@@ -28,7 +28,7 @@ $container['view'] = function ($container) {
     return $view;
 };
 
-$app->get('/hello/{name}', function ($request, $response, $args) {
+$app->get('/twig', function ($request, $response, $args) {
     return $this->view->render($response, 'header.html.twig', []);
 });
 
