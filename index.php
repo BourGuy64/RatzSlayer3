@@ -5,6 +5,12 @@ use \Psr\Http\Message\ResponseInterface as Response;
 
 require 'vendor/autoload.php';
 
+use ratzslayer3\conf\ConnectionFactory as CF;
+
+$cf = new CF();
+$cf->setConfig('src/conf/conf.ini');
+$db = $cf->makeConnection();
+
 /**
  * Rewrite start here
  */
