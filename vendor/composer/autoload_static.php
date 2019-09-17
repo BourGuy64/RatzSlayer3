@@ -14,6 +14,10 @@ class ComposerStaticInit3fa07e975975d21c4b97170541352a48
     );
 
     public static $prefixLengthsPsr4 = array (
+        'r' => 
+        array (
+            'ratzslayer3\\' => 12,
+        ),
         'T' => 
         array (
             'Twig\\' => 5,
@@ -32,10 +36,6 @@ class ComposerStaticInit3fa07e975975d21c4b97170541352a48
             'Psr\\SimpleCache\\' => 16,
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Container\\' => 14,
-        ),
-        'M' => 
-        array (
-            'MyApp\\' => 6,
         ),
         'I' => 
         array (
@@ -60,6 +60,10 @@ class ComposerStaticInit3fa07e975975d21c4b97170541352a48
     );
 
     public static $prefixDirsPsr4 = array (
+        'ratzslayer3\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src',
+        ),
         'Twig\\' => 
         array (
             0 => __DIR__ . '/..' . '/twig/twig/src',
@@ -99,10 +103,6 @@ class ComposerStaticInit3fa07e975975d21c4b97170541352a48
         'Psr\\Container\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/container/src',
-        ),
-        'MyApp\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/src',
         ),
         'Interop\\Container\\' => 
         array (
