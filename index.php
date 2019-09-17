@@ -5,7 +5,8 @@ use \Psr\Http\Message\ResponseInterface as Response;
 
 require 'vendor/autoload.php';
 
-use ratzslayer3\conf\ConnectionFactory as CF;
+use ratzslayer3\conf\ConnectionFactory  as CF;
+
 
 $cf = new CF();
 $cf->setConfig('src/conf/conf.ini');
@@ -41,14 +42,18 @@ $app->get('/twig', function ($request, $response, $args) {
 /**
  * test
  */
- $app->get('/cake', function (Request $req, Response $res, array $args) {
-     $res->getBody()->write("Cake is a lie");
-     return $res;
+$app->get('/cake', function (Request $req, Response $res, array $args) {
+    $res->getBody()->write("Cake is a lie");
+    return $res;
  });
 
 $app->get('/', function (Request $req, Response $res, array $args) {
     $res->getBody()->write("Coffe is ready!");
     return $res;
+});
+
+$app->group('/characters', function ($app) {
+    $app->get('', "\\ratzslayer3\\controller\\Character:get");
 });
 
 $app->run();
