@@ -35,7 +35,7 @@ $container['view'] = function ($container) {
 };
 
 $app->get('/twig', function ($request, $response, $args) {
-    return $this->view->render($response, 'header.html.twig', []);
+    return $this->view->render($response, 'body.html.twig', ['title' => 'Twig test']);
 });
 
 /**
