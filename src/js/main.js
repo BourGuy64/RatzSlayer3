@@ -1,10 +1,10 @@
 "use strict";
 
-import * as Monster from './monster.js';
+import * as Characters from './characters.js';
 
 
 function start() {
-    Monster.init();
+    Characters.init();
 }
 
 $(document).ready( function () {
