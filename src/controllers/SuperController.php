@@ -1,16 +1,13 @@
-<?php
+<?php namespace ratzslayer3\controllers;
 
-namespace ratzslayer3\controller;
 
-abstract class SuperController{
+class SuperController {
 
-  private $c = null;
-  protected $views = null:
+    private $c = null;
+    protected $views = null;
 
-  public function _construct($container){
-    $this->c = $container;
-    $this->viw = $container["view"];
-  }
+    public function __construct($container) {
+        $this->c = $container;
+        $this->views = $container["view"];
+    }
 }
-
-?>

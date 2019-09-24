@@ -33,7 +33,7 @@ $app = new \Slim\App($container);
 
 
 // Get container
-$container = $app->getContainer();
+// $container = $app->getContainer();
 
 
 
@@ -55,7 +55,8 @@ $app->get('/', function (Request $req, Response $res, array $args) {
 });
 
 $app->group('/characters', function ($app) {
-    $app->get('', "\\ratzslayer3\\controller\\Character:get");
+    $app->get('',           "\\ratzslayer3\\controllers\\Character:get");
+    $app->get('/create',    "\\ratzslayer3\\controllers\\Character:new");
 });
 
 $app->run();
