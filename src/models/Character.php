@@ -2,7 +2,7 @@
 
 namespace ratzslayer3\models;
 
-use Illuminate/Database/Eloquent/SoftDeletes;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Character extends \Illuminate\Database\Eloquent\Model
 {
