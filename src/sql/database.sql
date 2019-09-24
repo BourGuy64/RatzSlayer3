@@ -31,9 +31,9 @@ CREATE TABLE `characters` (
   `def` int(11) NOT NULL,
   `agility` int(11) NOT NULL,
   `picture` int(11) DEFAULT NULL,
-  `created_at` TIMESTAMP DEFAULT NULL,
-  `updated_at` TIMESTAMP DEFAULT NULL,
-  `deleted_at` TIMESTAMP DEFAULT NULL
+  `created_at` DATETIME DEFAULT NULL,
+  `updated_at` DATETIME DEFAULT NULL,
+  `deleted_at` DATETIME DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -47,9 +47,9 @@ CREATE TABLE `fights` (
   `id_characters` int(11) NOT NULL,
   `id_monsters` int(11) NOT NULL,
   `winner` int(11) NOT NULL,
-  `created_at` TIMESTAMP DEFAULT NULL,
-  `updated_at` TIMESTAMP DEFAULT NULL,
-  `deleted_at` TIMESTAMP DEFAULT NULL
+  `created_at` DATETIME DEFAULT NULL,
+  `updated_at` DATETIME DEFAULT NULL,
+  `deleted_at` DATETIME DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -63,9 +63,9 @@ CREATE TABLE `fights_log` (
   `id_fights` int(11) NOT NULL,
   `id_fighter` int(11) NOT NULL,
   `damage` int(11) NOT NULL,
-  `created_at` TIMESTAMP DEFAULT NULL,
-  `updated_at` TIMESTAMP DEFAULT NULL,
-  `deleted_at` TIMESTAMP DEFAULT NULL
+  `created_at` DATETIME DEFAULT NULL,
+  `updated_at` DATETIME DEFAULT NULL,
+  `deleted_at` DATETIME DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -84,9 +84,9 @@ CREATE TABLE `monsters` (
   `def` int(11) NOT NULL,
   `agility` int(11) NOT NULL,
   `picture` int(11) DEFAULT NULL,
-  `created_at` TIMESTAMP DEFAULT NULL,
-  `updated_at` TIMESTAMP DEFAULT NULL,
-  `deleted_at` TIMESTAMP DEFAULT NULL
+  `created_at` DATETIME DEFAULT NULL,
+  `updated_at` DATETIME DEFAULT NULL,
+  `deleted_at` DATETIME DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -108,7 +108,7 @@ ALTER TABLE `fights`
 --
 -- Indexes for table `figth_log`
 --
-ALTER TABLE `figths_log`
+ALTER TABLE `fights_log`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -136,7 +136,7 @@ ALTER TABLE `fights`
 --
 -- AUTO_INCREMENT for table `figth_log`
 --
-ALTER TABLE `figths_log`
+ALTER TABLE `fights_log`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -145,10 +145,10 @@ ALTER TABLE `figths_log`
 ALTER TABLE `monsters`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
-alter TABLE fights_log add FOREIGN key (id_fights) REFERENCES fights (id)
+alter TABLE fights_log add FOREIGN key (id_fights) REFERENCES fights (id);
 
-alter TABLE fights_log add FOREIGN key (id_fighter) REFERENCES monsters (id)
+alter TABLE fights_log add FOREIGN key (id_fighter) REFERENCES monsters (id);
 
-alter TABLE fights add FOREIGN key (id_monsters) REFERENCES monsters (id)
+alter TABLE fights add FOREIGN key (id_monsters) REFERENCES monsters (id);
 
-alter TABLE fights add FOREIGN key (id_characters) REFERENCES characters (id)
+alter TABLE fights add FOREIGN key (id_characters) REFERENCES characters (id);
