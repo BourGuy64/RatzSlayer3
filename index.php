@@ -7,10 +7,11 @@ require 'vendor/autoload.php';
 
 use ratzslayer3\conf\ConnectionFactory  as CF;
 
-
 $cf = new CF();
 $cf->setConfig('src/conf/conf.ini');
 $db = $cf->makeConnection();
+
+
 
 // Register component on container
 $container['view'] = function ($container) {
@@ -59,8 +60,13 @@ $app->get('/', function (Request $req, Response $res, array $args) {
 });
 
 $app->group('/characters', function ($app) {
-    $app->get('',           "\\ratzslayer3\\controllers\\Character:get");
-    $app->get('/create',    "\\ratzslayer3\\controllers\\Character:new");
+    $app->get('',           "\\ratzslayer3\\controllers\\CharactersController:get");
+    $app->get('/create',    "\\ratzslayer3\\controllers\\CharactersController:new");
+});
+
+$app->group('/monster', function ($app) {
+    $app->get('',           "\\ratzslayer3\\controllers\\MonstersController:get");
+    $app->get('/create',    "\\ratzslayer3\\controllers\\MonstersController:new");
 });
 
 $app->run();

@@ -2,14 +2,14 @@
 
 use \Psr\Http\Message\ServerRequestInterface    as Request;
 use \Psr\Http\Message\ResponseInterface         as Response;
-use ratzslayer3\models\Character                as CHR;
+use ratzslayer3\models\Monster                  as MST;
 
 
-class Character extends SuperController {
+class MonstersController extends SuperController {
 
     public function get(Request $req, Response $res, array $args) {
-        $characters = CHR::all();
-        var_dump($characters);
+        $monsters = MST::all();
+        var_dump($monsters);
     }
 
     public function new(Request $req, Response $res, array $args) {
