@@ -40,8 +40,8 @@ $app = new \Slim\App($container);
 
 $app->group('/characters', function ($app) {
     $app->get('',           "\\ratzslayer3\\controllers\\CharactersController:get");
-    $app->get('/create',    "\\ratzslayer3\\controllers\\CharactersController:new");
-    $app->post('/add',      "\\ratzslayer3\\controllers\\CharactersController:add");
+    $app->get('/create',    "\\ratzslayer3\\controllers\\CharactersController:createForm");
+    $app->post('/create',   "\\ratzslayer3\\controllers\\CharactersController:create");
 });
 
 $app->group('/monster', function ($app) {
