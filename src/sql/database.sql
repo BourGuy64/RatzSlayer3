@@ -17,10 +17,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `character`
+-- Table structure for table `characters`
 --
 
-CREATE TABLE `character` (
+CREATE TABLE `characters` (
   `id` int(11) NOT NULL,
   `lastname` varchar(255) NOT NULL,
   `firstname` varchar(255) NOT NULL,
@@ -30,20 +30,26 @@ CREATE TABLE `character` (
   `attack` int(11) NOT NULL,
   `def` int(11) NOT NULL,
   `agility` int(11) NOT NULL,
-  `picture` int(11) DEFAULT NULL
+  `picture` int(11) DEFAULT NULL,
+  `created_at` DATETIME DEFAULT NULL,
+  `updated_at` DATETIME DEFAULT NULL,
+  `deleted_at` DATETIME DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `fight`
+-- Table structure for table `fights`
 --
 
-CREATE TABLE `fight` (
+CREATE TABLE `fights` (
   `id` int(11) NOT NULL,
-  `id_character` int(11) NOT NULL,
-  `id_monster` int(11) NOT NULL,
-  `winner` int(11) NOT NULL
+  `id_characters` int(11) NOT NULL,
+  `id_monsters` int(11) NOT NULL,
+  `winner` int(11) NOT NULL,
+  `created_at` DATETIME DEFAULT NULL,
+  `updated_at` DATETIME DEFAULT NULL,
+  `deleted_at` DATETIME DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -52,20 +58,23 @@ CREATE TABLE `fight` (
 -- Table structure for table `figth_log`
 --
 
-CREATE TABLE `figth_log` (
+CREATE TABLE `fights_log` (
   `id` int(11) NOT NULL,
-  `id_fight` int(11) NOT NULL,
+  `id_fights` int(11) NOT NULL,
   `id_fighter` int(11) NOT NULL,
-  `damage` int(11) NOT NULL
+  `damage` int(11) NOT NULL,
+  `created_at` DATETIME DEFAULT NULL,
+  `updated_at` DATETIME DEFAULT NULL,
+  `deleted_at` DATETIME DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `monster`
+-- Table structure for table `monsters`
 --
 
-CREATE TABLE `monster` (
+CREATE TABLE `monsters` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `weight` int(11) NOT NULL,
@@ -74,7 +83,10 @@ CREATE TABLE `monster` (
   `attack` int(11) NOT NULL,
   `def` int(11) NOT NULL,
   `agility` int(11) NOT NULL,
-  `picture` int(11) DEFAULT NULL
+  `picture` int(11) DEFAULT NULL,
+  `created_at` DATETIME DEFAULT NULL,
+  `updated_at` DATETIME DEFAULT NULL,
+  `deleted_at` DATETIME DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -82,27 +94,27 @@ CREATE TABLE `monster` (
 --
 
 --
--- Indexes for table `character`
+-- Indexes for table `characters`
 --
-ALTER TABLE `character`
+ALTER TABLE `characters`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `fight`
+-- Indexes for table `fights`
 --
-ALTER TABLE `fight`
+ALTER TABLE `fights`
   ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `figth_log`
 --
-ALTER TABLE `figth_log`
+ALTER TABLE `fights_log`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `monster`
+-- Indexes for table `monsters`
 --
-ALTER TABLE `monster`
+ALTER TABLE `monsters`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -110,25 +122,33 @@ ALTER TABLE `monster`
 --
 
 --
--- AUTO_INCREMENT for table `character`
+-- AUTO_INCREMENT for table `characters`
 --
-ALTER TABLE `character`
+ALTER TABLE `characters`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `fight`
+-- AUTO_INCREMENT for table `fights`
 --
-ALTER TABLE `fight`
+ALTER TABLE `fights`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `figth_log`
 --
-ALTER TABLE `figth_log`
+ALTER TABLE `fights_log`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `monster`
+-- AUTO_INCREMENT for table `monsters`
 --
-ALTER TABLE `monster`
+ALTER TABLE `monsters`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+alter TABLE fights_log add FOREIGN key (id_fights) REFERENCES fights (id);
+
+alter TABLE fights_log add FOREIGN key (id_fighter) REFERENCES monsters (id);
+
+alter TABLE fights add FOREIGN key (id_monsters) REFERENCES monsters (id);
+
+alter TABLE fights add FOREIGN key (id_characters) REFERENCES characters (id);
