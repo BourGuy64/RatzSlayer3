@@ -41,7 +41,7 @@ $app->get('/twig', function ($request, $response, $args) {
     return $this->view->render($response, 'body.html.twig', ['title' => 'Twig test']);
 });
 
-$app->get('/add-char', function ($request, $response, $args) {
+$app->get('/create-char', function ($request, $response, $args) {
     return $this->view->render($response, 'form-char.html.twig', ['title' => 'Creation d\'un personnage']);
 });
 
