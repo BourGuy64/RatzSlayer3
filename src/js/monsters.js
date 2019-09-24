@@ -21,11 +21,11 @@ function create(e) {
         processData : false,
         success     : (response, xhr) => {
             // do something here
-            console.log(response);
+            console.log(response); // DEV
         },
         error       : (xhr) => {
             // do something for alert user
-            console.log("status =" + xhr.status);
+            console.log("status =" + xhr.status); // DEV
         },
         complete    : () => {
             Form.clear(formId);
