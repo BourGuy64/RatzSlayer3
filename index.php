@@ -53,9 +53,10 @@ $app->group('/monster', function ($app) {
 /**
  * test
  */
-$app->get('/', function (Request $req, Response $res, array $args) {
-    $res->getBody()->write("Coffe is ready!");
-    return $res;
-});
+ $app->get('/',              "\\ratzslayer3\\controllers\\MainMenuController:get");
+// $app->get('/', function (Request $req, Response $res, array $args) {
+//     $res->getBody()->write("Coffe is ready!");
+//     return $res;
+// });
 
 $app->run();
