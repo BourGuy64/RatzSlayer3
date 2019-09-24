@@ -47,7 +47,7 @@ $app->group('/characters', function ($app) {
 $app->group('/monster', function ($app) {
     $app->get('',           "\\ratzslayer3\\controllers\\MonstersController:get");
     $app->get('/create',    "\\ratzslayer3\\controllers\\MonstersController:createForm");
-    // $app->get('/create',    "\\ratzslayer3\\controllers\\MonstersController:new");
+    $app->post('/create',   "\\ratzslayer3\\controllers\\MonstersController:create");
 });
 
 /**
