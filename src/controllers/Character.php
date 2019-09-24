@@ -20,6 +20,6 @@ class Character extends SuperController {
     }
 
     public function new(Request $req, Response $res, array $args) {
-        return $this->views->render($res, 'body.html.twig', ['title' => 'New character']);
+        return $this->views->render($res, 'form-char.html.twig', ['title' => 'New character', 'dir' =>  $this->c['dir']]);
     }
 }

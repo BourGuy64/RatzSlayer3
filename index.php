@@ -12,6 +12,11 @@ $cf = new CF();
 $cf->setConfig('src/conf/conf.ini');
 $db = $cf->makeConnection();
 
+//Get root path, parse and add it into container
+$dir = realpath('./');
+$dir = explode('/', $dir);
+$container['dir'] = end($dir);
+
 // Register component on container
 $container['view'] = function ($container) {
     $view = new \Slim\Views\Twig('src/views', [
@@ -36,14 +41,10 @@ $app = new \Slim\App($container);
 // $container = $app->getContainer();
 
 
-
 $app->get('/twig', function ($request, $response, $args) {
     return $this->view->render($response, 'body.html.twig', ['title' => 'Twig test']);
 });
 
-$app->get('/create-char', function ($request, $response, $args) {
-    return $this->view->render($response, 'form-char.html.twig', ['title' => 'Creation d\'un personnage']);
-});
 
 /**
  * test
@@ -61,6 +62,7 @@ $app->get('/', function (Request $req, Response $res, array $args) {
 $app->group('/characters', function ($app) {
     $app->get('',           "\\ratzslayer3\\controllers\\Character:get");
     $app->get('/create',    "\\ratzslayer3\\controllers\\Character:new");
+    $app->get('/add',    "\\ratzslayer3\\controllers\\Character:add");
 });
 
 $app->run();
