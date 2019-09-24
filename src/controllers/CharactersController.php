@@ -19,6 +19,13 @@ class CharactersController extends SuperController {
     public function create(Request $req, Response $res, array $args) {
         $body = json_decode($req->getBody());
 
+        $char = CHR::where('lastname', 'like', $body->lastname)
+            ->where('firstname', 'like', $body->firstname)
+            ->first();
+        if ($char) {
+            return $res->withStatus(400);
+        }
+
         $char = new CHR;
         $char->lastname     = $body->lastname;
         $char->firstname    = $body->firstname;
