@@ -12,15 +12,6 @@ $cf = new CF();
 $cf->setConfig('src/conf/conf.ini');
 $db = $cf->makeConnection();
 
-/**
- * Rewrite start here
- */
-$app = new \Slim\App;
-
-
-// Get container
-$container = $app->getContainer();
-
 // Register component on container
 $container['view'] = function ($container) {
     $view = new \Slim\Views\Twig('src/views', [
@@ -34,6 +25,17 @@ $container['view'] = function ($container) {
 
     return $view;
 };
+
+/**
+ * Rewrite start here
+ */
+$app = new \Slim\App($container);
+
+
+// Get container
+$container = $app->getContainer();
+
+
 
 $app->get('/twig', function ($request, $response, $args) {
     return $this->view->render($response, 'body.html.twig', ['title' => 'Twig test']);
