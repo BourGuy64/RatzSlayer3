@@ -12,7 +12,24 @@ class CharactersController extends SuperController {
         var_dump($characters);
     }
 
-    public function new(Request $req, Response $res, array $args) {
+    public function createForm(Request $req, Response $res, array $args) {
         return $this->views->render($res, 'form-char.html.twig', ['title' => 'New character', 'dir' =>  $this->dir]);
+    }
+
+    public function create(Request $req, Response $res, array $args) {
+        $body = json_decode($req->getBody());
+
+        $char = new CHR;
+        $char->lastname     = $body->lastname;
+        $char->firstname    = $body->firstname;
+        $char->weight       = $body->weight;
+        $char->size         = $body->size;
+        $char->hp           = $body->hp;
+        $char->attack       = $body->attack;
+        $char->def          = $body->def;
+        $char->agility      = $body->agility;
+        $char->save();
+
+        return $res->withJson($body);
     }
 }
