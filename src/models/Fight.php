@@ -2,9 +2,13 @@
 
 namespace ratzslayer3\models;
 
+use Illuminate/Database/Eloquent/SoftDeletes;
+
 class Fight extends \Illuminate\Database\Eloquent\Model
 {
-    protected $table = 'fight';
+  use SoftDeletes;
+
+    protected $table = 'fights';
     protected $primaryKey = 'id';
     public $timestamps = true;
 
