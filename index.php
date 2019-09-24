@@ -35,38 +35,25 @@ $container['view'] = function ($container) {
  */
 $app = new \Slim\App($container);
 
-
 // Get container
 // $container = $app->getContainer();
-
-
-$app->get('/twig', function ($request, $response, $args) {
-    return $this->view->render($response, 'body.html.twig', ['title' => 'Twig test']);
-});
-
-
-/**
- * test
- */
-$app->get('/cake', function (Request $req, Response $res, array $args) {
-    $res->getBody()->write("Cake is a lie");
-    return $res;
- });
-
-$app->get('/', function (Request $req, Response $res, array $args) {
-    $res->getBody()->write("Coffe is ready!");
-    return $res;
-});
 
 $app->group('/characters', function ($app) {
     $app->get('',           "\\ratzslayer3\\controllers\\CharactersController:get");
     $app->get('/create',    "\\ratzslayer3\\controllers\\CharactersController:new");
-    $app->get('/add',    "\\ratzslayer3\\controllers\\CharactersController:add");
+    $app->post('/add',      "\\ratzslayer3\\controllers\\CharactersController:add");
 });
 
 $app->group('/monster', function ($app) {
     $app->get('',           "\\ratzslayer3\\controllers\\MonstersController:get");
     $app->get('/create',    "\\ratzslayer3\\controllers\\MonstersController:new");
+});
+
+/**
+ * test
+ */
+$app->get('/', function (Request $req, Response $res, array $args) {
+    return $res;
 });
 
 $app->run();
