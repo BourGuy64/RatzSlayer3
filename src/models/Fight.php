@@ -9,6 +9,7 @@ class Fight extends \Illuminate\Database\Eloquent\Model {
 
     protected $table = 'fights';
     protected $primaryKey = 'id';
+    
     public $timestamps = true;
 
     public function fightlog() {
