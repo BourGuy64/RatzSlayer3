@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block css %}
+    {{ parent() }}
+    <link href="/{{dir}}/src/css/main_menu.css" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+    <h1>Main menu</h1>
+{% endblock %}
