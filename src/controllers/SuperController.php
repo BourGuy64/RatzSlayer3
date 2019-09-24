@@ -8,6 +8,7 @@ class SuperController {
 
     public function __construct($container) {
         $this->c = $container;
+        $this->dir = $container['dir'];
         $this->views = $container["view"];
     }
 }
