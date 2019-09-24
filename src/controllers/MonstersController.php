@@ -12,7 +12,7 @@ class MonstersController extends SuperController {
         var_dump($monsters);
     }
 
-    public function new(Request $req, Response $res, array $args) {
-        return $this->views->render($res, 'form-char.html.twig', ['title' => 'New character']);
+    public function createForm(Request $req, Response $res, array $args) {
+        return $this->views->render($res, 'form-monster.html.twig', ['title' => 'New character', 'dir' =>  $this->dir]);
     }
 }
