@@ -2,7 +2,7 @@ RewriteEngine On
 
 #
 # cancel access to directory containing code
-RewriteRule ^src(/.*|)$ - [NC,F]
+# RewriteRule ^src(/.*|)$ - [NC,F]
 RewriteRule ^vendor(/.*|)$ - [NC,F]
 
 #
