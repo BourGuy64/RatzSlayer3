@@ -22,8 +22,6 @@ function create(e) {
         success     : (response, xhr) => {
             // do something here
             console.log(response);
-            console.log(xhr);
-            console.log("lol");
         },
         error       : (xhr) => {
             // do something for alert user
