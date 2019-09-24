@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>{{ title }}</title>
+    {% block css %}
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+        <!-- Bootstrap core CSS -->
+        <link href="/{{dir}}/src/framework/mdbootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Material Design Bootstrap -->
+        <link href="/{{dir}}/src/framework/mdbootstrap/css/mdb.min.css" rel="stylesheet">
+        <!-- Your custom styles (optional) -->
+        <link href="/{{dir}}/src/css/style.css" rel="stylesheet">
+    {% endblock %}
+
+</head>
+
+<body>
+
+    {% block body %}
+    {% endblock %}
+
+</body>
+<!-- SCRIPTS -->
+<!-- JQuery -->
+<script type="text/javascript" src="/{{dir}}/src/framework/mdbootstrap/js/jquery-3.4.1.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="/{{dir}}/src/framework/mdbootstrap/js/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="/{{dir}}/src/framework/mdbootstrap/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="/{{dir}}/src/framework/mdbootstrap/js/mdb.min.js"></script>
+<!-- perso -->
+<script type="module" src="/{{dir}}/src/js/main.js"></script>
+
+</html>
