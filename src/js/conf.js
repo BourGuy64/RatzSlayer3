@@ -2,5 +2,5 @@
 
 
 export const url = {
-    api : "https://www.ctrlouis.ovh/LP-PHP/"
+    api : dir
 };

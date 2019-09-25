@@ -8,7 +8,7 @@ function create(e) {
     e.preventDefault();
 
     const type = "POST";
-    const requestUrl = Conf.url.api + e.target.getAttribute('action');
+    const requestUrl = Conf.url.api + "/" + e.target.getAttribute('action');
     const formId = e.target.id;
     const data = Form.getData(formId);
 

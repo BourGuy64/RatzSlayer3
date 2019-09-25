@@ -12,9 +12,10 @@ $cf->setConfig('src/conf/conf.ini');
 $db = $cf->makeConnection();
 
 //Get root path, parse and add it into container
-$dir = realpath('./');
-$dir = explode('/', $dir);
-$container['dir'] = end($dir);
+// $dir = realpath('./');
+// $dir = explode('/', $dir);
+// $container['dir'] = end($dir);
+$container['dir'] = str_replace('/index.php', '', $_SERVER['PHP_SELF']);
 
 // Register component on container
 $container['view'] = function ($container) {

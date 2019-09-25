@@ -7,16 +7,16 @@
     {% block css %}
         <!-- Font Awesome -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-        <!-- Bootstrap core CSS -->
-        <link href="/{{dir}}/src/framework/mdbootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <!-- Material Design Bootstrap -->
-        <link href="/{{dir}}/src/framework/mdbootstrap/css/mdb.min.css" rel="stylesheet">
         <!-- NES.css core CSS -->
-        <link href="/{{dir}}/src/framework/nescss/nes.min.css" rel="stylesheet">
+        <link href="{{dir}}/src/framework/nescss/nes.min.css" rel="stylesheet">
         <!-- NES.css -->
-        <link href="/{{dir}}/src/framework/nescss/nes.min.css" rel="stylesheet">
+        <link href="{{dir}}/src/framework/nescss/nes.min.css" rel="stylesheet">
+        <!-- Bootstrap core CSS -->
+        <link href="{{dir}}/src/framework/mdbootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Material Design Bootstrap -->
+        <link href="{{dir}}/src/framework/mdbootstrap/css/mdb.min.css" rel="stylesheet">
         <!-- Your custom styles (optional) -->
-        <link href="/{{dir}}/src/css/style.css" rel="stylesheet">
+        <link href="{{dir}}/src/css/style.css" rel="stylesheet">
     {% endblock %}
 
     {% block fonts %}
@@ -34,14 +34,17 @@
 </body>
 <!-- SCRIPTS -->
 <!-- JQuery -->
-<script type="text/javascript" src="/{{dir}}/src/framework/mdbootstrap/js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="{{dir}}/src/framework/mdbootstrap/js/jquery-3.4.1.min.js"></script>
 <!-- Bootstrap tooltips -->
-<script type="text/javascript" src="/{{dir}}/src/framework/mdbootstrap/js/popper.min.js"></script>
+<script type="text/javascript" src="{{dir}}/src/framework/mdbootstrap/js/popper.min.js"></script>
 <!-- Bootstrap core JavaScript -->
-<script type="text/javascript" src="/{{dir}}/src/framework/mdbootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="{{dir}}/src/framework/mdbootstrap/js/bootstrap.min.js"></script>
 <!-- MDB core JavaScript -->
-<script type="text/javascript" src="/{{dir}}/src/framework/mdbootstrap/js/mdb.min.js"></script>
+<script type="text/javascript" src="{{dir}}/src/framework/mdbootstrap/js/mdb.min.js"></script>
 <!-- perso -->
-<script type="module" src="/{{dir}}/src/js/main.js"></script>
+<script type="text/javascript">
+    const dir = "{{dir}}";
+</script>
+<script type="module" src="{{dir}}/src/js/main.js"></script>
 
 </html>
