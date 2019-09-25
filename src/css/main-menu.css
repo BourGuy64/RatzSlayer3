@@ -1,6 +1,7 @@
 body {
     background-color: pink;
     font-family: 'Press Start 2P';
+    margin-top: 5vh;
 }
 
 body > div > div {
