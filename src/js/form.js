@@ -1,25 +1,36 @@
 "use strict";
 
-export function getData(formId) {
-    let object = {},
-        key,
+// collect value of input text
+function getDataText(formId, formData) {
+    let key,
         value;
 
-    // collect value of input text
     $('#' + formId + ' input').each(function() {
         key = $(this).attr('id');
         value = $(this).val();
-        object[key] = value;
+        formData[key] = value;
     });
+}
 
-    // collect value of select
+// collect value of select
+function getDataSelect(formId, formData) {
+    let key,
+        value;
+
     $('#' + formId + ' select').each(function() {
         key = $(this).attr('id');
         value = $(this).val();
-        object[key] = value;
+        formData[key] = value;
     });
+}
 
-    return object;
+export function getData(formId) {
+    let formData = {};
+
+    formData = getDataText(formId, formData);
+    formData = getDataSelect(formId, formData);
+
+    return formData;
 }
 
 export function clear(formId) {
