@@ -3,11 +3,16 @@ body {
     font-family: 'Press Start 2P';
 }
 
-body > div > div:hover {
-    color: grey;
+body > div > div {
+    color: darkgrey;
 }
 
 body > div > div img {
     border-radius: 4px;
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+body > div > div:hover {
+    color: black;
+    filter: contrast(120%);
 }
