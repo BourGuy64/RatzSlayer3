@@ -5,11 +5,26 @@ function getDataText(formId, formData) {
     let key,
         value;
 
-    $('#' + formId + ' input').each(function() {
+    $('#' + formId + ' :text').each(function() {
         key = $(this).attr('id');
         value = $(this).val();
         formData[key] = value;
     });
+
+    return formData;
+}
+
+function getDataNumber(formId, formData) {
+    let key,
+        value;
+
+    $(':input[type="number"]').each(function() {
+        key = $(this).attr('id');
+        value = $(this).val();
+        formData[key] = value;
+    });
+
+    return formData;
 }
 
 // collect value of select
@@ -22,12 +37,15 @@ function getDataSelect(formId, formData) {
         value = $(this).val();
         formData[key] = value;
     });
+
+    return formData;
 }
 
 export function getData(formId) {
     let formData = {};
 
     formData = getDataText(formId, formData);
+    formData = getDataNumber(formId, formData);
     formData = getDataSelect(formId, formData);
 
     return formData;
