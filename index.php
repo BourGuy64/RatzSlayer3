@@ -36,8 +36,7 @@ $container['view'] = function ($container) {
  */
 $app = new \Slim\App($container);
 
-// Get container
-// $container = $app->getContainer();
+$container = $app->getContainer(); // get container
 
 // CHARACTERS
 $app->group('/characters', function ($app) {
