@@ -1,35 +1,35 @@
 {% extends 'base.html.twig' %}
 
 {% block css %}
-{{ parent() }}
-<link href="/{{dir}}/src/css/main_menu.css" rel="stylesheet">
+    {{ parent() }}
+    <link href="/{{dir}}/src/css/main-menu.css" rel="stylesheet">
 {% endblock %}
 
 {% block body %}
-<h1 class="text-center">Main menu</h1>
+    <h1 class="text-center">Main menu</h1>
 
-<div class="row justify-content-center mt-5 mx-lg-5 mx-2">
+    <div class="row justify-content-center mt-5 mx-lg-5 mx-2">
 
-    <div class="col-8 col-lg-4 mb-5 p-lg-3 zoom">
-        <a href="">
-            <img src="/{{dir}}/src/img/gitans.png" alt="Fight logo" class="img-fluid rounded z-depth-5">
-        </a>
-        <h3 class="text-center">FIGHT</h3>
+        <div class="col-8 col-lg-4 mb-5 p-lg-3 zoom">
+            <a href="">
+                <img src="/{{dir}}/src/img/gitans.png" alt="Fight logo" class="img-fluid rounded z-depth-5">
+            </a>
+            <h3 class="text-center">FIGHT</h3>
+        </div>
+
+        <div class="col-8 col-lg-4 mb-5 p-lg-3 zoom">
+            <a href="characters/create">
+                <img src="/{{dir}}/src/img/sofa.jpg" alt="Sweet sofa" class="img-fluid rounded z-depth-5">
+            </a>
+            <h3 class="text-center">New Character</h3>
+        </div>
+
+        <div class="col-8 col-lg-4 mb-5 p-lg-3 zoom">
+            <a href="monsters/create">
+                <img src="/{{dir}}/src/img/eggs.jpg" alt="Basic" class="img-fluid rounded z-depth-5">
+            </a>
+            <h3 class="text-center">New Monster</h3>
+        </div>
+
     </div>
-
-    <div class="col-8 col-lg-4 mb-5 p-lg-3 zoom">
-        <a href="characters/create">
-            <img src="/{{dir}}/src/img/sofa.jpg" alt="Sweet sofa" class="img-fluid rounded z-depth-5">
-        </a>
-        <h3 class="text-center">New Character</h3>
-    </div>
-
-    <div class="col-8 col-lg-4 mb-5 p-lg-3 zoom">
-        <a href="monsters/create">
-            <img src="/{{dir}}/src/img/eggs.jpg" alt="Basic" class="img-fluid rounded z-depth-5">
-        </a>
-        <h3 class="text-center">New Monster</h3>
-    </div>
-
-</div>
 {% endblock %}
