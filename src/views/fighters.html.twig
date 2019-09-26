@@ -7,10 +7,27 @@
 
 {% block main %}
 
+<ul>
 {% for fighter in fighters %}
-    <div>
-        {{fighter}}
+
+    <div class="fighter">
+        <img src="{{dir}}/{{fighter.picture}}" alt="img alt">
+        <p>{{fighter.picture}}</p>
+
+        {% if fighter.name %}
+            <p>{{fighter.name}}</p>
+        {% else %}
+            <p>{{fighter.lastname}}</p>
+            <p>{{fighter.firstname}}</p>
+        {% endif %}
+        <p>{{fighter.weight}}</p>
+        <p>{{fighter.size}}</p>
+        <p>{{fighter.hp}}</p>
+        <p>{{fighter.attack}}</p>
+        <p>{{fighter.def}}</p>
+        <p>{{fighter.agility}}</p>
     </div>
 {% endfor %}
+</ul>
 
 {% endblock %}
