@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block css %}
+{{ parent() }}
+<link href="{{dir}}/src/css/fighters.css" rel="stylesheet">
+{% endblock %}
+
+{% block main %}
+
+{% for fighter in fighters %}
+    <div>
+        {{fighter}}
+    </div>
+{% endfor %}
+
+{% endblock %}
