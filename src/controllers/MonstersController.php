@@ -9,7 +9,7 @@ class MonstersController extends SuperController {
 
     public function get(Request $req, Response $res, array $args) {
         $monsters = MST::all();
-        var_dump($monsters);
+        return $this->views->render($res, 'fighters.html.twig', ['title' => 'Monsters','dir' =>  $this->dir, 'fighters' => $monsters]);
     }
 
     public function createForm(Request $req, Response $res, array $args) {

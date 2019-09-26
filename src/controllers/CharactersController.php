@@ -9,7 +9,7 @@ class CharactersController extends SuperController {
 
     public function get(Request $req, Response $res, array $args) {
         $characters = CHR::all();
-        var_dump($characters);
+        return $this->views->render($res, 'fighters.html.twig', ['title' => 'Monsters','dir' =>  $this->dir, 'fighters' => $characters]);
     }
 
     public function createForm(Request $req, Response $res, array $args) {
