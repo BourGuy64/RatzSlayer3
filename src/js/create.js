@@ -34,5 +34,6 @@ function create(e) {
 }
 
 export function init() {
-    $('#newChar', '#newMstr').on('submit', create);
+    console.log("test");
+    $('#newChar, #newMstr').on('submit', create);
 }
