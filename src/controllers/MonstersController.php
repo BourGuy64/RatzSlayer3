@@ -45,42 +45,4 @@ class MonstersController extends SuperController {
         return $res->withJson($monster);
     }
 
-    // public function imageUpload($item)
-	// {
-	// 	if ($this->imageVerify($_FILES)) {
-	// 		if ($item->img) unlink($item->img);
-	// 		if (!is_dir('img/')) mkdir('img/');
-	// 		$fileName = "img/$item->name-icone.png";
-	// 		$resultat = move_uploaded_file($_FILES['icone']['tmp_name'], $fileName);
-	// 		// if ($resultat) echo "Transfert réussi";
-	// 		// $item->img = $fileName;
-	// 		// $item->save();
-	// 	}
-	// }
-    //
-	// public static function imageDelete($item)
-	// {
-	// 	if ($item->img) unlink($item->img);
-	// 	$item->img = NULL;
-	// 	$item->save();
-	// }
-    //
-	// public static function imageVerify($file)
-	// {
-	// 	if ($_FILES['img']['error'] > 0) {
-	// 		return false;
-	// 	}
-    //
-	// 	if ($_FILES['img']['size'] > 10000000) {
-	// 		return false;
-	// 	}
-    //
-	// 	$extensions_valides = array( 'jpg' , 'jpeg' , 'gif' , 'png' );
-    //
-	// 	$extension_upload = strtolower(  substr(  strrchr($_FILES['img']['name'], '.')  ,1)  );
-	// 	if ( !in_array($extension_upload, $extensions_valides) ) {
-	// 		return false;
-	// 	}
-	// 	return true;
-	// }
 }
