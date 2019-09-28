@@ -8,7 +8,7 @@ function getDataText(formId, formData) {
     $('#' + formId + ' :text').each(function() {
         key = $(this).attr('id');
         value = $(this).val();
-        formData.append(key, value) // formData[key] = value;
+        formData.append(key, value); // formData[key] = value;
     });
 
     return formData;
@@ -21,7 +21,7 @@ function getDataNumber(formId, formData) {
     $(':input[type="number"]').each(function() {
         key = $(this).attr('id');
         value = $(this).val();
-        formData.append(key, value) // formData[key] = value;
+        formData.append(key, value); // formData[key] = value;
     });
 
     return formData;

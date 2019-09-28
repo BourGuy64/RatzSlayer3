@@ -2,6 +2,7 @@
 
 import * as Conf from './conf.js';
 import * as Form from './form.js';
+import * as Dev from './dev.js';
 
 
 function create(e) {
@@ -10,17 +11,14 @@ function create(e) {
     const type = "POST";
     const requestUrl = Conf.url.api + "/" + e.target.getAttribute('action');
     const formId = e.target.id;
-    const formData = Form.getData(formId);
-    console.log(formData);
-
+    const data = Form.getData(formId);
 
     $.ajax({
         type        : type,
         url         : requestUrl,
         timeout     : 5000,
         header      : {},
-        // data        : JSON.stringify(data),
-        data        : formData,
+        data        : data,
         processData : false,
         contentType : false,
         success     : (response, xhr) => {
