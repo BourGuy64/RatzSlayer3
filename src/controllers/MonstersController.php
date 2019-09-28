@@ -9,11 +9,11 @@ class MonstersController extends SuperController {
 
     public function get(Request $req, Response $res, array $args) {
         $monsters = MST::all();
-        return $this->views->render($res, 'fighters.html.twig', ['title' => 'Monsters','dir' =>  $this->dir, 'fighters' => $monsters]);
+        return $this->views->render($res, 'fighters.html.twig', ['title' => 'Monsters','dir' => $this->dir, 'fighters' => $monsters]);
     }
 
     public function createForm(Request $req, Response $res, array $args) {
-        return $this->views->render($res, 'form-monster.html.twig', ['title' => 'New character', 'dir' =>  $this->dir]);
+        return $this->views->render($res, 'form-monster.html.twig', ['title' => 'New character', 'dir' => $this->dir]);
     }
 
     public function create(Request $req, Response $res, array $args) {
