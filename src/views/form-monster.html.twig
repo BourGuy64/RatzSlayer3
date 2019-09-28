@@ -1,67 +1,74 @@
 {% extends 'base.html.twig' %}
 
 {% block main %}
-    <div class="mx-5 my-2">
-        <form id="newMstr" method="post" action="monsters/create">
+<div class="mx-5 my-2">
+    <form id="newMstr" method="post" action="monsters/create">
 
-            <div class="form-row">
-                <div class="col">
-                    <div class="md-form">
-                        <input type="text" id="name" class="form-control" required>
-                        <label for="name">Name</label>
-                    </div>
+        <div class="form-row">
+            <div class="col">
+                <div class="md-form">
+                    <input type="text" id="name" class="form-control" required>
+                    <label for="name">Name</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="col">
+                <div class="md-form">
+                    <input type="number" id="weight" class="form-control" min="1" max="100" required>
+                    <label for="weight">Weight</label>
                 </div>
             </div>
 
-            <div class="form-row">
-                <div class="col">
-                    <div class="md-form">
-                        <input type="number" id="weight" class="form-control" min="1" max="100" required>
-                        <label for="weight">Weight</label>
-                    </div>
+            <div class="col">
+                <div class="md-form">
+                    <input type="number" id="size" class="form-control" min="1" max="100" required>
+                    <label for="size">Size</label>
                 </div>
+            </div>
+        </div>
 
-                <div class="col">
-                    <div class="md-form">
-                        <input type="number" id="size" class="form-control" min="1" max="100" required>
-                        <label for="size">Size</label>
-                    </div>
+        <div class="form-row">
+            <div class="col">
+                <div class="md-form">
+                    <input type="number" id="hp" class="form-control" min="1" max="100" required>
+                    <label for="hp">HP</label>
                 </div>
             </div>
 
-            <div class="form-row">
-                <div class="col">
-                    <div class="md-form">
-                        <input type="number" id="hp" class="form-control" min="1" max="100" required>
-                        <label for="hp">HP</label>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="md-form">
-                        <input type="number" id="attack" class="form-control" min="1" max="100" required>
-                        <label for="attack">Attack</label>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="md-form">
-                        <input type="number" id="def" class="form-control" min="1" max="100" required>
-                        <label for="def">Def</label>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="md-form">
-                        <input type="number" id="agility" class="form-control" min="1" max="100" required>
-                        <label for="agility">Agility</label>
-                    </div>
+            <div class="col">
+                <div class="md-form">
+                    <input type="number" id="attack" class="form-control" min="1" max="100" required>
+                    <label for="attack">Attack</label>
                 </div>
             </div>
 
-            <div class="d-flex justify-content-center">
-                <button class="btn btn-danger" type="submit">Create</button>
+            <div class="col">
+                <div class="md-form">
+                    <input type="number" id="def" class="form-control" min="1" max="100" required>
+                    <label for="def">Def</label>
+                </div>
             </div>
-        </form>
-    </div>
+
+            <div class="col">
+                <div class="md-form">
+                    <input type="number" id="agility" class="form-control" min="1" max="100" required>
+                    <label for="agility">Agility</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <div class="custom-file">
+                <input type="file" id="img" class="custom-file-input" aria-describedby="inputGroupFileAddon01">
+                <label class="custom-file-label" for="img">Choose file</label>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-center">
+            <button class="btn btn-danger" type="submit">Create</button>
+        </div>
+    </form>
+</div>
 {% endblock %}

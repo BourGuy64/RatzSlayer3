@@ -10,15 +10,19 @@ function create(e) {
     const type = "POST";
     const requestUrl = Conf.url.api + "/" + e.target.getAttribute('action');
     const formId = e.target.id;
-    const data = Form.getData(formId);
+    const formData = Form.getData(formId);
+    console.log(formData);
+
 
     $.ajax({
         type        : type,
         url         : requestUrl,
         timeout     : 5000,
         header      : {},
-        data        : JSON.stringify(data),
+        // data        : JSON.stringify(data),
+        data        : formData,
         processData : false,
+        contentType : false,
         success     : (response, xhr) => {
             // do something here
             console.log(response); // DEV
