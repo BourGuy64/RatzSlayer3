@@ -39,14 +39,14 @@ $container = $app->getContainer(); // get container
 $app->group('/characters', function ($app) {
     $app->get('',           "\\ratzslayer3\\controllers\\CharactersController:get");
     $app->get('/create',    "\\ratzslayer3\\controllers\\CharactersController:createForm");
-    $app->post('/create',   "\\ratzslayer3\\controllers\\CharactersController:create");
+    $app->post('',          "\\ratzslayer3\\controllers\\CharactersController:create");
 });
 
 // MONSTERS
 $app->group('/monsters', function ($app) {
     $app->get('',           "\\ratzslayer3\\controllers\\MonstersController:get");
     $app->get('/create',    "\\ratzslayer3\\controllers\\MonstersController:createForm");
-    $app->post('/create',   "\\ratzslayer3\\controllers\\MonstersController:create");
+    $app->post('',          "\\ratzslayer3\\controllers\\MonstersController:create");
 });
 
 // MAIN MENU
