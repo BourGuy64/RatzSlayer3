@@ -17,6 +17,8 @@ class CharactersController extends SuperController {
     }
 
     public function create(Request $req, Response $res, array $args) {
+
+        // test if character is unique
         $char = CHR::where('lastname', 'like', $_POST['lastname'])
             ->where('firstname', 'like', $_POST['firstname'])
             ->first();

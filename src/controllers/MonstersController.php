@@ -18,6 +18,7 @@ class MonstersController extends SuperController {
 
     public function create(Request $req, Response $res, array $args) {
 
+        // test if character is unique
         $monster = MST::where('name', 'like', $_POST['name'])->first();
         if ($monster) {
             return $res->withStatus(400);
