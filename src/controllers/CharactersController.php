@@ -3,6 +3,7 @@
 use \Psr\Http\Message\ServerRequestInterface    as Request;
 use \Psr\Http\Message\ResponseInterface         as Response;
 use ratzslayer3\models\Character                as CHR;
+use ratzslayer3\tools\ImageTools;
 
 
 class CharactersController extends SuperController {
@@ -26,12 +27,9 @@ class CharactersController extends SuperController {
             return $res->withStatus(400);
         }
 
-        // image upload
-        $fileInfo = pathinfo($_FILES['img']['name']);
-        $extension = $fileInfo['extension']; // get the extension of the file
-        $fileName = $_POST['firstname'] . $_POST['lastname'] . '.' . $extension;
-        $target = 'src/img/fighters/' . $fileName; // better link maybe ?
-        move_uploaded_file($_FILES['img']['tmp_name'], $target);
+        // upload image
+        $image = new ImageTools($_FILES['img'], $_POST['firstname'] . $_POST['lastname']);
+        $image->upload();
 
         $char = new CHR;
         $char->lastname     = $_POST['lastname'];
@@ -42,7 +40,7 @@ class CharactersController extends SuperController {
         $char->attack       = $_POST['attack'];
         $char->def          = $_POST['def'];
         $char->agility      = $_POST['agility'];
-        $char->picture      = $fileName;
+        $char->picture      = $image->getFileName();
         $char->save();
 
         return $res->withJson($char);

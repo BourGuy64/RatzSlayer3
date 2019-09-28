@@ -3,6 +3,7 @@
 use \Psr\Http\Message\ServerRequestInterface    as Request;
 use \Psr\Http\Message\ResponseInterface         as Response;
 use ratzslayer3\models\Monster                  as MST;
+use ratzslayer3\tools\ImageTools;
 
 
 class MonstersController extends SuperController {
@@ -24,12 +25,9 @@ class MonstersController extends SuperController {
             return $res->withStatus(400);
         }
 
-        // image upload
-        $fileInfo = pathinfo($_FILES['img']['name']);
-        $extension = $fileInfo['extension']; // get the extension of the file
-        $fileName = $_POST['name'] . '.' . $extension;
-        $target = 'src/img/fighters/' . $fileName; // better link maybe ?
-        move_uploaded_file($_FILES['img']['tmp_name'], $target);
+        // upload image
+        $image = new ImageTools($_FILES['img'], $_POST['name']);
+        $image->upload();
 
         $monster = new MST;
         $monster->name      = $_POST['name'];
@@ -39,7 +37,7 @@ class MonstersController extends SuperController {
         $monster->attack    = $_POST['attack'];
         $monster->def       = $_POST['def'];
         $monster->agility   = $_POST['agility'];
-        $monster->picture   = $fileName;
+        $monster->picture   = $image->getFileName();
         $monster->save();
 
         return $res->withJson($monster);
