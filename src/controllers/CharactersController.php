@@ -17,26 +17,32 @@ class CharactersController extends SuperController {
     }
 
     public function create(Request $req, Response $res, array $args) {
-        $body = json_decode($req->getBody());
-
-        $char = CHR::where('lastname', 'like', $body->lastname)
-            ->where('firstname', 'like', $body->firstname)
+        $char = CHR::where('lastname', 'like', $_POST['lastname'])
+            ->where('firstname', 'like', $_POST['firstname'])
             ->first();
         if ($char) {
             return $res->withStatus(400);
         }
 
+        // image upload
+        $fileInfo = pathinfo($_FILES['img']['name']);
+        $extension = $fileInfo['extension']; // get the extension of the file
+        $fileName = $_POST['firstname'] . $_POST['lastname'] . '.' . $extension;
+        $target = 'src/img/fighters/' . $fileName; // better link maybe ?
+        move_uploaded_file($_FILES['img']['tmp_name'], $target);
+
         $char = new CHR;
-        $char->lastname     = $body->lastname;
-        $char->firstname    = $body->firstname;
-        $char->weight       = $body->weight;
-        $char->size         = $body->size;
-        $char->hp           = $body->hp;
-        $char->attack       = $body->attack;
-        $char->def          = $body->def;
-        $char->agility      = $body->agility;
+        $char->lastname     = $_POST['lastname'];
+        $char->firstname    = $_POST['firstname'];
+        $char->weight       = $_POST['weight'];
+        $char->size         = $_POST['size'];
+        $char->hp           = $_POST['hp'];
+        $char->attack       = $_POST['attack'];
+        $char->def          = $_POST['def'];
+        $char->agility      = $_POST['agility'];
+        $char->picture      = $fileName;
         $char->save();
 
-        return $res->withJson($body);
+        return $res->withJson($char);
     }
 }
