@@ -30,7 +30,7 @@ CREATE TABLE `characters` (
   `attack` int(11) NOT NULL,
   `def` int(11) NOT NULL,
   `agility` int(11) NOT NULL,
-  `picture` int(11) DEFAULT NULL,
+  `picture` varchar(255) NOT NULL,
   `created_at` DATETIME DEFAULT NULL,
   `updated_at` DATETIME DEFAULT NULL,
   `deleted_at` DATETIME DEFAULT NULL
@@ -83,7 +83,7 @@ CREATE TABLE `monsters` (
   `attack` int(11) NOT NULL,
   `def` int(11) NOT NULL,
   `agility` int(11) NOT NULL,
-  `picture` int(11) DEFAULT NULL,
+  `picture` varchar(255) NOT NULL,
   `created_at` DATETIME DEFAULT NULL,
   `updated_at` DATETIME DEFAULT NULL,
   `deleted_at` DATETIME DEFAULT NULL
