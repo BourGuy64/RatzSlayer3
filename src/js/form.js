@@ -35,7 +35,21 @@ function getDataSelect(formId, formData) {
     $('#' + formId + ' select').each(function() {
         key = $(this).attr('id');
         value = $(this).val();
-        formData.append(key, value) // formData[key] = value;
+        formData.append(key, value); // formData[key] = value;
+    });
+
+    return formData;
+}
+
+// collect value of select
+function getDataFile(formId, formData) {
+    let key,
+        value;
+
+    $('#' + formId + ' input[type="file"]').each(function() {
+        key = $(this).attr('id');
+        value = $(this)[0].files[0];
+        formData.append(key, value); // formData[key] = value;
     });
 
     return formData;
@@ -47,6 +61,7 @@ export function getData(formId) {
     formData = getDataText(formId, formData);
     formData = getDataNumber(formId, formData);
     formData = getDataSelect(formId, formData);
+    formData = getDataFile(formId, formData);
 
     return formData;
 }
