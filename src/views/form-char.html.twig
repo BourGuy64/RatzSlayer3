@@ -1,5 +1,6 @@
-{% include 'header.html.twig' %}
+{% extends 'base.html.twig' %}
 
+{% block main %}
 <div class="mx-5 my-2">
     <form id="newChar" method="post" action="characters">
 
@@ -77,5 +78,4 @@
       </div>
     </form>
 </div>
-
-{% include 'footer.html.twig' %}
+{% endblock %}
