@@ -2,7 +2,6 @@
 
 import * as Conf from './conf.js';
 import * as Form from './form.js';
-import * as Dev from './dev.js';
 
 
 function create(e) {
