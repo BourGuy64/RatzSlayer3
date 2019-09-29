@@ -1,11 +1,10 @@
 "use strict";
 
-import * as Create  from './create.js';
-
+import * as Fighters  from './fighters.js';
 
 
 function start() {
-    Create.init();
+    Fighters.init();
 }
 
 $(document).ready( function () {
