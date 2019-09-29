@@ -43,4 +43,10 @@ class MonstersController extends SuperController {
         return $res->withJson($monster);
     }
 
+    public function delete(Request $req, Response $res, array $args) {
+        $monster = MST::find($args['id']);
+        $monster->delete();
+        return $res->withStatus(200);
+    }
+
 }

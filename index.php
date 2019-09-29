@@ -40,6 +40,7 @@ $app->group('/characters', function ($app) {
     $app->get('',           "\\ratzslayer3\\controllers\\CharactersController:get");
     $app->get('/create',    "\\ratzslayer3\\controllers\\CharactersController:createForm");
     $app->post('',          "\\ratzslayer3\\controllers\\CharactersController:create");
+    $app->delete('/{id}',   "\\ratzslayer3\\controllers\\CharactersController:delete");
 });
 
 // MONSTERS
@@ -47,6 +48,7 @@ $app->group('/monsters', function ($app) {
     $app->get('',           "\\ratzslayer3\\controllers\\MonstersController:get");
     $app->get('/create',    "\\ratzslayer3\\controllers\\MonstersController:createForm");
     $app->post('',          "\\ratzslayer3\\controllers\\MonstersController:create");
+    $app->delete('/{id}',   "\\ratzslayer3\\controllers\\MonstersController:delete");
 });
 
 // MAIN MENU

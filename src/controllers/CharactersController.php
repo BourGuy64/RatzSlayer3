@@ -45,4 +45,11 @@ class CharactersController extends SuperController {
 
         return $res->withJson($char);
     }
+
+    public function delete(Request $req, Response $res, array $args) {
+        $character = CHR::find($args['id']);
+        $character->delete();
+        return $res->withStatus(200);
+    }
+    
 }
