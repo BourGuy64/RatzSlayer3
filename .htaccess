@@ -4,6 +4,7 @@ RewriteEngine On
 # cancel access to directory containing code
 # RewriteRule ^src(/.*|)$ - [NC,F]
 RewriteRule ^vendor(/.*|)$ - [NC,F]
+RewriteRule ^conf(/.*|)$ - [NC,F]
 
 #
 # slim rewrite
