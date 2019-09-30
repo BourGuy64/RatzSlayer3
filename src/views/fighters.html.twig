@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+    {% extends 'base.html.twig' %}
 
 {% block css %}
 {{ parent() }}
@@ -13,18 +13,17 @@
         <img src="{{dir}}/src/img/fighters/{{fighter.picture}}" alt="img alt">
 
         {% if fighter.name %}
-            <p class="name">{{fighter.name}}</p>
+            <p class="name">Name: {{fighter.name}}</p>
         {% else %}
-            <p class="lastname">{{fighter.lastname}}</p>
-            <p class="firstname">{{fighter.firstname}}</p>
+            <p class="lastname">Lastname: {{fighter.lastname}}</p>
+            <p class="firstname">Firstname: {{fighter.firstname}}</p>
         {% endif %}
-        <p>{{fighter.weight}}</p>
-        <p>{{fighter.size}}</p>
-        <p>{{fighter.hp}}</p>
-        <p>{{fighter.attack}}</p>
-        <p>{{fighter.def}}</p>
-        <p>{{fighter.agility}}</p>
-        <p>{{fighter.agility}}</p>
+        <p>Weigth: {{fighter.weight}}</p>
+        <p>Size: {{fighter.size}}</p>
+        <p>Health: {{fighter.hp}}</p>
+        <p>Attack: {{fighter.attack}}</p>
+        <p>Defense: {{fighter.def}}</p>
+        <p>Agility: {{fighter.agility}}</p>
         <i class="remove fas fa-trash-alt" data-id="{{fighter.id}}"></i>
     </div>
 {% endfor %}

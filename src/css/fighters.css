@@ -1,9 +1,30 @@
-body {
+body > div{
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
 }
 
 .fighter {
     box-shadow: 0 5px 10px rgba(0,0,0,0.19), 0 3px 3px rgba(0,0,0,0.23);
+    border-radius: 8px;
+
+    width: 40vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    margin: 2% 1%;
+    padding: 2%;
+}
+
+.fighter img {
+    max-height: 10vh;
+}
+
+p {
+    display: block;
 }
