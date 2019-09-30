@@ -1,0 +1,7 @@
+form {
+    margin-top: 10vh;
+}
+
+form > div {
+    margin: 2.5vh 20vw 0 20vw;
+}

@@ -1,81 +1,62 @@
 {% extends 'base.html.twig' %}
 
+{% block css %}
+{{ parent() }}
+<link href="{{dir}}/src/css/form.css" rel="stylesheet">
+{% endblock %}
+
 {% block main %}
-<div class="mx-5 my-2">
-    <form id="newChar" method="post" action="characters">
+<form id="newChar" method="post" action="characters">
 
-      <div class="form-row">
-        <div class="col">
-          <div class="md-form">
-            <input type="text" id="firstname" class="form-control" required>
-            <label for="firstname">First Name</label>
-          </div>
-        </div>
+    <div class="nes-field">
+        <label for="firstname">Firstname</label>
+        <input type="text" id="firstname" class="nes-input">
+    </div>
 
-        <div class="col">
-          <div class="md-form">
-            <input type="text" id="lastname" class="form-control" required>
-            <label for="lastname">Last Name</label>
-          </div>
-        </div>
-      </div>
+    <div class="nes-field">
+        <label for="lastname">Lastname</label>
+        <input type="text" id="lastname" class="nes-input">
+    </div>
 
-      <div class="form-row">
-        <div class="col">
-          <div class="md-form">
-            <input type="number" id="weight" class="form-control" min="1" max="100" required>
-            <label for="weight">Weight</label>
-          </div>
-        </div>
+    <div class="nes-field">
+        <label for="weight">Weight</label>
+        <input type="number" id="weight" class="nes-input">
+    </div>
 
-        <div class="col">
-          <div class="md-form">
-            <input type="number" id="size" class="form-control" min="1" max="100" required>
-            <label for="size">Size</label>
-          </div>
-        </div>
-      </div>
+    <div class="nes-field">
+        <label for="size">Size</label>
+        <input type="number" id="size" class="nes-input">
+    </div>
 
-      <div class="form-row">
-        <div class="col">
-          <div class="md-form">
-            <input type="number" id="hp" class="form-control" min="1" max="100" required>
-            <label for="hp">HP</label>
-          </div>
-        </div>
+    <div class="nes-field">
+        <label for="hp">Health</label>
+        <input type="number" id="hp" class="nes-input">
+    </div>
 
-        <div class="col">
-          <div class="md-form">
-            <input type="number" id="attack" class="form-control" min="1" max="100" required>
-            <label for="attack">Attack</label>
-          </div>
-        </div>
+    <div class="nes-field">
+        <label for="attack">Attack</label>
+        <input type="number" id="attack" class="nes-input">
+    </div>
 
-        <div class="col">
-          <div class="md-form">
-            <input type="number" id="def" class="form-control" min="1" max="100" required>
-            <label for="def">Def</label>
-          </div>
-        </div>
+    <div class="nes-field">
+        <label for="def">Defense</label>
+        <input type="number" id="def" class="nes-input">
+    </div>
 
-        <div class="col">
-          <div class="md-form">
-            <input type="number" id="agility" class="form-control" min="1" max="100" required>
-            <label for="agility">Agility</label>
-          </div>
-        </div>
-      </div>
+    <div class="nes-field">
+        <label for="Agility">Agility</label>
+        <input type="number" id="agility" class="nes-input">
+    </div>
 
-      <div class="input-group">
-          <div class="custom-file">
-              <input type="file" id="img" name="img" class="custom-file-input"  aria-describedby="inputGroupFileAddon01">
-              <label class="custom-file-label" for="img">Select image</label>
-          </div>
-      </div>
+    <div class="custom-file">
+        <input type="file" id="img" name="img" class="custom-file-input" aria-describedby="inputGroupFileAddon01">
+        <label class="custom-file-label" for="img">Select image</label>
+    </div>
 
-      <div class="d-flex justify-content-center">
-        <button class="btn btn-primary" type="submit">Create</button>
-      </div>
-    </form>
-</div>
+
+    <div>
+        <button type="submit" class="nes-btn is-primary">Primary</button>
+    </div>
+</form>
+
 {% endblock %}
