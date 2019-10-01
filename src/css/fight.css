@@ -1,0 +1,42 @@
+.fight-view{
+  margin-top: 1em;
+}
+
+div.select-char{
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  margin: 1.5em auto !important;
+  background: rgba(255, 255, 255, 0.69);
+}
+
+.select-char:hover{
+  background: white;
+}
+
+.select-char .name{
+  display: flex;
+}
+
+.select-char .name > p{
+  margin: .6em;
+}
+
+.select-char .stats{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.select-char .stats > p{
+  margin-left: .7em;
+}
+
+.select-char .stats > p:after{
+  content: '|';
+}
+
+.select-char .stats > p:last-child:after{
+  content: none;
+}

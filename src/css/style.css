@@ -37,7 +37,7 @@ header {
 }
 
 div.navbar {
-  display: flex;
+
   background: rgba(255, 255, 255, 0.5);
   box-shadow: none;
 }
@@ -50,6 +50,12 @@ div.navbar a:before{
   content: '< ';
 }
 
+div.navbar .title{
+  position: absolute;
+  white-space: nowrap;
+  left: 50%;
+  transform: translateX(-50%);
+}
 /**
  * DEFAULT #MAIN
  */
