@@ -17,6 +17,11 @@ class MonstersController extends SuperController {
         return $this->views->render($res, 'form-monster.html.twig', ['title' => 'New character', 'dir' => $this->dir]);
     }
 
+    public function editForm(Request $req, Response $res, array $args) {
+        $monster = MST::find($args['id']);
+        return $this->views->render($res, 'edit-monster.html.twig', ['title' => 'Edit Monster', 'dir' => $this->dir, 'fighter' => $monster]);
+    }
+
     public function create(Request $req, Response $res, array $args) {
 
         // test if character is unique
@@ -49,4 +54,30 @@ class MonstersController extends SuperController {
         return $res->withStatus(200);
     }
 
+    public function update(Request $req, Response $res, array $args) {
+
+
+        // test if character is unique
+        $monster = MST::find($args['id']);
+
+        // upload image
+        if($_FILES['img'])
+        {
+          $image = new ImageTools($_FILES['img'], $_POST['name']);
+          $image->upload();
+          $monster->picture   = $image->getFileName();
+        }
+
+        $monster->name      = $_POST['name'];
+        $monster->weight    = $_POST['weight'];
+        $monster->size      = $_POST['size'];
+        $monster->hp        = $_POST['hp'];
+        $monster->attack    = $_POST['attack'];
+        $monster->def       = $_POST['def'];
+        $monster->agility   = $_POST['agility'];
+
+        $monster->save();
+
+        return $res->withJson($monster);
+    }
 }
