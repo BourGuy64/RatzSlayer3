@@ -13,7 +13,7 @@ class UsersController extends SuperController {
     }
 
     public function createForm(Request $req, Response $res, array $args) {
-        return $this->views->render($res, 'login.html.twig', ['title' => 'Login','dir' => $this->dir, 'admin' => $_SESSION['admin']]);
+        return $this->views->render($res, 'form-user.html.twig', ['title' => 'New user','dir' => $this->dir, 'admin' => $_SESSION['admin']]);
     }
 
     public function login(Request $req, Response $res, array $args) {
@@ -32,8 +32,27 @@ class UsersController extends SuperController {
     }
 
     public function create(Request $req, Response $res, array $args) {
+        // test if username is unique
+        $user = USR::where('username', $_POST['username'])->first();
+        if ($user) {
+            return $res->withStatus(400);
+        }
 
-        return $res->withJson("yo");
+
+        if ( $_POST['password'] == $_POST['repeatPassword']) {
+            $user = new USR;
+            $user->username     = $_POST['username'];
+            $user->password     = hash('sha512', $_POST['password'] . SELF::SEL);
+            $user->save();
+            return $res->withJson($user);
+        }
+        return $res->withStatus(400);
+    }
+
+    public function delete(Request $req, Response $res, array $args) {
+        $user = USR::find($args['id']);
+        $user->delete();
+        return $res->withStatus(200);
     }
 
     private const SEL = 'jaimelesel';

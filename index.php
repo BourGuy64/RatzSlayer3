@@ -13,7 +13,7 @@ use ratzslayer3\middlewares\AuthentificationMiddleware;
 
 session_start();
 
-// $_SESSION['admin'] = true; // DEV ( fake admin connection )
+$_SESSION['admin'] = true; // DEV ( fake admin connection )
 
 $cf = new CF();
 $cf->setConfig('src/conf/conf.ini');
@@ -80,6 +80,11 @@ $app->group('/users', function ($app) {
     $app->post('/login',    "\\ratzslayer3\\controllers\\UsersController:login");
     $app->get('/logout',    "\\ratzslayer3\\controllers\\UsersController:logout");
 });
+$app->group('/users', function ($app) {
+    $app->get('/create',    "\\ratzslayer3\\controllers\\UsersController:createForm");
+    $app->post('',          "\\ratzslayer3\\controllers\\UsersController:create");
+    $app->delete('/{id}',   "\\ratzslayer3\\controllers\\UsersController:delete");
+})->add( new AuthentificationMiddleware() );
 
 // MAIN MENU
 $app->get('/',              "\\ratzslayer3\\controllers\\MainMenuController:get");
