@@ -13,6 +13,8 @@ use ratzslayer3\middlewares\AuthentificationMiddleware;
 
 session_start();
 
+$_SESSION['admin'] = true; // DEV ( fake admin connection )
+
 $cf = new CF();
 $cf->setConfig('src/conf/conf.ini');
 $db = $cf->makeConnection();
