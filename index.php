@@ -54,6 +54,11 @@ $app->group('/monsters', function ($app) {
     $app->delete('/{id}',   "\\ratzslayer3\\controllers\\MonstersController:delete");
 });
 
+// FIGHT
+$app->group('/fight', function ($app) {
+    $app->get('',           "\\ratzslayer3\\controllers\\FightController:get");
+});
+
 // MAIN MENU
 $app->get('/',              "\\ratzslayer3\\controllers\\MainMenuController:get");
 

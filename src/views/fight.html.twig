@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block css %}
+{{ parent() }}
+<link href="{{dir}}/src/css/fight.css" rel="stylesheet">
+{% endblock %}
+
+{% block main %}
+<div class="row fight-view">
+  <div class="col">
+    <div class="text-center">Characters</div>
+    {% for character in characters %}
+    <div class="select-char nes-container is-rounded">
+      <div class="name">
+        <p class="lastname">{{character.lastname}}</p>
+        <p class="firstname">{{character.firstname}}</p>
+      </div>
+      <div class="stats">
+        <p>WT:{{character.weight}}</p>
+        <p>SZ:{{character.size}}</p>
+        <p>HP:{{character.hp}}</p>
+        <p>Att:{{character.attack}}</p>
+        <p>Def:{{character.def}}</p>
+        <p>Agi:{{character.agility}}</p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  <div class="col">
+    <div class="text-center">Monsters</div>
+    {% for monster in monsters %}
+    <div class="select-char nes-container is-rounded">
+      <div class="name">
+        <p>{{monster.name}}</p>
+      </div>
+      <div class="stats">
+        <p>WT:{{monster.weight}}</p>
+        <p>SZ:{{monster.size}}</p>
+        <p>HP:{{monster.hp}}</p>
+        <p>Att:{{monster.attack}}</p>
+        <p>Def:{{monster.def}}</p>
+        <p>Agi:{{monster.agility}}</p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
