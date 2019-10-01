@@ -24,7 +24,16 @@
         <p>Attack: {{fighter.attack}}</p>
         <p>Defense: {{fighter.def}}</p>
         <p>Agility: {{fighter.agility}}</p>
-        <i class="remove fas fa-trash-alt" data-id="{{fighter.id}}"></i>
+
+        {% if admin %}
+        <div>
+            <a href="{{dir}}/{{fighterType}}/edit/{{fighter.id}}">
+                <i class="fas fa-edit"></i>
+            </a>
+            <i class="remove fas fa-trash-alt" data-id="{{fighter.id}}"></i>
+        </div>
+        {% endif %}
+
     </div>
 {% endfor %}
 
