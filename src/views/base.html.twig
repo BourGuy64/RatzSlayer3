@@ -30,12 +30,15 @@
 
     <header>
         {% block header %}
+        {% include "navbar.html.twig" %}
         {% endblock %}
     </header>
 
     <div id="main">
+      <section>
         {% block main %}
         {% endblock %}
+      </section>
     </div>
 
     <footer>
