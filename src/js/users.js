@@ -66,6 +66,40 @@ function login(e) {
     });
 }
 
+function remove(e) {
+
+    let fighterType;
+    if ($(e.target).parent().hasClass('monsters')) {
+        fighterType = 'monsters';
+    } else if ($(e.target).parent().hasClass('characters')) {
+        fighterType = 'characters';
+    }
+    console.log(fighterType);
+
+    const type = "DELETE";
+    const requestUrl = Conf.url.api + "/users/" + $(e.target).data('id');
+    console.log(requestUrl);
+
+    $.ajax({
+        type        : type,
+        url         : requestUrl,
+        timeout     : 5000,
+        header      : {},
+        data        : null,
+        processData : false,
+        contentType : false,
+        success     : (response, xhr) => {
+            $(e.target).parent().remove();
+        },
+        error       : (xhr) => {
+            // do something for alert user
+            console.log("status =" + xhr.status); // DEV
+        },
+        complete    : () => {
+        }
+    });
+}
+
 export function init() {
     $('#newUser').on('submit', create);
     $('#login').on('submit', login);
