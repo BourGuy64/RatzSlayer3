@@ -36,6 +36,20 @@ header {
   z-index: 999;
 }
 
+div.navbar {
+  display: flex;
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: none;
+}
+
+div.navbar a {
+  color: black;
+}
+
+div.navbar a:before{
+  content: '< ';
+}
+
 /**
  * DEFAULT #MAIN
  */
@@ -55,28 +69,6 @@ footer {
   z-index: 999;
 }
 
-div.navbar {
-  display: flex;
-  background: rgba(255, 255, 255, 0.5);
-  box-shadow: none;
-}
-
-div.navbar a {
-  text-decoration: none;
-  color: black;
-}
-
-div.navbar a:before{
-  content: '< ';
-}
-
 a{
   text-decoration: none;
-}
-
-section{
-  overflow: auto;
-  flex-grow: 1;
-  margin-top: .5em;
-  padding-bottom: 1em;
 }
