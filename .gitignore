@@ -2,3 +2,4 @@ composer.lock
 composer.phar
 .DS_Store
 .jshintrc
+src/conf/conf.ini
