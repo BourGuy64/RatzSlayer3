@@ -1,27 +1,11 @@
--- phpMyAdmin SQL Dump
--- version 4.8.3
--- https://www.phpmyadmin.net/
---
--- Host: localhost:8889
--- Generation Time: Sep 17, 2019 at 07:11 AM
--- Server version: 5.7.23
--- PHP Version: 7.2.10
+SET NAMES utf8;
+SET time_zone = '+00:00';
+SET foreign_key_checks = 0;
+SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
---
--- Database: `RatzSlayer3`
---
-
--- --------------------------------------------------------
-
---
--- Table structure for table `characters`
---
-
+DROP TABLE IF EXISTS `characters`;
 CREATE TABLE `characters` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `lastname` varchar(255) NOT NULL,
   `firstname` varchar(255) NOT NULL,
   `weight` int(11) NOT NULL,
@@ -30,52 +14,51 @@ CREATE TABLE `characters` (
   `attack` int(11) NOT NULL,
   `def` int(11) NOT NULL,
   `agility` int(11) NOT NULL,
-  `picture` varchar(255) NOT NULL,
-  `created_at` DATETIME DEFAULT NULL,
-  `updated_at` DATETIME DEFAULT NULL,
-  `deleted_at` DATETIME DEFAULT NULL
+  `picture` varchar(255) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `deleted_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
 
---
--- Table structure for table `fights`
---
-
+DROP TABLE IF EXISTS `fights`;
 CREATE TABLE `fights` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_characters` int(11) NOT NULL,
   `id_monsters` int(11) NOT NULL,
   `winner` int(11) NOT NULL,
-  `created_at` DATETIME DEFAULT NULL,
-  `updated_at` DATETIME DEFAULT NULL,
-  `deleted_at` DATETIME DEFAULT NULL
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `deleted_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_monsters` (`id_monsters`),
+  KEY `id_characters` (`id_characters`),
+  CONSTRAINT `fights_ibfk_1` FOREIGN KEY (`id_monsters`) REFERENCES `monsters` (`id`),
+  CONSTRAINT `fights_ibfk_2` FOREIGN KEY (`id_characters`) REFERENCES `characters` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
 
---
--- Table structure for table `figth_log`
---
-
+DROP TABLE IF EXISTS `fights_log`;
 CREATE TABLE `fights_log` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_fights` int(11) NOT NULL,
   `id_fighter` int(11) NOT NULL,
   `damage` int(11) NOT NULL,
-  `created_at` DATETIME DEFAULT NULL,
-  `updated_at` DATETIME DEFAULT NULL,
-  `deleted_at` DATETIME DEFAULT NULL
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `deleted_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_fights` (`id_fights`),
+  KEY `id_fighter` (`id_fighter`),
+  CONSTRAINT `fights_log_ibfk_1` FOREIGN KEY (`id_fights`) REFERENCES `fights` (`id`),
+  CONSTRAINT `fights_log_ibfk_2` FOREIGN KEY (`id_fighter`) REFERENCES `monsters` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
 
---
--- Table structure for table `monsters`
---
-
+DROP TABLE IF EXISTS `monsters`;
 CREATE TABLE `monsters` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `weight` int(11) NOT NULL,
   `size` int(11) NOT NULL,
@@ -83,72 +66,26 @@ CREATE TABLE `monsters` (
   `attack` int(11) NOT NULL,
   `def` int(11) NOT NULL,
   `agility` int(11) NOT NULL,
-  `picture` varchar(255) NOT NULL,
-  `created_at` DATETIME DEFAULT NULL,
-  `updated_at` DATETIME DEFAULT NULL,
-  `deleted_at` DATETIME DEFAULT NULL
+  `picture` varchar(255) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `deleted_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Indexes for dumped tables
---
 
---
--- Indexes for table `characters`
---
-ALTER TABLE `characters`
-  ADD PRIMARY KEY (`id`);
+SET NAMES utf8mb4;
 
---
--- Indexes for table `fights`
---
-ALTER TABLE `fights`
-  ADD PRIMARY KEY (`id`);
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(30) NOT NULL,
+  `password` text CHARACTER SET utf8 NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `deleted_at` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Indexes for table `figth_log`
---
-ALTER TABLE `fights_log`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `monsters`
---
-ALTER TABLE `monsters`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `characters`
---
-ALTER TABLE `characters`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `fights`
---
-ALTER TABLE `fights`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `figth_log`
---
-ALTER TABLE `fights_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `monsters`
---
-ALTER TABLE `monsters`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
-alter TABLE fights_log add FOREIGN key (id_fights) REFERENCES fights (id);
-
-alter TABLE fights_log add FOREIGN key (id_fighter) REFERENCES monsters (id);
-
-alter TABLE fights add FOREIGN key (id_monsters) REFERENCES monsters (id);
-
-alter TABLE fights add FOREIGN key (id_characters) REFERENCES characters (id);
+INSERT INTO `users` (`id`, `username`, `password`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1,	'admin',	'3ac3c428897e984ff8174f3988868eb6141ff840693657a5bc8c3e52b8ec7dcbee80bf51cfdcc744f52c6cf5d85cdefac60b72abb561789cfd188d8c3a1413db',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00');
