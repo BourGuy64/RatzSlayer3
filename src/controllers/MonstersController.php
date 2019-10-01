@@ -10,16 +10,16 @@ class MonstersController extends SuperController {
 
     public function get(Request $req, Response $res, array $args) {
         $monsters = MST::all();
-        return $this->views->render($res, 'fighters.html.twig', ['title' => 'Monsters','dir' => $this->dir, 'fighters' => $monsters, 'fighterType' => 'monsters']);
+        return $this->views->render($res, 'fighters.html.twig', ['title' => 'Monsters','dir' => $this->dir, 'fighters' => $monsters, 'fighterType' => 'monsters', 'admin' => $_SESSION['admin']]);
     }
 
     public function createForm(Request $req, Response $res, array $args) {
-        return $this->views->render($res, 'form-monster.html.twig', ['title' => 'New monster', 'dir' => $this->dir]);
+        return $this->views->render($res, 'form-monster.html.twig', ['title' => 'New monster', 'dir' => $this->dir, 'admin' => $_SESSION['admin']]);
     }
 
     public function editForm(Request $req, Response $res, array $args) {
         $monster = MST::find($args['id']);
-        return $this->views->render($res, 'edit-monster.html.twig', ['title' => 'Edit Monster', 'dir' => $this->dir, 'fighter' => $monster]);
+        return $this->views->render($res, 'edit-monster.html.twig', ['title' => 'Edit Monster', 'dir' => $this->dir, 'fighter' => $monster, 'admin' => $_SESSION['admin']]);
     }
 
     public function create(Request $req, Response $res, array $args) {

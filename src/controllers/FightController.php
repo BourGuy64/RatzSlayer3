@@ -9,6 +9,6 @@ class FightController extends SuperController{
   public function get(Request $req, Response $res, array $args) {
       $characters = chr::all();
       $monsters = MST::all();
-      return $this->views->render($res, 'fight.html.twig', ['title' => 'Choose your fighter', 'dir' =>  $this->dir, 'characters' => $characters, 'monsters' => $monsters]);
+      return $this->views->render($res, 'fight.html.twig', ['title' => 'Choose your fighter', 'dir' =>  $this->dir, 'characters' => $characters, 'monsters' => $monsters, 'admin' => $_SESSION['admin']]);
   }
 }

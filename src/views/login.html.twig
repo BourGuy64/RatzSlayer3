@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block css %}
+{{ parent() }}
+<link href="{{dir}}/src/css/form.css" rel="stylesheet">
+{% endblock %}
+
+{% block main %}
+<form id="login" method="post" action="users/login">
+
+    <div class="nes-field">
+        <label for="username">Username</label>
+        <input type="text" id="username" class="nes-input">
+    </div>
+
+    <div class="nes-field">
+        <label for="password">Password</label>
+        <input type="text" id="password" class="nes-input">
+    </div>
+
+    <div class="text-center">
+        <button type="submit" class="nes-btn is-primary">Login</button>
+    </div>
+
+</form>
+{% endblock %}
