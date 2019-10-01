@@ -13,7 +13,7 @@ use ratzslayer3\middlewares\AuthentificationMiddleware;
 
 session_start();
 
-$_SESSION['admin'] = true; // DEV ( fake admin connection )
+// $_SESSION['admin'] = true; // DEV ( fake admin connection )
 
 $cf = new CF();
 $cf->setConfig('src/conf/conf.ini');
@@ -50,20 +50,24 @@ $app->add( new GlobalMiddleware() );
 // CHARACTERS
 $app->group('/characters', function ($app) {
     $app->get('',           "\\ratzslayer3\\controllers\\CharactersController:get");
-    $app->get('/create',    "\\ratzslayer3\\controllers\\CharactersController:createForm")->add( new AuthentificationMiddleware() );
-    $app->post('',          "\\ratzslayer3\\controllers\\CharactersController:create")->add( new AuthentificationMiddleware() );
-    $app->delete('/{id}',   "\\ratzslayer3\\controllers\\CharactersController:delete")->add( new AuthentificationMiddleware() );
 });
+$app->group('/characters', function ($app) {
+    $app->get('/create',    "\\ratzslayer3\\controllers\\CharactersController:createForm");
+    $app->post('',          "\\ratzslayer3\\controllers\\CharactersController:create");
+    $app->delete('/{id}',   "\\ratzslayer3\\controllers\\CharactersController:delete");
+})->add( new AuthentificationMiddleware() );
 
 // MONSTERS
 $app->group('/monsters', function ($app) {
     $app->get('',               "\\ratzslayer3\\controllers\\MonstersController:get");
-    $app->get('/create',        "\\ratzslayer3\\controllers\\MonstersController:createForm")->add( new AuthentificationMiddleware() );
-    $app->get('/edit/{id}',     "\\ratzslayer3\\controllers\\MonstersController:editForm")->add( new AuthentificationMiddleware() );
-    $app->post('',              "\\ratzslayer3\\controllers\\MonstersController:create")->add( new AuthentificationMiddleware() );
-    $app->post('/edit/{id}',    "\\ratzslayer3\\controllers\\MonstersController:update")->add( new AuthentificationMiddleware() );
-    $app->delete('/{id}',       "\\ratzslayer3\\controllers\\MonstersController:delete")->add( new AuthentificationMiddleware() );
 });
+$app->group('/monsters', function ($app) {
+    $app->get('/create',        "\\ratzslayer3\\controllers\\MonstersController:createForm");
+    $app->get('/edit/{id}',     "\\ratzslayer3\\controllers\\MonstersController:editForm");
+    $app->post('',              "\\ratzslayer3\\controllers\\MonstersController:create");
+    $app->post('/edit/{id}',    "\\ratzslayer3\\controllers\\MonstersController:update");
+    $app->delete('/{id}',       "\\ratzslayer3\\controllers\\MonstersController:delete");
+})->add( new AuthentificationMiddleware() );
 
 // FIGHT
 $app->group('/fight', function ($app) {
