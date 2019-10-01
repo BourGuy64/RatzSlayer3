@@ -29,7 +29,7 @@ function fightReady(){
     }
   });
   if(ready === 2){
-    alert("Fight Ready !");
+    $('.popup-fight, .overlay').removeClass('disable');
   }
 }
 

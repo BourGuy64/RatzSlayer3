@@ -46,3 +46,40 @@ div.select-char , div.select-monster{
 .select-char .stats > p:last-child:after, .select-monster .stats > p:last-child:after{
   content: none;
 }
+
+.popup-fight{
+  position: absolute;
+  background: white;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  padding: 3em;
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+}
+
+.popup-fight > div{
+  margin-bottom: 1em;
+}
+
+.popup-button{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.overlay{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.36);
+}
+
+.disable{
+  display: none;
+  visibility: hidden;
+}

@@ -26,6 +26,7 @@
     </div>
     {% endfor %}
   </div>
+
   <div class="col">
     <div class="text-center">Monsters</div>
     {% for monster in monsters %}
@@ -43,6 +44,15 @@
       </div>
     </div>
     {% endfor %}
+  </div>
+</div>
+
+<div class="overlay disable"></div>
+<div class="popup-fight disable nes-container is-rounded">
+  <p>Your fight is ready !</p>
+  <div class="popup-button">
+    <button type="submit" class="nes-btn is-error cancel-fight">Cancel</button>
+    <button type="submit" class="nes-btn is-primary start-fight">Fight !</button>
   </div>
 </div>
 {% endblock %}
