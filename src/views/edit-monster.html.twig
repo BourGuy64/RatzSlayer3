@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block css %}
+{{ parent() }}
+<link href="{{dir}}/src/css/form.css" rel="stylesheet">
+{% endblock %}
+
+{% block main %}
+<form id="editMstr" method="post" action="monsters/edit/{{fighter.id}}">
+
+<img src="{{dir}}/src/img/fighters/{{fighter.picture}}" alt="img alt">
+
+    <div class="nes-field">
+        <label for="name">Name</label>
+        <input type="text" id="name" class="nes-input" value="{{fighter.name}}">
+    </div>
+
+    <div class="nes-field">
+        <label for="weight">Weight</label>
+        <input type="number" id="weight" class="nes-input" value="{{fighter.weight}}">
+    </div>
+
+    <div class="nes-field">
+        <label for="size">Size</label>
+        <input type="number" id="size" class="nes-input" value="{{fighter.size}}">
+    </div>
+
+    <div class="nes-field">
+        <label for="hp">Health</label>
+        <input type="number" id="hp" class="nes-input" value="{{fighter.hp}}">
+    </div>
+
+    <div class="nes-field">
+        <label for="attack">Attack</label>
+        <input type="number" id="attack" class="nes-input" value="{{fighter.attack}}">
+    </div>
+
+    <div class="nes-field">
+        <label for="def">Defense</label>
+        <input type="number" id="def" class="nes-input" value="{{fighter.def}}">
+    </div>
+
+    <div class="nes-field">
+        <label for="Agility">Agility</label>
+        <input type="number" id="agility" class="nes-input" value="{{fighter.agility}}">
+    </div>
+
+    <div class="custom-file">
+        <input type="file" id="img" name="img" class="custom-file-input" aria-describedby="inputGroupFileAddon01">
+        <label class="custom-file-label" for="img">Select image</label>
+    </div>
+
+    <div>
+        <button type="submit" class="nes-btn is-primary">Update</button>
+    </div>
+</form>
+{% endblock %}
