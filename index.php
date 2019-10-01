@@ -6,6 +6,7 @@ use \Psr\Http\Message\ResponseInterface as Response;
 require 'vendor/autoload.php';
 
 use ratzslayer3\conf\ConnectionFactory  as CF;
+use ratzslayer3\middlewares\GlobalMiddleware;
 
 $cf = new CF();
 $cf->setConfig('src/conf/conf.ini');
@@ -34,6 +35,8 @@ $container['view'] = function ($container) {
 $app = new \Slim\App($container);
 
 $container = $app->getContainer(); // get container
+
+$app->add( new GlobalMiddleware() );
 
 // CHARACTERS
 $app->group('/characters', function ($app) {
