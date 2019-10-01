@@ -33,7 +33,18 @@ function fightReady(){
   }
 }
 
+function cancel(){
+  $('.popup-fight, .overlay').addClass('disable');
+  $('.select-char').each(function(i){
+    $(this).removeClass('is-selected');
+  });
+  $('.select-monster').each(function(i){
+    $(this).removeClass('is-selected');
+  });
+}
+
 export function init() {
     $('.select-char').on('click', selectChar);
     $('.select-monster').on('click', selectMonster);
+    $('.cancel-fight').on('click', cancel);
 }
