@@ -5,6 +5,8 @@ use \Psr\Http\Message\ResponseInterface as Response;
 
 require 'vendor/autoload.php';
 
+use Illuminate\Support\Facades\Auth;
+
 use ratzslayer3\conf\ConnectionFactory  as CF;
 use ratzslayer3\middlewares\GlobalMiddleware;
 
@@ -52,6 +54,11 @@ $app->group('/monsters', function ($app) {
     $app->get('/create',    "\\ratzslayer3\\controllers\\MonstersController:createForm");
     $app->post('',          "\\ratzslayer3\\controllers\\MonstersController:create");
     $app->delete('/{id}',   "\\ratzslayer3\\controllers\\MonstersController:delete");
+});
+
+// USERS
+$app->group('/users', function ($app) {
+    $app->get('/login',     "\\ratzslayer3\\controllers\\UsersController:loginForm");
 });
 
 // MAIN MENU
