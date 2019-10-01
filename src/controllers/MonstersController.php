@@ -14,7 +14,7 @@ class MonstersController extends SuperController {
     }
 
     public function createForm(Request $req, Response $res, array $args) {
-        return $this->views->render($res, 'form-monster.html.twig', ['title' => 'New character', 'dir' => $this->dir]);
+        return $this->views->render($res, 'form-monster.html.twig', ['title' => 'New monster', 'dir' => $this->dir]);
     }
 
     public function editForm(Request $req, Response $res, array $args) {
