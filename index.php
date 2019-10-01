@@ -5,15 +5,22 @@ use \Psr\Http\Message\ResponseInterface as Response;
 
 require 'vendor/autoload.php';
 
+use Illuminate\Support\Facades\Auth;
+
 use ratzslayer3\conf\ConnectionFactory  as CF;
 use ratzslayer3\middlewares\GlobalMiddleware;
+use ratzslayer3\middlewares\AuthentificationMiddleware;
+
+session_start();
 
 $cf = new CF();
 $cf->setConfig('src/conf/conf.ini');
 $db = $cf->makeConnection();
 
 //Get root path, parse and add it into container
-$container['dir'] = str_replace('/index.php', '', $_SERVER['PHP_SELF']);
+$dir = str_replace('/index.php', '', $_SERVER['PHP_SELF']);
+$container['dir'] = $dir;
+$_SESSION['dir'] = $dir;
 
 // Register component on container
 $container['view'] = function ($container) {
@@ -48,17 +55,23 @@ $app->group('/characters', function ($app) {
 
 // MONSTERS
 $app->group('/monsters', function ($app) {
-    $app->get('',           "\\ratzslayer3\\controllers\\MonstersController:get");
-    $app->get('/create',    "\\ratzslayer3\\controllers\\MonstersController:createForm");
-    $app->get('/edit/{id}', "\\ratzslayer3\\controllers\\MonstersController:editForm");
-    $app->post('',          "\\ratzslayer3\\controllers\\MonstersController:create");
-    $app->delete('/{id}',   "\\ratzslayer3\\controllers\\MonstersController:delete");
-    $app->post('/edit/{id}',      "\\ratzslayer3\\controllers\\MonstersController:update");
+    $app->get('',               "\\ratzslayer3\\controllers\\MonstersController:get");
+    $app->get('/create',        "\\ratzslayer3\\controllers\\MonstersController:createForm");
+    $app->get('/edit/{id}',     "\\ratzslayer3\\controllers\\MonstersController:editForm");
+    $app->post('',              "\\ratzslayer3\\controllers\\MonstersController:create");
+    $app->post('/edit/{id}',    "\\ratzslayer3\\controllers\\MonstersController:update");
+    $app->delete('/{id}',       "\\ratzslayer3\\controllers\\MonstersController:delete");
 });
 
 // FIGHT
 $app->group('/fight', function ($app) {
     $app->get('',           "\\ratzslayer3\\controllers\\FightController:get");
+});
+
+// USERS
+$app->group('/users', function ($app) {
+    $app->get('/login',     "\\ratzslayer3\\controllers\\UsersController:loginForm");
+    $app->post('/login',    "\\ratzslayer3\\controllers\\UsersController:loginForm");
 });
 
 // MAIN MENU
