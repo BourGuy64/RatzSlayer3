@@ -3,4 +3,13 @@
   <div class="title text-center">
     {{title}}
   </div>
+      {% if admin %}
+      <a href="{{dir}}/users/logout">
+          <i class="fas fa-power-off"></i>
+      </a>
+      {% else %}
+      <a href="{{dir}}/users/login">
+          <i class="fas fa-user"></i>
+      </a>
+      {% endif %}
 </div>

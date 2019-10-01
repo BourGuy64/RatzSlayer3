@@ -5,15 +5,27 @@ use \Psr\Http\Message\ResponseInterface as Response;
 
 require 'vendor/autoload.php';
 
+use Illuminate\Support\Facades\Auth;
+
 use ratzslayer3\conf\ConnectionFactory  as CF;
 use ratzslayer3\middlewares\GlobalMiddleware;
+use ratzslayer3\middlewares\AuthentificationMiddleware;
+
+session_start();
+<<<<<<< HEAD
+=======
+
+$_SESSION['admin'] = true; // DEV ( fake admin connection )
+>>>>>>> dev_ctrlouis
 
 $cf = new CF();
 $cf->setConfig('src/conf/conf.ini');
 $db = $cf->makeConnection();
 
 //Get root path, parse and add it into container
-$container['dir'] = str_replace('/index.php', '', $_SERVER['PHP_SELF']);
+$dir = str_replace('/index.php', '', $_SERVER['PHP_SELF']);
+$container['dir'] = $dir;
+$_SESSION['dir'] = $dir;
 
 // Register component on container
 $container['view'] = function ($container) {
@@ -41,24 +53,43 @@ $app->add( new GlobalMiddleware() );
 // CHARACTERS
 $app->group('/characters', function ($app) {
     $app->get('',           "\\ratzslayer3\\controllers\\CharactersController:get");
-    $app->get('/create',    "\\ratzslayer3\\controllers\\CharactersController:createForm");
-    $app->post('',          "\\ratzslayer3\\controllers\\CharactersController:create");
-    $app->delete('/{id}',   "\\ratzslayer3\\controllers\\CharactersController:delete");
+    $app->get('/create',    "\\ratzslayer3\\controllers\\CharactersController:createForm")->add( new AuthentificationMiddleware() );
+    $app->post('',          "\\ratzslayer3\\controllers\\CharactersController:create")->add( new AuthentificationMiddleware() );
+    $app->delete('/{id}',   "\\ratzslayer3\\controllers\\CharactersController:delete")->add( new AuthentificationMiddleware() );
 });
 
 // MONSTERS
 $app->group('/monsters', function ($app) {
-    $app->get('',           "\\ratzslayer3\\controllers\\MonstersController:get");
-    $app->get('/create',    "\\ratzslayer3\\controllers\\MonstersController:createForm");
-    $app->get('/edit/{id}', "\\ratzslayer3\\controllers\\MonstersController:editForm");
-    $app->post('',          "\\ratzslayer3\\controllers\\MonstersController:create");
-    $app->delete('/{id}',   "\\ratzslayer3\\controllers\\MonstersController:delete");
-    $app->post('/edit/{id}',      "\\ratzslayer3\\controllers\\MonstersController:update");
+    $app->get('',               "\\ratzslayer3\\controllers\\MonstersController:get");
+<<<<<<< HEAD
+    $app->get('/create',        "\\ratzslayer3\\controllers\\MonstersController:createForm");
+    $app->get('/edit/{id}',     "\\ratzslayer3\\controllers\\MonstersController:editForm");
+    $app->post('',              "\\ratzslayer3\\controllers\\MonstersController:create");
+    $app->post('/edit/{id}',    "\\ratzslayer3\\controllers\\MonstersController:update");
+    $app->delete('/{id}',       "\\ratzslayer3\\controllers\\MonstersController:delete");
+=======
+    $app->get('/create',        "\\ratzslayer3\\controllers\\MonstersController:createForm")->add( new AuthentificationMiddleware() );
+    $app->get('/edit/{id}',     "\\ratzslayer3\\controllers\\MonstersController:editForm")->add( new AuthentificationMiddleware() );
+    $app->post('',              "\\ratzslayer3\\controllers\\MonstersController:create")->add( new AuthentificationMiddleware() );
+    $app->post('/edit/{id}',    "\\ratzslayer3\\controllers\\MonstersController:update")->add( new AuthentificationMiddleware() );
+    $app->delete('/{id}',       "\\ratzslayer3\\controllers\\MonstersController:delete")->add( new AuthentificationMiddleware() );
+>>>>>>> dev_ctrlouis
 });
 
 // FIGHT
 $app->group('/fight', function ($app) {
     $app->get('',           "\\ratzslayer3\\controllers\\FightController:get");
+});
+
+// USERS
+$app->group('/users', function ($app) {
+    $app->get('/login',     "\\ratzslayer3\\controllers\\UsersController:loginForm");
+<<<<<<< HEAD
+    $app->post('/login',    "\\ratzslayer3\\controllers\\UsersController:loginForm");
+=======
+    $app->post('/login',    "\\ratzslayer3\\controllers\\UsersController:login");
+    $app->get('/logout',    "\\ratzslayer3\\controllers\\UsersController:logout");
+>>>>>>> dev_ctrlouis
 });
 
 // MAIN MENU
