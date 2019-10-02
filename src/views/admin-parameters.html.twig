@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block css %}
+{{ parent() }}
+{% endblock %}
+
+{% block main %}
+<a href="{{dir}}/users/create" class="nes-btn is-primary">Create user</a>
+<button id="removeUser" type="button" class="nes-btn is-error" data-id="{{userId}}">Delete current user</button>
+{% endblock %}
