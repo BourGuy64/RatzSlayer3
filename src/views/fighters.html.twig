@@ -9,8 +9,8 @@
 
 {% for fighter in fighters %}
 
-    <div class="select-char nes-container is-rounded fighter {{fighterType}}">
-        <img src="{{dir}}/src/img/fighters/{{fighter.picture}}" alt="img alt">
+    <div class="nes-container is-rounded fighter {{fighterType}}">
+        <img src="{{dir}}/src/img/fighters/{{fighter.picture}}" onerror="this.src='{{dir}}/src/img/icons/{{fighterType}}.png'">
 
         {% if fighter.name %}
             <p class="name">Name: {{fighter.name}}</p>
@@ -18,13 +18,14 @@
             <p class="lastname">Lastname: {{fighter.lastname}}</p>
             <p class="firstname">Firstname: {{fighter.firstname}}</p>
         {% endif %}
-        <p>Weigth: {{fighter.weight}}</p>
-        <p>Size: {{fighter.size}}</p>
-        <p>Health: {{fighter.hp}}</p>
-        <p>Attack: {{fighter.attack}}</p>
-        <p>Defense: {{fighter.def}}</p>
-        <p>Agility: {{fighter.agility}}</p>
-
+        <div class="stats">
+          <div><p>Weigth:</p> <p>{{fighter.weight}}</p></div>
+          <div><p>Size:</p> <p>{{fighter.size}}</p></div>
+          <div class="hp icon"><p>Health:</p> <p>{{fighter.hp}}</p></div>
+          <div class="att icon"><p>Attack:</p> <p>{{fighter.attack}}</p></div>
+          <div class="def icon"><p>Defense:</p> <p>{{fighter.def}}</p></div>
+          <div><p>Agility:</p> <p>{{fighter.agility}}</p></div>
+        </div>
         {% if admin %}
         <div>
             <a href="{{dir}}/{{fighterType}}/edit/{{fighter.id}}">
