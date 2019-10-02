@@ -54,6 +54,7 @@ function login(e) {
         success     : (response, xhr) => {
             // do something here
             console.log(response); // DEV
+            document.location.href = Conf.url.api;
         },
         error       : (xhr) => {
             // do something for alert user
@@ -84,7 +85,7 @@ function remove(e) {
         processData : false,
         contentType : false,
         success     : (response, xhr) => {
-            $(e.target).parent().remove();
+            document.location.href = Conf.url.api;
         },
         error       : (xhr) => {
             // do something for alert user
