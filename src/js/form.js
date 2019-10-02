@@ -10,6 +10,11 @@ function getDataText(formId, formData) {
         value = $(this).val();
         formData.append(key, value); // formData[key] = value;
     });
+    $('#' + formId + ' :password').each(function() {
+        key = $(this).attr('id');
+        value = $(this).val();
+        formData.append(key, value); // formData[key] = value;
+    });
 
     return formData;
 }
