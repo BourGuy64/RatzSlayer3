@@ -10,11 +10,12 @@ use Illuminate\Support\Facades\Auth;
 use ratzslayer3\conf\ConnectionFactory  as CF;
 use ratzslayer3\middlewares\GlobalMiddleware;
 use ratzslayer3\middlewares\AuthentificationMiddleware;
+use ratzslayer3\middlewares\ConnectedRejectMiddleware;
 
 session_start();
 
-$_SESSION['admin'] = true; // DEV ( fake admin connection )
-$_SESSION['userId'] = 1; // DEV ( fake admin connection )
+// $_SESSION['admin'] = true; // DEV ( fake admin connection )
+// $_SESSION['userId'] = 1; // DEV ( fake admin connection )
 
 $cf = new CF();
 $cf->setConfig('src/conf/conf.ini');
@@ -77,7 +78,7 @@ $app->group('/fight', function ($app) {
 
 // USERS
 $app->group('/users', function ($app) {
-    $app->get('/login',     "\\ratzslayer3\\controllers\\UsersController:loginForm");
+    $app->get('/login',     "\\ratzslayer3\\controllers\\UsersController:loginForm")->add( new ConnectedRejectMiddleware() );
     $app->post('/login',    "\\ratzslayer3\\controllers\\UsersController:login");
     $app->get('/logout',    "\\ratzslayer3\\controllers\\UsersController:logout");
 });
