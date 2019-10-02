@@ -4,12 +4,17 @@
     {{title}}
   </div>
       {% if admin %}
-      <a href="{{dir}}/users/logout">
-          <i class="fas fa-power-off"></i>
-      </a>
-      {% else %}
-      <a href="{{dir}}/users/login">
-          <i class="fas fa-user"></i>
-      </a>
+      <div>
+          <a href="{{dir}}/users/logout">
+              <i class="fas fa-cog"></i>
+          </a>
+          <a href="{{dir}}/users/logout">
+              <i class="fas fa-power-off"></i>
+          </a>
+          {% else %}
+          <a href="{{dir}}/users/login">
+              <i class="fas fa-user"></i>
+          </a>
+      </div>
       {% endif %}
 </div>
