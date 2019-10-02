@@ -1,7 +1,7 @@
 <div class="navbar">
 
     {% if title != 'RatzSlayer3' %}
-    <a href="{{dir}}/">BACK</a>
+    <a href="{{dir}}/">< BACK</a>
     {% else %}
     <div></div>
     {% endif %}
@@ -9,9 +9,9 @@
     <div class="title text-center">
         {{title}}
     </div>
-    
+
+    <div id="authentification">
     {% if admin %}
-    <div>
         <a href="{{dir}}/users/parameters">
             <i class="fas fa-cog"></i>
         </a>
@@ -22,7 +22,7 @@
         <a href="{{dir}}/users/login">
             <i class="fas fa-user"></i>
         </a>
-    </div>
     {% endif %}
+    </div>
 
 </div>

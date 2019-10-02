@@ -36,6 +36,7 @@ header {
 }
 
 div.navbar {
+  font-size: 2em;
   border-bottom: 3px solid black;
   background: white;
   box-shadow: none;
@@ -45,16 +46,17 @@ div.navbar a {
   color: black;
 }
 
-div.navbar a:before{
-  content: '< ';
-}
-
 div.navbar .title{
   position: absolute;
   white-space: nowrap;
   left: 50%;
   transform: translateX(-50%);
 }
+
+div.navbar > #authentification {
+    font-size: 1.5em;
+}
+
 /**
  * DEFAULT #MAIN
  */
@@ -76,4 +78,13 @@ footer {
 
 a{
   text-decoration: none;
+}
+
+@media screen and (min-width: 992px) {
+    div.navbar {
+        font-size: 1em;
+    }
+    div.navbar > #authentification {
+        font-size: 1.5em;
+    }
 }
