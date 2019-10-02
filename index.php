@@ -81,9 +81,10 @@ $app->group('/users', function ($app) {
     $app->get('/logout',    "\\ratzslayer3\\controllers\\UsersController:logout");
 });
 $app->group('/users', function ($app) {
-    $app->get('/create',    "\\ratzslayer3\\controllers\\UsersController:createForm");
-    $app->post('',          "\\ratzslayer3\\controllers\\UsersController:create");
-    $app->delete('/{id}',   "\\ratzslayer3\\controllers\\UsersController:delete");
+    $app->get('/parameters',    "\\ratzslayer3\\controllers\\UsersController:parameters");
+    $app->get('/create',        "\\ratzslayer3\\controllers\\UsersController:createForm");
+    $app->post('',              "\\ratzslayer3\\controllers\\UsersController:create");
+    $app->delete('/{id}',       "\\ratzslayer3\\controllers\\UsersController:delete");
 })->add( new AuthentificationMiddleware() );
 
 // MAIN MENU

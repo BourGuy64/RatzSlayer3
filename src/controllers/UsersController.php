@@ -12,6 +12,10 @@ class UsersController extends SuperController {
         return $this->views->render($res, 'login.html.twig', ['title' => 'Login','dir' => $this->dir, 'admin' => $_SESSION['admin']]);
     }
 
+    public function parameters(Request $req, Response $res, array $args) {
+        return $this->views->render($res, 'admin-parameters.html.twig', ['title' => 'Parameters','dir' => $this->dir, 'userId' => $_SESSION['admin_id'], 'admin' => $_SESSION['admin']]);
+    }
+
     public function createForm(Request $req, Response $res, array $args) {
         return $this->views->render($res, 'form-user.html.twig', ['title' => 'New user','dir' => $this->dir, 'admin' => $_SESSION['admin']]);
     }
@@ -21,6 +25,7 @@ class UsersController extends SuperController {
         $hashPassword = hash('sha512', $_POST['password'] . SELF::SEL);
         if ( $hashPassword == $user->password) {
             $_SESSION['admin'] = true;
+            $_SESSION['admin_id'] = $user->id;
             return $res->withRedirect($_SESSION['dir']);
         }
         return $res->withJson('false');
@@ -28,6 +33,7 @@ class UsersController extends SuperController {
 
     public function logout(Request $req, Response $res, array $args) {
         $_SESSION['admin'] = false;
+        $_SESSION['admin_id'] = null;
         return $res->withRedirect($_SESSION['dir']);
     }
 
@@ -50,6 +56,8 @@ class UsersController extends SuperController {
     }
 
     public function delete(Request $req, Response $res, array $args) {
+        $_SESSION['admin'] = false;
+        $_SESSION['admin_id'] = null;
         $user = USR::find($args['id']);
         $user->delete();
         return $res->withStatus(200);

@@ -67,14 +67,9 @@ function login(e) {
 }
 
 function remove(e) {
+    e.preventDefault();
 
-    let fighterType;
-    if ($(e.target).parent().hasClass('monsters')) {
-        fighterType = 'monsters';
-    } else if ($(e.target).parent().hasClass('characters')) {
-        fighterType = 'characters';
-    }
-    console.log(fighterType);
+    console.log('click');
 
     const type = "DELETE";
     const requestUrl = Conf.url.api + "/users/" + $(e.target).data('id');
@@ -103,4 +98,5 @@ function remove(e) {
 export function init() {
     $('#newUser').on('submit', create);
     $('#login').on('submit', login);
+    $('#removeUser').on('click', remove);
 }
