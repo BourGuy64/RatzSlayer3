@@ -17,6 +17,11 @@ class CharactersController extends SuperController {
         return $this->views->render($res, 'form-char.html.twig', ['title' => 'New character', 'dir' => $this->dir, 'admin' => $_SESSION['admin']]);
     }
 
+    public function editForm(Request $req, Response $res, array $args) {
+        $character = CHR::find($args['id']);
+        return $this->views->render($res, 'edit-character.html.twig', ['title' => 'Edit Character', 'dir' => $this->dir, 'fighter' => $character, 'admin' => $_SESSION['admin']]);
+    }
+
     public function create(Request $req, Response $res, array $args) {
 
         // test if character is unique
@@ -44,6 +49,34 @@ class CharactersController extends SuperController {
         $char->save();
 
         return $res->withJson($char);
+    }
+
+    public function update(Request $req, Response $res, array $args) {
+
+
+        // test if character is unique
+        $character = CHR::find($args['id']);
+
+        // upload image
+        if($_FILES['img'])
+        {
+          $image = new ImageTools($_FILES['img'], $_POST['name']);
+          $image->upload();
+          $monster->picture   = $image->getFileName();
+        }
+
+        $character->lastname      = $_POST['lastname'];
+        $character->firstname      = $_POST['firstname'];
+        $character->weight    = $_POST['weight'];
+        $character->size      = $_POST['size'];
+        $character->hp        = $_POST['hp'];
+        $character->attack    = $_POST['attack'];
+        $character->def       = $_POST['def'];
+        $character->agility   = $_POST['agility'];
+
+        $character->save();
+
+        return $res->withJson($character);
     }
 
     public function delete(Request $req, Response $res, array $args) {
