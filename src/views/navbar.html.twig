@@ -1,20 +1,28 @@
 <div class="navbar">
-  <a href="{{dir}}/">BACK</a>
-  <div class="title text-center">
-    {{title}}
-  </div>
-      {% if admin %}
-      <div>
-          <a href="{{dir}}/users/parameters">
-              <i class="fas fa-cog"></i>
-          </a>
-          <a href="{{dir}}/users/logout">
-              <i class="fas fa-power-off"></i>
-          </a>
-          {% else %}
-          <a href="{{dir}}/users/login">
-              <i class="fas fa-user"></i>
-          </a>
-      </div>
-      {% endif %}
+
+    {% if title != 'RatzSlayer3' %}
+    <a href="{{dir}}/">BACK</a>
+    {% else %}
+    <div></div>
+    {% endif %}
+
+    <div class="title text-center">
+        {{title}}
+    </div>
+    
+    {% if admin %}
+    <div>
+        <a href="{{dir}}/users/parameters">
+            <i class="fas fa-cog"></i>
+        </a>
+        <a href="{{dir}}/users/logout">
+            <i class="fas fa-power-off"></i>
+        </a>
+        {% else %}
+        <a href="{{dir}}/users/login">
+            <i class="fas fa-user"></i>
+        </a>
+    </div>
+    {% endif %}
+
 </div>
