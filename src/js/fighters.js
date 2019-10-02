@@ -67,9 +67,9 @@ function update(e) {
 function remove(e) {
 
     let fighterType;
-    if ($(e.target).parent().hasClass('monsters')) {
+    if ($(e.target).parent().parent().hasClass('monsters')) {
         fighterType = 'monsters';
-    } else if ($(e.target).parent().hasClass('characters')) {
+    } else if ($(e.target).parent().parent().hasClass('characters')) {
         fighterType = 'characters';
     }
     console.log(fighterType);
@@ -87,7 +87,7 @@ function remove(e) {
         processData : false,
         contentType : false,
         success     : (response, xhr) => {
-            $(e.target).parent().remove();
+            $(e.target).parent().parent().remove();
         },
         error       : (xhr) => {
             // do something for alert user
