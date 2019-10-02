@@ -7,24 +7,52 @@ body > div{
 }
 
 .fighter {
-    box-shadow: 0 5px 10px rgba(0,0,0,0.19), 0 3px 3px rgba(0,0,0,0.23);
     border-radius: 8px;
-
     width: 40vh;
-
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
+    background-color: white;
     margin: 2% 1%;
     padding: 2%;
 }
 
 .fighter img {
     max-height: 10vh;
+    margin-top: -1em;
+}
+.stats > div{
+    flex-direction: row;
+    display: flex;
+    justify-content: space-between;
 }
 
-p {
-    display: block;
+.icon:before{
+  position: absolute;
+  background-size: 1em;
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  content:"";
+  margin-left: -1.3em;
+  margin-top: .2em;
+}
+
+.hp:before{
+  background-image: url('../img/icons/heart.png');
+}
+
+.att:before{
+  background-image: url('../img/icons/sword.png');
+}
+
+.def:before{
+  background-image: url('../img/icons/shield.png')
+}
+
+.fighter > .stats {
+    flex-direction: column;
+    display: flex;
+    justify-content: space-around;
 }

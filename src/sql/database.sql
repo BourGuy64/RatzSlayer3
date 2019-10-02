@@ -3,7 +3,13 @@ SET time_zone = '+00:00';
 SET foreign_key_checks = 0;
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
+DROP TABLE IF EXISTS `fights_log`;
+DROP TABLE IF EXISTS `fights`;
 DROP TABLE IF EXISTS `characters`;
+DROP TABLE IF EXISTS `monsters`;
+DROP TABLE IF EXISTS `users`;
+
+
 CREATE TABLE `characters` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `lastname` varchar(255) NOT NULL,
@@ -21,42 +27,6 @@ CREATE TABLE `characters` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-DROP TABLE IF EXISTS `fights`;
-CREATE TABLE `fights` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_characters` int(11) NOT NULL,
-  `id_monsters` int(11) NOT NULL,
-  `winner` int(11) NOT NULL,
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL,
-  `deleted_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_monsters` (`id_monsters`),
-  KEY `id_characters` (`id_characters`),
-  CONSTRAINT `fights_ibfk_1` FOREIGN KEY (`id_monsters`) REFERENCES `monsters` (`id`),
-  CONSTRAINT `fights_ibfk_2` FOREIGN KEY (`id_characters`) REFERENCES `characters` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-DROP TABLE IF EXISTS `fights_log`;
-CREATE TABLE `fights_log` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_fights` int(11) NOT NULL,
-  `id_fighter` int(11) NOT NULL,
-  `damage` int(11) NOT NULL,
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL,
-  `deleted_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_fights` (`id_fights`),
-  KEY `id_fighter` (`id_fighter`),
-  CONSTRAINT `fights_log_ibfk_1` FOREIGN KEY (`id_fights`) REFERENCES `fights` (`id`),
-  CONSTRAINT `fights_log_ibfk_2` FOREIGN KEY (`id_fighter`) REFERENCES `monsters` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-DROP TABLE IF EXISTS `monsters`;
 CREATE TABLE `monsters` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
@@ -73,10 +43,40 @@ CREATE TABLE `monsters` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE `fights` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_characters` int(11) NOT NULL,
+  `id_monsters` int(11) NOT NULL,
+  `winner` int(11) NOT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `deleted_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_monsters` (`id_monsters`),
+  KEY `id_characters` (`id_characters`),
+  CONSTRAINT `fights_ibfk_1` FOREIGN KEY (`id_monsters`) REFERENCES `monsters` (`id`),
+  CONSTRAINT `fights_ibfk_2` FOREIGN KEY (`id_characters`) REFERENCES `characters` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `fights_log` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_fights` int(11) NOT NULL,
+  `id_fighter` int(11) NOT NULL,
+  `damage` int(11) NOT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `deleted_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_fights` (`id_fights`),
+  KEY `id_fighter` (`id_fighter`),
+  CONSTRAINT `fights_log_ibfk_1` FOREIGN KEY (`id_fights`) REFERENCES `fights` (`id`),
+  CONSTRAINT `fights_log_ibfk_2` FOREIGN KEY (`id_fighter`) REFERENCES `monsters` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 SET NAMES utf8mb4;
 
-DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(30) NOT NULL,
