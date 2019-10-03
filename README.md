@@ -28,6 +28,16 @@ git clone git@github.com:BourGuy64/LP-PHP.git && git update-index --assume-uncha
 3. Créez la base de données avec le fichier `/LP-PHP/src/sql/database.sql`.
 4. Modifier le nom de la base de données et les identifiants de connexion (lignes commentées) dans le fichier `/LP-PHP/src/conf/conf.ini` et décommentez les lignes.
 
+
+## Minimiser un fichier (.min)
+### Requis
+- NPM package [minify](https://www.npmjs.com/package/minify)
+### Utilisation
+Minimiser un fichier :
+```
+minify input.css > output.css
+```
+
 ## Taches
 - [ ] 1. Etape 1
 - [ ] 2. Etape 2
