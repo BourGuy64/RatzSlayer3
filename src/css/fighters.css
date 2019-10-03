@@ -1,58 +1,59 @@
-body > div{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
+body > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .fighter {
-    border-radius: 8px;
-    width: 40vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: white;
-    margin: 2% 1%;
-    padding: 2%;
+  border-radius: 8px;
+  width: 40vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  margin: 2% 1%;
+  padding: 2%;
 }
-
 .fighter img {
-    max-height: 10vh;
-    margin-top: -1em;
+  max-height: 10vh;
+  margin-top: -1em;
 }
-.stats > div{
-    flex-direction: row;
-    display: flex;
-    justify-content: space-between;
+.fighter > .stats {
+  flex-direction: column;
+  display: flex;
+  justify-content: space-around;
 }
 
-.icon:before{
+.stats > div {
+  flex-direction: row;
+  display: flex;
+  justify-content: space-between;
+}
+
+.icon:before {
   position: absolute;
   background-size: 1em;
   display: inline-block;
   width: 1em;
   height: 1em;
-  content:"";
+  content: "";
   margin-left: -1.3em;
-  margin-top: .2em;
+  margin-top: 0.2em;
 }
 
-.hp:before{
-  background-image: url('../img/icons/heart.png');
+.hp:before {
+  background-image: url("../img/icons/heart.png");
 }
 
-.att:before{
-  background-image: url('../img/icons/sword.png');
+.att:before {
+  background-image: url("../img/icons/sword.png");
 }
 
-.def:before{
-  background-image: url('../img/icons/shield.png')
+.def:before {
+  background-image: url("../img/icons/shield.png");
 }
 
-.fighter > .stats {
-    flex-direction: column;
-    display: flex;
-    justify-content: space-around;
-}
+/*# sourceMappingURL=fighters.css.map */
