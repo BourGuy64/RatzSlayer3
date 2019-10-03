@@ -1,53 +1,40 @@
-.fight-view{
+.fight-view {
   margin-top: 1em;
   display: flex;
   flex-direction: row;
 }
 
-div.select-char , div.select-monster{
+div.select-fighter {
   display: flex;
   flex-direction: column;
   width: 70%;
   margin: 1.5em auto !important;
   background: rgba(255, 255, 255, 0.69);
 }
-
-.select-char:hover, .select-monster:hover{
+div.select-fighter:hover {
   background: white;
 }
-
-.select-char .name, .select-monster .name{
+div.select-fighter .name {
   display: flex;
 }
-
-.is-selected{
-  background: white !important;
-}
-
-.select-char .name > p, .select-monster .name > p{
-  margin: .6em;
-}
-
-.select-char .stats, .select-monster .stats{
+div.select-fighter .stats {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
 }
-
-.select-char .stats > p, .select-monster .stats > p{
-  margin-left: .7em;
+div.select-fighter .stats > p {
+  margin-left: 0.7em;
+}
+div.select-fighter .stats > p:after {
+  content: "|";
 }
 
-.select-char .stats > p:after, .select-monster .stats > p:after{
-  content: '|';
+.is-selected {
+  background: white !important;
 }
 
-.select-char .stats > p:last-child:after, .select-monster .stats > p:last-child:after{
-  content: none;
-}
-
-.popup-fight{
+.popup-fight {
   position: absolute;
   background: white;
   transform: translate(-50%, -50%);
@@ -58,18 +45,17 @@ div.select-char , div.select-monster{
   flex-direction: column;
   z-index: 4;
 }
-
-.popup-fight > div{
+.popup-fight > div {
   margin-bottom: 1em;
 }
 
-.popup-button{
+.popup-button {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
-.overlay{
+.overlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -80,7 +66,9 @@ div.select-char , div.select-monster{
   z-index: 3;
 }
 
-.disable{
+.disable {
   display: none;
   visibility: hidden;
 }
+
+/*# sourceMappingURL=fight.css.map */

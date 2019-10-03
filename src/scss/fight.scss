@@ -1,0 +1,78 @@
+.fight-view {
+    margin-top: 1em;
+    display: flex;
+    flex-direction: row;
+}
+
+div.select-fighter {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    margin: 1.5em auto !important;
+    background: rgba(255, 255, 255, 0.69);
+
+    &:hover {
+        background: white;
+    }
+
+    .name {
+        display: flex;
+    }
+
+    .stats {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+
+        & > p {
+            margin-left: 0.7em;
+
+            &:after {
+                content: '|';
+            }
+        }
+    }
+}
+
+.is-selected {
+    background: white !important;
+}
+
+.popup-fight {
+    position: absolute;
+    background: white;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    padding: 3em;
+    display: flex;
+    flex-direction: column;
+    z-index: 4;
+
+    & > div {
+        margin-bottom: 1em;
+    }
+}
+
+.popup-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    backdrop-filter: blur(10px);
+    background: rgba(0, 0, 0, 0.36);
+    z-index: 3;
+}
+
+.disable {
+    display: none;
+    visibility: hidden;
+}
