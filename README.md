@@ -33,9 +33,15 @@ git clone git@github.com:BourGuy64/LP-PHP.git && git update-index --assume-uncha
 ### Requis
 - NPM package [minify](https://www.npmjs.com/package/minify)
 ### Utilisation
-Minimiser un fichier :
+- Minimiser un fichier :
 ```
-minify input.css > output.css
+minify input.css > output.min.css
+```
+- Minimiser tous les fichiers d'un dossier :
+```
+for file in src/css/*.css;
+do minify "$file" > "${file%.css}.min.css";
+done
 ```
 
 ## Taches
