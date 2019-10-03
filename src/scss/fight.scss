@@ -4,22 +4,30 @@
     flex-direction: row;
 }
 
-div.select-fighter {
+div.select-char,
+div.select-monster {
     display: flex;
     flex-direction: column;
     width: 70%;
     margin: 1.5em auto !important;
     background: rgba(255, 255, 255, 0.69);
+}
 
+.select-char,
+.select-monster {
     &:hover {
         background: white;
     }
 
-    .name {
+    & .name {
         display: flex;
+
+        & > p {
+            margin: 0.6em;
+        }
     }
 
-    .stats {
+    & .stats {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
@@ -27,16 +35,18 @@ div.select-fighter {
 
         & > p {
             margin-left: 0.7em;
-
-            &:after {
-                content: '|';
-            }
         }
     }
-}
 
-.is-selected {
-    background: white !important;
+    & .stats {
+        & > p:after {
+            content: '|';
+        }
+
+        & > p:last-child:after {
+            content: none;
+        }
+    }
 }
 
 .popup-fight {
@@ -70,6 +80,10 @@ div.select-fighter {
     backdrop-filter: blur(10px);
     background: rgba(0, 0, 0, 0.36);
     z-index: 3;
+}
+
+.is-selected {
+    background: white !important;
 }
 
 .disable {
