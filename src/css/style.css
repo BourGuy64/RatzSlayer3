@@ -12,6 +12,10 @@ img {
   width: auto;
 }
 
+a {
+  text-decoration: none;
+}
+
 /**
  * DEFAULT BODY
  */
@@ -41,20 +45,17 @@ div.navbar {
   background: white;
   box-shadow: none;
 }
-
 div.navbar a {
   color: black;
 }
-
-div.navbar .title{
+div.navbar .title {
   position: absolute;
   white-space: nowrap;
   left: 50%;
   transform: translateX(-50%);
 }
-
 div.navbar > #authentification {
-    font-size: 1.5em;
+  font-size: 1.5em;
 }
 
 /**
@@ -76,15 +77,13 @@ footer {
   z-index: 999;
 }
 
-a{
-  text-decoration: none;
+@media screen and (min-width: 992px) {
+  div.navbar {
+    font-size: 1em;
+  }
+  div.navbar > #authentification {
+    font-size: 1.5em;
+  }
 }
 
-@media screen and (min-width: 992px) {
-    div.navbar {
-        font-size: 1em;
-    }
-    div.navbar > #authentification {
-        font-size: 1.5em;
-    }
-}
+/*# sourceMappingURL=style.css.map */
