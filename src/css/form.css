@@ -1,13 +1,15 @@
 form > div {
-    margin: 2.5vh 20vw 0 20vw;
+  margin: 2.5vh 20vw 0 20vw;
 }
 
-div.nes-field > input{
+div.nes-field > input {
   background: transparent;
 }
 
-div.custom-file{
+div.custom-file {
   width: 59vw;
   margin-top: 1em;
   display: inherit;
 }
+
+/*# sourceMappingURL=form.css.map */
