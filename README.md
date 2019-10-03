@@ -37,10 +37,18 @@ git clone git@github.com:BourGuy64/LP-PHP.git && git update-index --assume-uncha
 ```
 minify input.css > output.min.css
 ```
+```
+minify input.js > output.min.js
+```
 - Minimiser tous les fichiers d'un dossier :
 ```
-for file in src/css/*.css;
+for file in *.css;
 do minify "$file" > "${file%.css}.min.css";
+done
+```
+```
+for file in *.js;
+do minify "$file" > "${file%.js}.min.js";
 done
 ```
 
