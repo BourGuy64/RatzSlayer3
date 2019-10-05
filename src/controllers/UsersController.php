@@ -62,6 +62,10 @@ class UsersController extends SuperController {
         return $res->withStatus(200);
     }
 
-    private const SEL = 'jaimelesel';
+    // MISC
+    public function hashPassword(Request $req, Response $res, array $args) {
+        $hashPassword = password_hash($args['password'], PASSWORD_DEFAULT);
+        echo $hashPassword;
+    }
 
 }

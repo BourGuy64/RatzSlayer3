@@ -92,4 +92,7 @@ $app->group('/users', function ($app) {
 // MAIN MENU
 $app->get('/',              "\\ratzslayer3\\controllers\\MainMenuController:get");
 
+// MISC
+// $app->get('/hashPassword/{password}', "\\ratzslayer3\\controllers\\UsersController:hashPassword"); // DEV
+
 $app->run();
