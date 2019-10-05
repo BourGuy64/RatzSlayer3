@@ -88,4 +88,4 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `users` (`id`, `username`, `password`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1,	'admin',	'3ac3c428897e984ff8174f3988868eb6141ff840693657a5bc8c3e52b8ec7dcbee80bf51cfdcc744f52c6cf5d85cdefac60b72abb561789cfd188d8c3a1413db',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00');
+(1,	'admin',	'$2y$10$4jtZb7UT.tNhwHFRVRG9fu.Guf5zZwajJH0M9Kp2uYinE/Wnmy2t6',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00');

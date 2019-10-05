@@ -22,8 +22,7 @@ class UsersController extends SuperController {
 
     public function login(Request $req, Response $res, array $args) {
         $user = USR::where('username', $_POST['username'])->first();
-        $hashPassword = hash('sha512', $_POST['password'] . SELF::SEL);
-        if ( $hashPassword == $user->password) {
+        if ( password_verify($_POST['password'], $user->password) ) {
             $_SESSION['admin'] = true;
             $_SESSION['admin_id'] = $user->id;
             return $res->withRedirect($_SESSION['dir']);
@@ -48,7 +47,7 @@ class UsersController extends SuperController {
         if ( $_POST['password'] == $_POST['repeatPassword']) {
             $user = new USR;
             $user->username     = $_POST['username'];
-            $user->password     = hash('sha512', $_POST['password'] . SELF::SEL);
+            $user->password     = password_hash($_POST['password'], PASSWORD_DEFAULT);
             $user->save();
             return $res->withJson($user);
         }
