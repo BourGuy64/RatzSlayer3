@@ -54,9 +54,11 @@ $app->group('/characters', function ($app) {
     $app->get('',           "\\ratzslayer3\\controllers\\CharactersController:get");
 });
 $app->group('/characters', function ($app) {
-    $app->get('/create',    "\\ratzslayer3\\controllers\\CharactersController:createForm");
-    $app->post('',          "\\ratzslayer3\\controllers\\CharactersController:create");
-    $app->delete('/{id}',   "\\ratzslayer3\\controllers\\CharactersController:delete");
+    $app->get('/create',        "\\ratzslayer3\\controllers\\CharactersController:createForm");
+    $app->get('/edit/{id}',     "\\ratzslayer3\\controllers\\CharactersController:editForm");
+    $app->post('',              "\\ratzslayer3\\controllers\\CharactersController:create");
+    $app->post('/edit/{id}',    "\\ratzslayer3\\controllers\\CharactersController:update");
+    $app->delete('/{id}',       "\\ratzslayer3\\controllers\\CharactersController:delete");
 })->add( new AuthentificationMiddleware() );
 
 // MONSTERS
