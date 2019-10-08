@@ -27,7 +27,10 @@ class MonstersController extends SuperController {
         // test if character is unique
         $monster = MST::where('name', 'like', $_POST['name'])->first();
         if ($monster) {
-            return $res->withStatus(400);
+            return $res->withJson([
+              "error_code" => 1,
+              "message" => "Erreur Monster"
+            ]);
         }
 
         // upload image
@@ -45,7 +48,10 @@ class MonstersController extends SuperController {
         $monster->picture   = $image->getFileName();
         $monster->save();
 
-        return $res->withJson($monster);
+        return $res->withJson([
+          "error_code" => 0,
+          "message" => "Monster créé"
+        ]);
     }
 
     public function delete(Request $req, Response $res, array $args) {
