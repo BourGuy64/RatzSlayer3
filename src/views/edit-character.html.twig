@@ -1,4 +1,4 @@
-{% extends 'fabric/base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block css %}
 {{ parent() }}
@@ -6,14 +6,25 @@
 {% endblock %}
 
 {% block main %}
-<form id="editMstr" method="post" action="monsters/edit/{{fighter.id}}">
+<form id="editCar" method="post" action="characters/edit/{{fighter.id}}">
 
 <img src="{{dir}}/src/img/fighters/{{fighter.picture}}" alt="img alt">
 
-    <div class="nes-field">
-        <label for="name">Name</label>
-        <input type="text" id="name" class="nes-input" value="{{fighter.name}}">
-    </div>
+  {% if fighter.name %}
+  <div class="nes-field">
+      <label for="name">Name</label>
+      <input type="text" id="name" class="nes-input" value="{{fighter.name}}">
+  </div>
+  {% else %}
+  <div class="nes-field">
+      <label for="lastname">Lastname</label>
+      <input type="text" id="lastname" class="nes-input" value="{{fighter.lastname}}">
+  </div>
+  <div class="nes-field">
+      <label for="firstname">Firstname</label>
+      <input type="text" id="firstname" class="nes-input" value="{{fighter.firstname}}">
+  </div>
+  {% endif %}
 
     <div class="nes-field">
         <label for="weight">Weight</label>

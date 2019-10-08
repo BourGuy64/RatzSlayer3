@@ -1,4 +1,4 @@
-.fight-view{
+.fight-view {
   margin-top: 1em;
   display: flex;
   flex-direction: row;
@@ -14,11 +14,11 @@ div.select-char , div.select-monster{
   background: rgba(255, 255, 255, 0.69);
 }
 
-.select-char:hover, .select-monster:hover{
+.select-char:hover, .select-monster:hover {
   background: white;
 }
 
-.select-char .name, .select-monster .name{
+.select-char .name, .select-monster .name {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -41,7 +41,7 @@ div.select-char , div.select-monster{
   margin-bottom: 0;
 }
 
-.popup-fight{
+.popup-fight {
   position: absolute;
   background: white;
   transform: translate(-50%, -50%);
@@ -53,17 +53,17 @@ div.select-char , div.select-monster{
   z-index: 4;
 }
 
-.popup-fight > div{
+.popup-fight > div {
   margin-bottom: 1em;
 }
 
-.popup-button{
+.popup-button {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
-.overlay{
+.overlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -74,7 +74,11 @@ div.select-char , div.select-monster{
   z-index: 3;
 }
 
-.disable{
+.is-selected {
+  background: white !important;
+}
+
+.disable {
   display: none;
   visibility: hidden;
 }

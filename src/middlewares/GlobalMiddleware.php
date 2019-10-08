@@ -7,6 +7,12 @@ class GlobalMiddleware {
         if (!isset($_SESSION) || !isset($_SESSION['admin'])) {
             $_SESSION['admin'] = false;
         }
+        foreach ($_GET as $key => $value) {
+            $_GET[$key] = htmlspecialchars($value);
+        }
+        foreach ($_POST as $key => $value) {
+            $_POST[$key] = htmlspecialchars($value);
+        }
         $res = $next($req, $res);
         return $res;
     }
