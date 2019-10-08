@@ -58,11 +58,11 @@ class CharactersController extends SuperController {
         $character = CHR::find($args['id']);
 
         // upload image
-        if($_FILES['img'])
+        if(isset($_FILES) && isset($_FILES['img']) && $_FILES['img'])
         {
-          $image = new ImageTools($_FILES['img'], $_POST['name']);
+          $image = new ImageTools($_FILES['img'], $_POST['firstname'], $_POST['lastname']);
           $image->upload();
-          $monster->picture   = $image->getFileName();
+          $character->picture   = $image->getFileName();
         }
 
         $character->lastname      = $_POST['lastname'];
