@@ -12,6 +12,7 @@ DROP TABLE IF EXISTS `users`;
 
 CREATE TABLE `characters` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(1) NOT NULL,
   `lastname` varchar(255) NOT NULL,
   `firstname` varchar(255) NOT NULL,
   `weight` int(11) NOT NULL,
@@ -29,6 +30,7 @@ CREATE TABLE `characters` (
 
 CREATE TABLE `monsters` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(1) NOT NULL,
   `name` varchar(255) NOT NULL,
   `weight` int(11) NOT NULL,
   `size` int(11) NOT NULL,
@@ -63,7 +65,8 @@ CREATE TABLE `fights_log` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_fights` int(11) NOT NULL,
   `id_fighter` int(11) NOT NULL,
-  `damage` int(11) NOT NULL,
+  `fighter_type` varchar(1) NOT NULL,
+  `hp` int(11) NOT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL,
