@@ -40,7 +40,7 @@ header {
 }
 
 div.navbar {
-  font-size: 2em;
+  font-size: 1.5em;
   border-bottom: 3px solid black;
   background: white;
   box-shadow: none;
@@ -78,12 +78,15 @@ footer {
 }
 
 @media screen and (min-width: 992px) {
-  div.navbar {
-    font-size: 1em;
-  }
-  div.navbar > #authentification {
-    font-size: 1.5em;
-  }
+    div.navbar {
+        font-size: 1em;
+    }
+    div.navbar > #authentification {
+        font-size: 1.2em;
+    }
+    div.navbar> a:after{
+      content: ' BACK';
+    }
 }
 
 /*# sourceMappingURL=style.css.map */
