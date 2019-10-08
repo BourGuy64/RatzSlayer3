@@ -7,69 +7,53 @@ body > div{
 }
 
 .fighter {
-    border-radius: 8px;
-    width: 40vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    grid-template-rows: auto 1em auto 1em;
+    grid-gap: .4em;
     background-color: white;
-    margin: 2% 1%;
-    padding: 2%;
+    margin: 2% !important;
 }
 
-.fighter img {
-    max-height: 10vh;
-    margin-top: -1em;
+.fighter > img {
+    grid-row: 1;
+    max-height: 4em;
+    margin: 0 auto;
 }
+
 .stats > div{
     flex-direction: row;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-flex-start;
 }
 
-.icon:before{
-  position: absolute;
-  background-size: 1.5em;
-  display: inline-block;
-  width: 1.5em;
-  height: 1.5em;
-  content:"";
-  margin-left: -1.7em;
-  margin-top: 0em;
+.fighter-editor{
+  text-align: center;
 }
 
-.hp:before{
-  background-image: url('../img/icons/heart.png');
+.fighter > .stats p{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 0px;
 }
 
-.att:before{
-  background-image: url('../img/icons/sword.png');
-}
-
-.def:before{
-  background-image: url('../img/icons/shield.png');
-}
-
-.wt:before{
-  background-image: url('../img/icons/weight.png')
-}
-
-.agi:before{
-  background-image: url('../img/icons/agility.png')
-}
-
-.sz:before{
-  background-image: url('../img/icons/size.png')
+.fighter > .stats div{
+  margin: .2em;
 }
 
 .fighter > .stats {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+    grid-row: 3;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.fighter > .stats img{
+  max-height:  2em;
+  margin-right: 1em;
 }
 
 .fighter .fighter-name {
+    grid-row: 2;
     width: 100%;
     flex-grow: 1;
     flex-shrink: 0;

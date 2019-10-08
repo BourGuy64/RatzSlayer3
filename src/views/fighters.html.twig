@@ -15,27 +15,25 @@
         {% if fighter.name %}
             <p class="name">{{fighter.name}}</p>
         {% else %}
-            <p class="firstname">{{fighter.firstname}}</p>
-            <p class="lastname">{{fighter.lastname}}</p>
+            <p class="name">{{fighter.firstname}} {{fighter.lastname}}</p>
         {% endif %}
         </div>
         <div class="stats">
-          <div class="wt icon"><p>Weight:</p> <p>{{fighter.weight}}</p></div>
-          <div class="sz icon"><p>Size:</p> <p>{{fighter.size}}</p></div>
-          <div class="hp icon"><p>Health:</p> <p>{{fighter.hp}}</p></div>
-          <div class="att icon"><p>Attack:</p> <p>{{fighter.attack}}</p></div>
-          <div class="def icon"><p>Defense:</p> <p>{{fighter.def}}</p></div>
-          <div class="agi icon"><p>Agility:</p> <p>{{fighter.agility}}</p></div>
+          <div class="wt icon"><img src="{{dir}}/src/img/icons/weight.png"><p>Weight:</p> <p>{{fighter.weight}}</p></div>
+          <div class="sz icon"><img src="{{dir}}/src/img/icons/size.png"><p>Size:</p> <p>{{fighter.size}}</p></div>
+          <div class="hp icon"><img src="{{dir}}/src/img/icons/heart.png"><p>Health:</p> <p>{{fighter.hp}}</p></div>
+          <div class="att icon"><img src="{{dir}}/src/img/icons/sword.png"><p>Attack:</p> <p>{{fighter.attack}}</p></div>
+          <div class="def icon"><img src="{{dir}}/src/img/icons/shield.png"><p>Defense:</p> <p>{{fighter.def}}</p></div>
+          <div class="agi icon"><img src="{{dir}}/src/img/icons/agility.png"><p>Agility:</p> <p>{{fighter.agility}}</p></div>
         </div>
         {% if admin %}
-        <div>
+        <div class="fighter-editor">
             <a href="{{dir}}/{{fighterType}}/edit/{{fighter.id}}">
                 <i class="fas fa-edit"></i>
             </a>
             <i class="remove fas fa-trash-alt" data-id="{{fighter.id}}"></i>
         </div>
         {% endif %}
-
     </div>
 {% endfor %}
 
