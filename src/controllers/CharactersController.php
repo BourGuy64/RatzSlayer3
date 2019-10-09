@@ -37,6 +37,7 @@ class CharactersController extends SuperController {
         $image->upload();
 
         $char = new CHR;
+        $char->type      = 'c';
         $char->lastname     = $_POST['lastname'];
         $char->firstname    = $_POST['firstname'];
         $char->weight       = $_POST['weight'];

@@ -35,6 +35,7 @@ class MonstersController extends SuperController {
         $image->upload();
 
         $monster = new MST;
+        $monster->type      = 'm';
         $monster->name      = $_POST['name'];
         $monster->weight    = $_POST['weight'];
         $monster->size      = $_POST['size'];
