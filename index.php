@@ -76,6 +76,7 @@ $app->group('/monsters', function ($app) {
 // FIGHT
 $app->group('/fight', function ($app) {
     $app->get('',           "\\ratzslayer3\\controllers\\FightController:get");
+    $app->get('/combat',           "\\ratzslayer3\\controllers\\FightController:fight");
 });
 
 // USERS
