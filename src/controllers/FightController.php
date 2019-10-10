@@ -16,8 +16,12 @@ class FightController extends SuperController{
 
   //Do whole fight
   public function fight(Request $req, Response $res, array $args){
-    $character = CHR::first();
-    $monster = MST::first();
+    $character = CHR::where('id', $_POST['char'])->first();
+    $monster = MST::where('id', $_POST['monster'])->first();
+    if(!$monster && !$character){
+      echo 'PAS BON';
+      return $res->withStatus(400);
+    }
     $fight = new FGT;
     $fight->id_characters = $character->id;
     $fight->id_monsters = $monster->id;
