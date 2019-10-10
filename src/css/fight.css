@@ -19,10 +19,7 @@ div.select-char , div.select-monster{
 }
 
 .winner{
-  position: absolute;
-  white-space: nowrap;
-  left: 50%;
-  transform: translateX(-50%);
+  text-align: center;
 }
 
 .fight-log .nes-container {

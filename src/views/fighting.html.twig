@@ -7,23 +7,20 @@
 
 {% block main %}
 
-<div class="winner">
-  {% if winner == 'c' %}
-    <p>{{character.firstname}} {{character.lastname}} is the winner !</p>
-  {% elseif winner == 'm' %}
-    <p>{{monster.name}} is the winner !</p>
-  {% endif %}
-</div>
-Winner :{{winner}} | BUG WINNER IS EMPTY ? {{winner is empty}}
-
 <div class="fight-view">
   <div class="col">
+    <div class="winner">
+      {% if winner == 'c' %}
+       Winner !
+      {% endif %}
+    </div>
     <div class="fight-card">
       <div data-id="{{character.id}}" class="select-char nes-container is-rounded">
         <div class="picture">
           <img src="{{dir}}/src/img/fighters/{{character.picture}}" onerror="this.src='{{dir}}/src/img/icons/Characters.png'">
         </div>
         <div class="name">
+          {{character.firstname}} {{character.lastname}}
         </div>
         <div class="stats">
           <p><img src="{{dir}}/src/img/icons/weight.png">: {{character.weight}}</p>
@@ -48,6 +45,11 @@ Winner :{{winner}} | BUG WINNER IS EMPTY ? {{winner is empty}}
   </div>
 
   <div class="col">
+    {% if winner == 'm' %}
+     <div class="winner">
+       Winner !
+     </div>
+    {% endif %}
     <div class="fight-card">
     <div data-id="{{monster.id}}" class="select-monster nes-container is-rounded">
       <div class="picture">
