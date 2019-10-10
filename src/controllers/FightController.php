@@ -46,8 +46,12 @@ class FightController extends SuperController{
         $round++;
       }
     }
-    $fight->winner = $this->winner($fight->id, $round);
+    $winner = $this->winner($fight->id, $round);
+    $fight->winner = $winner;
     $fight->save();
+    $logChar = FGL::where('id_fights', $fight->id)->where('fighter_type', 'c')->orderBy('id', 'asc')->get();
+    $logMonster = FGL::where('id_fights', $fight->id)->where('fighter_type', 'm')->orderBy('id', 'asc')->get();
+    return $this->views->render($res, 'fighting.html.twig', ['title' => 'Fight !', 'dir' =>  $this->dir, 'character' => $character, 'monster' => $monster, 'logChar' => $logChar, 'logMonster' => $logMonster, $winner => 'winner', 'admin' => $_SESSION['admin']]);
   }
 
   public function doAttack($fighter, $target, $fightId, $round){
