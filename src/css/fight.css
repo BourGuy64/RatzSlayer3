@@ -9,13 +9,26 @@ div.select-char , div.select-monster{
   grid-template-columns: 20% 80%;
   grid-template-rows: 3em;
   grid-gap: .2em .5em;
-  width: 22em;
+  min-width: 22em;
   margin: 1em !important;
   background: rgba(255, 255, 255, 0.69);
 }
 
 .select-char:hover, .select-monster:hover {
   background: white;
+}
+
+.winner{
+  position: absolute;
+  white-space: nowrap;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.fight-log .nes-container {
+    margin: 1.4em auto;
+    background: rgba(255, 255, 255, 0.69);
+    width: 21em;
 }
 
 .select-char .name, .select-monster .name {
