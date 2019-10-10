@@ -58,7 +58,7 @@ class FightController extends SuperController{
     $fightlog->round = $round;
     $fightlog->fighter_type = $target->type;
     //Get hp of target from last round
-    $lastRound = FGL::where('round', $round-1)->where('id_fighter', $target->id)->orderBy('id', 'desc')->first();
+    $lastRound = FGL::where('round', $round-1)->where('id_fighter', $target->id)->where('fighter_type', $target->type)->orderBy('id', 'desc')->first();
     $leftLife = $lastRound->hp - $fighter->attack;
     if($leftLife < 0){
       $leftLife = 0;
