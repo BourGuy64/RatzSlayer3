@@ -16,17 +16,24 @@ Repository du projet de Licence Pro CIASIE en PHP.
 ```
 git clone git@github.com:BourGuy64/LP-PHP.git
 ```
-2. Empechez le suivie du fichier conf.ini par git :
-```
-git update-index --assume-unchanged src/conf/conf.ini
-```
 
 **OU** 1 à 2 en oneshot :
 ```
 git clone git@github.com:BourGuy64/LP-PHP.git && git update-index --assume-unchanged src/conf/conf.ini
 ```
 3. Créez la base de données avec le fichier `/LP-PHP/src/sql/database.sql`.
-4. Modifier le nom de la base de données et les identifiants de connexion (lignes commentées) dans le fichier `/LP-PHP/src/conf/conf.ini` et décommentez les lignes.
+
+4. Créez le fichier de conf.ini dans le répertoire src/conf/ avec le template suivant, en ajustant les valeurs :
+```
+db_driver=mysql
+host=localhost
+dbname=database
+db_user=user
+db_password=password
+db_charset=utf8
+db_collation=utf8_unicode_ci
+prefix=
+```
 
 
 ## Minimiser un fichier (.min)
@@ -51,8 +58,3 @@ for file in *.js;
 do minify "$file" > "${file%.js}.min.js";
 done
 ```
-
-## Taches
-- [ ] 1. Etape 1
-- [ ] 2. Etape 2
-- [ ] 3. Etape 3
