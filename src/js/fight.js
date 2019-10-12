@@ -1,7 +1,6 @@
 "use strict"
 
 import * as Conf from './conf.js';
-import * as Form from './form.js';
 
 function selectChar(e){
   $('.select-char').each(function(i){
