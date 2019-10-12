@@ -66,6 +66,7 @@ CREATE TABLE `fights_log` (
   `id_fights` int(11) NOT NULL,
   `id_fighter` int(11) NOT NULL,
   `fighter_type` varchar(1) NOT NULL,
+  `round` int(11) NOT NULL,
   `hp` int(11) NOT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
@@ -73,8 +74,7 @@ CREATE TABLE `fights_log` (
   PRIMARY KEY (`id`),
   KEY `id_fights` (`id_fights`),
   KEY `id_fighter` (`id_fighter`),
-  CONSTRAINT `fights_log_ibfk_1` FOREIGN KEY (`id_fights`) REFERENCES `fights` (`id`),
-  CONSTRAINT `fights_log_ibfk_2` FOREIGN KEY (`id_fighter`) REFERENCES `monsters` (`id`)
+  CONSTRAINT `fights_log_ibfk_1` FOREIGN KEY (`id_fights`) REFERENCES `fights` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
