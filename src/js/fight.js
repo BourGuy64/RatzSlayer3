@@ -51,31 +51,21 @@ function start(e) {
 
     const char = $('.select-char.is-selected').attr('data-id');
     const monster = $('.select-monster.is-selected').attr('data-id');
-
-    const type = "POST";
     const requestUrl = Conf.url.api + "/" + 'fight';
-    const data = {'char': char, 'monster': monster};
 
     $.ajax({
-        type        : type,
+        type        : 'POST',
         url         : requestUrl,
-        timeout     : 5000,
-        header      : {},
-        data        : JSON.stringify(data),
-        processData : false,
-        contentType : false,
-        dataType: 'html',
+        data        : {char: char, monster: monster},
         success     : (response, xhr) => {
             // do something here
-            console.log(response); // DEV
+            console.log(response); // DEV Return what twig generate but in console...
         },
         error       : (xhr) => {
             // do something for alert user
             console.log("status =" + xhr.status); // DEV
-            console.log(data);
         },
         complete    : () => {
-            console.log('AIE');
         }
     });
 }
