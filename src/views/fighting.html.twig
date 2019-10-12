@@ -37,7 +37,7 @@
       {% for log in logChar|slice(1, logChar.length) %}
       <div class="nes-container is-rounded">
         <p>Round: {{log.round}}</p>
-        <p>Damage taken: {{logChar[loop.index - 1].hp - log.hp}}</p>
+        <p>Damage taken: -{{logChar[loop.index - 1].hp - log.hp}}</p>
         <label for="file">Life:</label><progress id="file" max="{{character.hp}}" value="{{log.hp}}"></progress>
       </div>
       {% endfor %}
@@ -73,7 +73,7 @@
     {% for log in logMonster|slice(1, logMonster.length) %}
     <div class="nes-container is-rounded">
       <p>Round: {{log.round}}</p>
-      <p>Damage taken: {{logMonster[loop.index - 1].hp - log.hp}}</p>
+      <p>Damage taken: -{{logMonster[loop.index - 1].hp - log.hp}}</p>
       <label for="file">Life:</label><progress id="file" max="{{monster.hp}}" value="{{log.hp}}"></progress>
     </div>
     {% endfor %}
