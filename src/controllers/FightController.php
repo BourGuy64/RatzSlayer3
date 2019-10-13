@@ -10,9 +10,21 @@ use ratzslayer3\controllers\FightLogController  as FGLC;
 
 class FightController extends SuperController{
   public function get(Request $req, Response $res, array $args) {
-      $characters = CHR::all();
-      $monsters = MST::all();
-      return $this->views->render($res, 'fight.html.twig', ['title' => 'Choose your fighter', 'dir' =>  $this->dir, 'characters' => $characters, 'monsters' => $monsters, 'admin' => $_SESSION['admin']]);
+      if(isset($_COOKIE['CurrentFight'])){
+        $fightId = $_COOKIE['CurrentFight'];
+        $fight = FGT::where('id', $fightId)->first();
+        $character = CHR::where('id', $fight->id_characters)->first();
+        $monster = MST::where('id', $fight->id_monsters)->first();
+        $logChar = FGL::where('id_fights', $fightId)->where('fighter_type', 'c')->orderBy('id', 'asc')->get();
+        $logMonster = FGL::where('id_fights', $fightId)->where('fighter_type', 'm')->orderBy('id', 'asc')->get();
+        $winner = $this->winner($fightId);
+        return $this->views->render($res, 'fighting.html.twig', ['title' => 'Fight !', 'dir' =>  $this->dir, 'character' => $character, 'monster' => $monster, 'logChar' => $logChar, 'logMonster' => $logMonster, 'winner' => $winner, 'admin' => $_SESSION['admin']]);
+      }
+      else{
+        $characters = CHR::all();
+        $monsters = MST::all();
+        return $this->views->render($res, 'fight.html.twig', ['title' => 'Choose your fighter', 'dir' =>  $this->dir, 'characters' => $characters, 'monsters' => $monsters, 'admin' => $_SESSION['admin']]);
+      }
   }
 
   //Do whole fight
@@ -55,6 +67,7 @@ class FightController extends SuperController{
     $fight->save();
     $logChar = FGL::where('id_fights', $fight->id)->where('fighter_type', 'c')->orderBy('id', 'asc')->get();
     $logMonster = FGL::where('id_fights', $fight->id)->where('fighter_type', 'm')->orderBy('id', 'asc')->get();
+    setcookie("CurrentFight", $fight->id, time() + (10 * 365 * 24 * 60 * 60));
     return $this->views->render($res, 'fighting.html.twig', ['title' => 'Fight !', 'dir' =>  $this->dir, 'character' => $character, 'monster' => $monster, 'logChar' => $logChar, 'logMonster' => $logMonster, 'winner' => $winner, 'admin' => $_SESSION['admin']]);
   }
 
