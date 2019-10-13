@@ -50,7 +50,7 @@ class FightController extends SuperController{
         $round++;
       }
     }
-    $winner = $this->winner($fight->id, $round);
+    $winner = $this->winner($fight->id);
     $fight->winner = $winner;
     $fight->save();
     $logChar = FGL::where('id_fights', $fight->id)->where('fighter_type', 'c')->orderBy('id', 'asc')->get();
@@ -59,7 +59,7 @@ class FightController extends SuperController{
   }
 
   //Return fighter type of the winner
-  public function winner($fightId, $round){
+  public function winner($fightId){
     $winner = FGL::where('id_fights', $fightId)->where('hp', '>', '0')->orderBy('id', 'desc')->first();
     return $winner->fighter_type;
   }
