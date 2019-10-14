@@ -16,9 +16,13 @@ function success(msg, element) {
   {
     element = '#main';
   }
+  $('#myModal p').text(msg);
+  $('#myModal').show();
 
-  $(element).prepend('<div class="successAlert">' + msg + '</div>');
   console.log("success");
+  $('#myModal span').on("click", () => {
+    $('#myModal').hide();
+  });
 }
 
 function error(msg) {

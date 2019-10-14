@@ -29,7 +29,10 @@ class CharactersController extends SuperController {
             ->where('firstname', 'like', $_POST['firstname'])
             ->first();
         if ($char) {
-            return $res->withStatus(400);
+          return $res->withJson([
+            "error_code" => 1,
+            "message" => "Erreur, nom et prénom du character déjà pris"
+          ]);
         }
 
         // upload image
@@ -48,7 +51,10 @@ class CharactersController extends SuperController {
         $char->picture      = $image->getFileName();
         $char->save();
 
-        return $res->withJson($char);
+        return $res->withJson([
+          "error_code" => 0,
+          "message" => "Character créé"
+        ]);
     }
 
     public function update(Request $req, Response $res, array $args) {

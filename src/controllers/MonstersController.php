@@ -29,7 +29,7 @@ class MonstersController extends SuperController {
         if ($monster) {
             return $res->withJson([
               "error_code" => 1,
-              "message" => "Erreur Monster"
+              "message" => "Erreur, nom du monstre déjà pris"
             ]);
         }
 
