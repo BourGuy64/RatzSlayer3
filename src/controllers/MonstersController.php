@@ -34,6 +34,14 @@ class MonstersController extends SuperController {
         }
 
         // upload image
+        // if(!isset($_FILES) || !isset($_FILES['img']) || !$_FILES['img'])
+        // {
+        //   return $res->withJson([
+        //     "error_code" => 1,
+        //     "message" => "Erreur, veuillez insérer une image"
+        //   ]);
+        // }
+
         $image = new ImageTools($_FILES['img'], $_POST['name']);
         $image->upload();
 
@@ -71,16 +79,12 @@ class MonstersController extends SuperController {
           ]);
       }
 
-      
+
         // test if character is unique
         $monster = MST::find($args['id']);
 
         // upload image
-<<<<<<< HEAD
         if(isset($_FILES) && isset($_FILES['img']) && $_FILES['img'] )
-=======
-        if(isset($_FILES) && isset($_FILES['img']) && $_FILES['img'])
->>>>>>> master
         {
           $image = new ImageTools($_FILES['img'], $_POST['name']);
           $image->upload();

@@ -1,9 +1,9 @@
 "use strict";
 
-export function errorCode(code, msg, element =null) {
+export function errorCode(code, msg) {
   if(code === 0)
   {
-    success(msg, element);
+    success(msg);
   }
   else
   {
@@ -11,11 +11,11 @@ export function errorCode(code, msg, element =null) {
   }
 }
 
-function success(msg, element) {
-  if(!element)
-  {
-    element = '#main';
-  }
+function success(msg) {
+
+  $('#myModal > div').removeClass("modal-content-false");
+  $('#myModal > div').addClass("modal-content-true");
+
   $('#myModal p').text(msg);
   $('#myModal').show();
 
@@ -26,6 +26,9 @@ function success(msg, element) {
 }
 
 function error(msg) {
+  $('#myModal > div').removeClass("modal-content-true");
+  $('#myModal > div').addClass("modal-content-false");
+
   $('#myModal p').text(msg);
   $('#myModal').show();
   // $('#main').prepend('<div class="errorAlert">' + msg + '</div>');
