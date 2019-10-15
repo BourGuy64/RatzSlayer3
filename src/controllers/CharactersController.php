@@ -73,15 +73,21 @@ class CharactersController extends SuperController {
       $existChar = CHR::where('lastname', 'like', $_POST['lastname'])
           ->where('firstname', 'like', $_POST['firstname'])
           ->first();
-      if ($existChar) {
-        return $res->withJson([
-          "error_code" => 1,
-          "message" => "Erreur, nom et prénom du character déjà pris"
-        ]);
+
+      // test if character is unique
+      $character = CHR::find($args['id']);
+
+      if($character->firstname != $_POST['firstname'] && $character->lastname != $_POST['lastname'])
+      {
+        if ($existChar) {
+          return $res->withJson([
+            "error_code" => 1,
+            "message" => "Erreur, nom et prénom du character déjà pris"
+          ]);
+        }
       }
 
-        // test if character is unique
-        $character = CHR::find($args['id']);
+
 
         // upload image
         if(isset($_FILES) && isset($_FILES['img']) && $_FILES['img'] )
