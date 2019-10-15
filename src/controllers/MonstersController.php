@@ -34,13 +34,13 @@ class MonstersController extends SuperController {
         }
 
         // upload image
-        // if(!isset($_FILES) || !isset($_FILES['img']) || !$_FILES['img'])
-        // {
-        //   return $res->withJson([
-        //     "error_code" => 1,
-        //     "message" => "Erreur, veuillez insérer une image"
-        //   ]);
-        // }
+        if(!isset($_FILES) || !isset($_FILES['img']) || !$_FILES['img'])
+        {
+          return $res->withJson([
+            "error_code" => 1,
+            "message" => "Erreur, veuillez insérer une image"
+          ]);
+        }
 
         $image = new ImageTools($_FILES['img'], $_POST['name']);
         $image->upload();
@@ -72,16 +72,20 @@ class MonstersController extends SuperController {
     public function update(Request $req, Response $res, array $args) {
 
       $existMonster = MST::where('name', 'like', $_POST['name'])->first();
-      if ($existMonster) {
-          return $res->withJson([
-            "error_code" => 1,
-            "message" => "Erreur, nom du monstre déjà pris"
-          ]);
+      // test if character is unique
+      $monster = MST::find($args['id']);
+
+      //test to allow keeping the same monster name
+      if($monster->name != $_POST['name'])
+      {
+        if ($existMonster)
+        {
+            return $res->withJson([
+              "error_code" => 1,
+              "message" => "Erreur, nom du monstre déjà pris"
+            ]);
+        }
       }
-
-
-        // test if character is unique
-        $monster = MST::find($args['id']);
 
         // upload image
         if(isset($_FILES) && isset($_FILES['img']) && $_FILES['img'] )
@@ -104,7 +108,9 @@ class MonstersController extends SuperController {
 
         return $res->withJson([
           "error_code" => 0,
-          "message" => "Monster mis à jour"
+          "message" => "Monstre mis à jour"
         ]);
+
+
     }
 }
