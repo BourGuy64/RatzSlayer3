@@ -36,6 +36,16 @@ class CharactersController extends SuperController {
         }
 
         // upload image
+        if(!isset($_FILES) || !isset($_FILES['img']) || !$_FILES['img'])
+        {
+          return $res->withJson([
+            "error_code" => 1,
+            "message" => "Erreur, veuillez insérer une image"
+          ]);
+        }
+
+
+        // upload image
         $image = new ImageTools($_FILES['img'], $_POST['firstname'] . $_POST['lastname']);
         $image->upload();
 
