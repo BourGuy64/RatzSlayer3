@@ -3,14 +3,23 @@
 use \Psr\Http\Message\ServerRequestInterface    as Request;
 use \Psr\Http\Message\ResponseInterface         as Response;
 use ratzslayer3\models\Monster                  as MST;
+use ratzslayer3\models\Fight                    as FGT;
 use ratzslayer3\tools\ImageTools;
-
 
 class MonstersController extends SuperController {
 
     public function get(Request $req, Response $res, array $args) {
         $monsters = MST::all();
-        return $this->views->render($res, 'fighters.html.twig', ['title' => 'Monsters','dir' => $this->dir, 'fighters' => $monsters, 'fighterType' => 'monsters', 'admin' => $_SESSION['admin']]);
+        //Get fighter fight's stats
+        $winners = array();
+        $fights = array();
+        foreach ($monsters as $monster) {
+          $fight = FGT::where('id_monsters', $monster->id)->get();
+          $win = FGT::where('id_monsters', $monster->id)->where('winner', 'm')->get();
+          $winners[$monster->id] = count($win);
+          $fights[$monster->id] = count($fight);
+        }
+        return $this->views->render($res, 'fighters.html.twig', ['title' => 'Monsters','dir' => $this->dir, 'fighters' => $monsters, 'fighterType' => 'monsters', 'winners' => $winners, 'fights' => $fights, 'admin' => $_SESSION['admin']]);
     }
 
     public function createForm(Request $req, Response $res, array $args) {
