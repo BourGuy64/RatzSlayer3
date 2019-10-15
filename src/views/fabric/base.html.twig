@@ -36,7 +36,8 @@
     </header>
 
     <div id="main">
-      <div id="myModal" class="modal ">
+
+      <div id="myModal" class="modal">
 
         <div class="modal-content-false">
           <span class="close">&times;</span>
@@ -44,6 +45,16 @@
         </div>
 
       </div>
+
+      <div id="myModalDelete"  class="modalDelete">
+        <div class="modal-content-del">
+          <p>
+          </p>
+          <button class="ok">Yes</button>
+          <button class="cancel">Cancel</button>
+        </div>
+      </div>
+
         {% block main %}
         {% endblock %}
     </div>

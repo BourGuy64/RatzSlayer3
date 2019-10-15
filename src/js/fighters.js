@@ -24,7 +24,7 @@ function create(e) {
         success     : (response, xhr) => {
             // do something here
             console.log(response); // DEV
-            CodeErr.errorCode(response.error_code, response.message, '#' + formId);
+            CodeErr.errorCode(response.error_code, response.message);
         },
         error       : (xhr) => {
             // do something for alert user
@@ -55,7 +55,7 @@ function update(e) {
         success     : (response, xhr) => {
             // do something here
             console.log(response); // DEV
-            CodeErr.errorCode(response.error_code, response.message, '#' + formId);
+            CodeErr.errorCode(response.error_code, response.message);
         },
         error       : (xhr) => {
             // do something for alert user
@@ -81,28 +81,49 @@ function remove(e) {
     const requestUrl = Conf.url.api + "/" + fighterType + "/" + $(e.target).data('id');
     console.log(requestUrl);
 
-    $.ajax({
-        type        : type,
-        url         : requestUrl,
-        timeout     : 5000,
-        header      : {},
-        data        : null,
-        processData : false,
-        contentType : false,
-        success     : (response, xhr) => {
-            $(e.target).parent().parent().remove();
-        },
-        error       : (xhr) => {
-            // do something for alert user
-            console.log("status =" + xhr.status); // DEV
-        },
-        complete    : () => {
-        }
-    });
+
+      $.ajax({
+          type        : type,
+          url         : requestUrl,
+          timeout     : 5000,
+          header      : {},
+          data        : null,
+          processData : false,
+          contentType : false,
+          success     : (response, xhr) => {
+              $(e.target).parent().parent().remove();
+          },
+          error       : (xhr) => {
+              // do something for alert user
+              console.log("status =" + xhr.status); // DEV
+          },
+          complete    : () => {
+          }
+      });
+
+}
+
+function confirm_del(e) {
+  $('#myModalDelete p').text("Etes-vous sûr de vouloir le supprimer ?");
+  $('#myModalDelete').show();
+
+  console.log("delete !");
+
+  $('.cancel').on("click", () => {
+    $('#myModalDelete').hide();
+    console.log("delete cancel !");
+  });
+
+
+  $('.ok').on("click", () => {
+    $('#myModalDelete').hide();
+    console.log("delete ok !");
+    remove(e);
+  });
 }
 
 export function init() {
     $('#newChar, #newMstr').on('submit', create);
     $('#editMstr, #editCar').on('submit', update);
-    $('.fighter .remove').on('click', remove);
+    $('.fighter .remove').on('click', confirm_del);
 }
