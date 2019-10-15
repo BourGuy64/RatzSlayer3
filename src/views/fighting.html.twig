@@ -6,15 +6,15 @@
 {% endblock %}
 
 {% block main %}
+
 <div class="fight-view">
   <div class="col">
-    {% if characters|length > 1 %}
-      <div class="list-name">Characters</div>
-    {% else %}
-      <div class="list-name">Character</div>
-    {% endif %}
+    <div class="winner">
+      {% if winner == 'c' %}
+       Winner !
+      {% endif %}
+    </div>
     <div class="fight-card">
-    {% for character in characters %}
       <div data-id="{{character.id}}" class="select-char nes-container is-rounded">
         <div class="picture">
           <img src="{{dir}}/src/img/fighters/{{character.picture}}" onerror="this.src='{{dir}}/src/img/icons/Characters.png'">
@@ -31,25 +31,32 @@
           <p><img src="{{dir}}/src/img/icons/agility.png">: {{character.agility}}</p>
         </div>
       </div>
-      {% endfor %}
     </div>
+
+    <div class="fight-log">
+      {% for log in logChar|slice(1, logChar.length) %}
+      <div class="nes-container is-rounded">
+        <p>Round: {{log.round}}</p>
+        <p>Damage taken: -{{logChar[loop.index - 1].hp - log.hp}}</p>
+        <label for="file">Life:</label><progress id="file" max="{{character.hp}}" value="{{log.hp}}"></progress>
+      </div>
+      {% endfor %}
+      </div>
   </div>
 
-
   <div class="col">
-    {% if monsters|length > 1 %}
-      <div class="list-name">Monsters</div>
-    {% else %}
-      <div class="list-name">Monster</div>
+    {% if winner == 'm' %}
+     <div class="winner">
+       Winner !
+     </div>
     {% endif %}
     <div class="fight-card">
-    {% for monster in monsters %}
     <div data-id="{{monster.id}}" class="select-monster nes-container is-rounded">
       <div class="picture">
         <img src="{{dir}}/src/img/fighters/{{monster.picture}}" onerror="this.src='{{dir}}/src/img/icons/Monsters.png'">
       </div>
       <div class="name">
-        <p>{{monster.name}}</p>
+        {{monster.name}}
       </div>
       <div class="stats">
         <p><img src="{{dir}}/src/img/icons/weight.png">: {{monster.weight}}</p>
@@ -60,16 +67,17 @@
         <p><img src="{{dir}}/src/img/icons/agility.png">: {{monster.agility}}</p>
       </div>
     </div>
+  </div>
+
+  <div class="fight-log">
+    {% for log in logMonster|slice(1, logMonster.length) %}
+    <div class="nes-container is-rounded">
+      <p>Round: {{log.round}}</p>
+      <p>Damage taken: -{{logMonster[loop.index - 1].hp - log.hp}}</p>
+      <label for="file">Life:</label><progress id="file" max="{{monster.hp}}" value="{{log.hp}}"></progress>
+    </div>
     {% endfor %}
   </div>
 </div>
 
-<div class="overlay disable"></div>
-<div class="popup-fight disable nes-container is-rounded">
-  <p>Your fight is ready !</p>
-  <div class="popup-button">
-    <button type="submit" class="nes-btn is-error cancel-fight">Cancel</button>
-    <button type="submit" class="nes-btn is-primary start-fight">Fight !</button>
-  </div>
-</div>
 {% endblock %}

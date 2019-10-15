@@ -38,6 +38,7 @@ class MonstersController extends SuperController {
         $image->upload();
 
         $monster = new MST;
+        $monster->type      = 'm';
         $monster->name      = $_POST['name'];
         $monster->weight    = $_POST['weight'];
         $monster->size      = $_POST['size'];
@@ -75,7 +76,11 @@ class MonstersController extends SuperController {
         $monster = MST::find($args['id']);
 
         // upload image
+<<<<<<< HEAD
         if(isset($_FILES) && isset($_FILES['img']) && $_FILES['img'] )
+=======
+        if(isset($_FILES) && isset($_FILES['img']) && $_FILES['img'])
+>>>>>>> master
         {
           $image = new ImageTools($_FILES['img'], $_POST['name']);
           $image->upload();

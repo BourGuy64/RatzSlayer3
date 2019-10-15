@@ -4,11 +4,13 @@
   flex-direction: row;
 }
 
-div.select-char, div.select-monster {
-  display: flex;
-  flex-direction: column;
-  width: 70%;
-  margin: 1.5em auto !important;
+div.select-char , div.select-monster{
+  display: grid;
+  grid-template-columns: 20% 80%;
+  grid-template-rows: 3em;
+  grid-gap: .2em .5em;
+  min-width: 22em;
+  margin: 1em !important;
   background: rgba(255, 255, 255, 0.69);
 }
 
@@ -16,31 +18,37 @@ div.select-char, div.select-monster {
   background: white;
 }
 
+.winner{
+  text-align: center;
+}
+
+.fight-log .nes-container {
+    margin: 1.4em auto;
+    background: rgba(255, 255, 255, 0.69);
+    width: 21em;
+}
+
 .select-char .name, .select-monster .name {
   display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.select-char .name > p, .select-monster .name > p {
-  margin: 0.6em;
+.is-selected{
+  background: white !important;
 }
 
-.select-char .stats, .select-monster .stats {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
+.select-char .stats, .select-monster .stats{
+  grid-column: 1/col-end;
+  grid-row-start: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1em 1em;
+  grid-gap: 1em 0.7em;
 }
 
-.select-char .stats > p, .select-monster .stats > p {
-  margin-left: 0.7em;
-}
-
-.select-char .stats > p:after, .select-monster .stats > p:after {
-  content: "|";
-}
-
-.select-char .stats > p:last-child:after, .select-monster .stats > p:last-child:after {
-  content: none;
+.select-char .stats > p, .select-monster .stats > p{
+  margin-bottom: 0;
 }
 
 .popup-fight {
@@ -85,4 +93,31 @@ div.select-char, div.select-monster {
   visibility: hidden;
 }
 
-/*# sourceMappingURL=fight.css.map */
+.picture img {
+    max-height: 3em;
+    max-width: 3em;
+}
+
+.picture{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.list-name{
+  text-align: center;
+}
+
+.fight-card{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.fight-card div:first-child{
+}
+
+.fight-card .stats p  img{
+  width: 2em;
+}

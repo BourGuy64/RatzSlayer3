@@ -11,30 +11,29 @@
 
     <div class="nes-container is-rounded fighter {{fighterType}}">
         <img src="{{dir}}/src/img/fighters/{{fighter.picture}}" onerror="this.src='{{dir}}/src/img/icons/{{fighterType}}.png'">
-
+        <div class="fighter-name">
         {% if fighter.name %}
-            <p class="name">Name: {{fighter.name}}</p>
+            <p class="name">{{fighter.name}}</p>
         {% else %}
-            <p class="lastname">Lastname: {{fighter.lastname}}</p>
-            <p class="firstname">Firstname: {{fighter.firstname}}</p>
+            <p class="name">{{fighter.firstname}} {{fighter.lastname}}</p>
         {% endif %}
+        </div>
         <div class="stats">
-          <div><p>Weigth:</p> <p>{{fighter.weight}}</p></div>
-          <div><p>Size:</p> <p>{{fighter.size}}</p></div>
-          <div class="hp icon"><p>Health:</p> <p>{{fighter.hp}}</p></div>
-          <div class="att icon"><p>Attack:</p> <p>{{fighter.attack}}</p></div>
-          <div class="def icon"><p>Defense:</p> <p>{{fighter.def}}</p></div>
-          <div><p>Agility:</p> <p>{{fighter.agility}}</p></div>
+          <div class="wt icon"><img src="{{dir}}/src/img/icons/weight.png"><p>Weight:</p> <p>{{fighter.weight}}</p></div>
+          <div class="sz icon"><img src="{{dir}}/src/img/icons/size.png"><p>Size:</p> <p>{{fighter.size}}</p></div>
+          <div class="hp icon"><img src="{{dir}}/src/img/icons/heart.png"><p>Health:</p> <p>{{fighter.hp}}</p></div>
+          <div class="att icon"><img src="{{dir}}/src/img/icons/sword.png"><p>Attack:</p> <p>{{fighter.attack}}</p></div>
+          <div class="def icon"><img src="{{dir}}/src/img/icons/shield.png"><p>Defense:</p> <p>{{fighter.def}}</p></div>
+          <div class="agi icon"><img src="{{dir}}/src/img/icons/agility.png"><p>Agility:</p> <p>{{fighter.agility}}</p></div>
         </div>
         {% if admin %}
-        <div>
+        <div class="fighter-editor">
             <a href="{{dir}}/{{fighterType}}/edit/{{fighter.id}}">
                 <i class="fas fa-edit"></i>
             </a>
             <i class="remove fas fa-trash-alt" data-id="{{fighter.id}}"></i>
         </div>
         {% endif %}
-
     </div>
 {% endfor %}
 

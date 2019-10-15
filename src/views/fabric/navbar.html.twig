@@ -1,9 +1,10 @@
 <div class="navbar">
-
-    {% if title != 'RatzSlayer3' %}
-    <a href="{{dir}}/">< BACK</a>
+    {% if title == 'RatzSlayer3' %}
+      <div></div>
+    {% elseif title == 'Fight !' %}
+      <a class="leaveFights" onclick='document.cookie = "CurrentFight=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";' href="./fight"><</a>
     {% else %}
-    <div></div>
+      <a href="{{dir}}/"><</a>
     {% endif %}
 
     <div class="title text-center">
