@@ -59,16 +59,25 @@ class CharactersController extends SuperController {
 
     public function update(Request $req, Response $res, array $args) {
 
+      $existChar = CHR::where('lastname', 'like', $_POST['lastname'])
+          ->where('firstname', 'like', $_POST['firstname'])
+          ->first();
+      if ($existChar) {
+        return $res->withJson([
+          "error_code" => 1,
+          "message" => "Erreur, nom et prénom du character déjà pris"
+        ]);
+      }
 
         // test if character is unique
         $character = CHR::find($args['id']);
 
         // upload image
-        if($_FILES['img'])
+        if(isset($_FILES) && isset($_FILES['img']) && $_FILES['img'] )
         {
-          $image = new ImageTools($_FILES['img'], $_POST['name']);
+          $image = new ImageTools($_FILES['img'], $_POST['firstname'].$_POST['lastname']);
           $image->upload();
-          $monster->picture   = $image->getFileName();
+          $character->picture   = $image->getFileName();
         }
 
         $character->lastname      = $_POST['lastname'];
@@ -82,7 +91,10 @@ class CharactersController extends SuperController {
 
         $character->save();
 
-        return $res->withJson($character);
+        return $res->withJson([
+          "error_code" => 0,
+          "message" => "Character mis à jour"
+        ]);
     }
 
     public function delete(Request $req, Response $res, array $args) {

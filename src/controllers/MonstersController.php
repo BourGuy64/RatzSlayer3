@@ -62,17 +62,26 @@ class MonstersController extends SuperController {
 
     public function update(Request $req, Response $res, array $args) {
 
+      $existMonster = MST::where('name', 'like', $_POST['name'])->first();
+      if ($existMonster) {
+          return $res->withJson([
+            "error_code" => 1,
+            "message" => "Erreur, nom du monstre déjà pris"
+          ]);
+      }
 
+      
         // test if character is unique
         $monster = MST::find($args['id']);
 
         // upload image
-        if($_FILES['img'])
+        if(isset($_FILES) && isset($_FILES['img']) && $_FILES['img'] )
         {
           $image = new ImageTools($_FILES['img'], $_POST['name']);
           $image->upload();
           $monster->picture   = $image->getFileName();
         }
+
 
         $monster->name      = $_POST['name'];
         $monster->weight    = $_POST['weight'];
@@ -84,6 +93,9 @@ class MonstersController extends SuperController {
 
         $monster->save();
 
-        return $res->withJson($monster);
+        return $res->withJson([
+          "error_code" => 0,
+          "message" => "Monster mis à jour"
+        ]);
     }
 }

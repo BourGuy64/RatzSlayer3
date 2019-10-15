@@ -55,6 +55,7 @@ function update(e) {
         success     : (response, xhr) => {
             // do something here
             console.log(response); // DEV
+            CodeErr.errorCode(response.error_code, response.message, '#' + formId);
         },
         error       : (xhr) => {
             // do something for alert user
