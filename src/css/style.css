@@ -153,12 +153,18 @@ footer {
   background-color: #e89532;
   margin: auto;
   padding: 20px;
-  width: 30%;
-  height: 25%;
+  min-width: 60%;
+  max-width: 30%;
   border-radius: 10px;
   text-align: center;
   box-shadow: 10px 10px 30px rgba(0,0,0,0.45), 15px 9px 5px rgba(0,0,0,0.35);
   border: 2px solid #474545;
+}
+
+@media screen and (min-width: 880px) {
+  .modal-content-del {
+    min-width: 30%;
+  }
 }
 
 /* The Close Button */
