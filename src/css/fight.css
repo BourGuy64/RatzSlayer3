@@ -17,6 +17,13 @@
   .column{
     font-size: 1.5em;
   }
+  .popup-fight{
+    font-size: 2em;
+    width: 22em;
+  }
+  .popup-button > button{
+    padding: .2em .5em !important;
+  }
 }
 
 div.select-char , div.select-monster{
