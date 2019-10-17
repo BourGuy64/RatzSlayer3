@@ -1,5 +1,4 @@
 .fight-view {
-  margin-top: 1em;
   display: grid;
   grid-template-columns: 1fr;
 }
@@ -21,7 +20,24 @@
   }
 }
 
-.col {
+@media screen and (min-width: 1310px)
+ {
+  .fight-view{
+    grid-template-columns: minmax(27em, 1fr) 380px minmax(27em, 1fr);
+  }
+  .lightning {
+    max-width: 380px;
+    height: 100%;
+  }
+}
+
+@media screen and (max-width: 1310px) {
+  .separator {
+    display: none;
+  }
+}
+
+.column {
   margin-top: 1em;
 }
 
@@ -132,15 +148,4 @@ div.select-char , div.select-monster{
 
 .fight-card .stats p  img{
   width: 2em;
-}
-
-.lightning {
-  max-width: 380px;
-  height: 100%;
-}
-
-@media screen and (max-width: 1310px) {
-  .lightning {
-    display: none;
-  }
 }
