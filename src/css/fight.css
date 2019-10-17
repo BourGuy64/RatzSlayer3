@@ -1,7 +1,10 @@
 .fight-view {
-  margin-top: 1em;
   display: flex;
   flex-direction: row;
+}
+
+.col {
+  margin-top: 1em;
 }
 
 div.select-char , div.select-monster{
@@ -120,4 +123,15 @@ div.select-char , div.select-monster{
 
 .fight-card .stats p  img{
   width: 2em;
+}
+
+.lightning {
+  max-width: 380px;
+  height: 100%;
+}
+
+@media screen and (max-width: 1310px) {
+  .lightning {
+    display: none;
+  }
 }
