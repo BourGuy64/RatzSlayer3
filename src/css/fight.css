@@ -29,6 +29,8 @@
  {
   .fight-view{
     grid-template-columns: minmax(27em, 1fr) 380px minmax(27em, 1fr);
+    min-height: 100%;
+    max-height: auto;
   }
   .lightning {
     max-width: 380px;
