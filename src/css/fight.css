@@ -1,7 +1,24 @@
 .fight-view {
   margin-top: 1em;
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.column{
+  width: 30em;
+  font-size: 1.5em;
+  margin: 1px auto;
+}
+
+@media screen and (min-width: 992px)
+ {
+  .fight-view{
+    grid-template-columns: repeat(2, minmax(27em, 1fr));
+  }
+  .column{
+    width: 30em;
+    font-size: 1em;
+  }
 }
 
 div.select-char , div.select-monster{
@@ -12,6 +29,7 @@ div.select-char , div.select-monster{
   min-width: 22em;
   margin: 1em !important;
   background: rgba(255, 255, 255, 0.69);
+  padding: 1.5em 1em !important;
 }
 
 .select-char:hover, .select-monster:hover {
@@ -106,16 +124,6 @@ div.select-char , div.select-monster{
 
 .list-name{
   text-align: center;
-}
-
-.fight-card{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.fight-card div:first-child{
 }
 
 .fight-card .stats p  img{
