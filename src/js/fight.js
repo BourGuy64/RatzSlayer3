@@ -58,7 +58,6 @@ function start(e) {
         data        : {char: char, monster: monster},
         success     : (response, xhr) => {
             // do something here
-            console.log(response); // DEV Return what twig generate but in console...
             document.write(response);
         },
         error       : (xhr) => {
