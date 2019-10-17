@@ -1,22 +1,27 @@
 .fight-view {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(2, minmax(27em, 1fr));
 }
 
 .column{
   width: 30em;
-  font-size: 1.5em;
   margin: 1px auto;
 }
 
-@media screen and (min-width: 992px)
+@media screen and (max-width: 992px)
  {
   .fight-view{
-    grid-template-columns: repeat(2, minmax(27em, 1fr));
+    grid-template-columns: 1fr;
   }
   .column{
-    width: 30em;
-    font-size: 1em;
+    font-size: 1.5em;
+  }
+  .popup-fight{
+    font-size: 2em;
+    width: 22em;
+  }
+  .popup-button > button{
+    padding: .2em .5em !important;
   }
 }
 
