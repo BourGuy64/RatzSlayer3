@@ -140,7 +140,9 @@ footer {
   margin: auto;
   padding: 20px;
   width: 30%;
-  height: 20%;
+  height: 10%;
+  min-height: 140px;
+  min-width: 175px;
   border-radius: 10px;
   text-align: center;
   box-shadow: 10px 10px 30px rgba(0,0,0,0.45), 15px 9px 5px rgba(0,0,0,0.35);
@@ -152,6 +154,7 @@ footer {
   position: relative;
   background-color: #e89532;
   margin: auto;
+  margin-top: 0;
   padding: 20px;
   min-width: 60%;
   max-width: 30%;
@@ -164,6 +167,27 @@ footer {
 @media screen and (min-width: 880px) {
   .modal-content-del {
     min-width: 30%;
+  }
+}
+
+@media screen and (max-width: 1165px) {
+  .modal-content-false {
+    min-height: 145px;
+    min-width: 250px;
+  }
+}
+
+@media screen and (max-width: 330px) {
+  .modal-content-del {
+    min-height: 260px;
+    min-width: 200px;
+  }
+}
+
+@media screen and (min-width: 815px) {
+  .modal-content-true {
+    min-height: 100px;
+
   }
 }
 
