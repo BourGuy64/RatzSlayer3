@@ -42,7 +42,7 @@ class FightController extends SuperController{
     $round = 1;
     //Fighter with more agility attack first (here is the MONSTER)
     if($monster->agility > $character->agility){
-      FGLC::roundZero($monster, $character, $fight->id);
+      FGLC::roundZero($character, $monster, $fight->id);
       while(!FGLC::fighterIsDying($fight->id)){
         FGLC::doAttack($monster, $character, $fight->id, $round);
         if(!FGLC::fighterIsDying($fight->id)){
@@ -53,7 +53,7 @@ class FightController extends SuperController{
     }
     //If CHARACTER have more agility, he attack first
     else{
-      FGLC::roundZero($character, $monster, $fight->id);
+      FGLC::roundZero($monster, $character, $fight->id);
       while(!FGLC::fighterIsDying($fight->id)){
         FGLC::doAttack($character, $monster, $fight->id, $round);
         if(!FGLC::fighterIsDying($fight->id)){
