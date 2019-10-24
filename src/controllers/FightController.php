@@ -21,23 +21,25 @@ class FightController extends SuperController{
 
             $logChar = FGL::where('id_fights', $fightId)
                 ->where('fighter_type', 'c')
-                ->orderBy('id', 'asc')
+                ->orderBy('id', 'desc')
                 ->get();
 
             $logMonster = FGL::where('id_fights', $fightId)
                 ->where('fighter_type', 'm')
-                ->orderBy('id', 'asc')
+                ->orderBy('id', 'desc')
                 ->get();
 
-          $winner = $this->winner($fightId);
-          return $this->views->render($res, 'fighting.html.twig', ['title' => 'Fight !', 'dir' =>  $this->dir, 'character' => $character, 'monster' => $monster, 'logChar' => $logChar, 'logMonster' => $logMonster, 'winner' => $winner, 'admin' => $_SESSION['admin']]);
-          // return $this->views->render($res, 'fighting.html.twig', ['title' => 'Fight !', 'dir' =>  $this->dir, 'character' => $character, 'monster' => $monster, 'admin' => $_SESSION['admin']]);
-      } else {
-          $characters = CHR::all();
-          $monsters = MST::all();
-          return $this->views->render($res, 'fight.html.twig', ['title' => 'Choose your fighter', 'dir' =>  $this->dir, 'characters' => $characters, 'monsters' => $monsters, 'admin' => $_SESSION['admin']]);
-      }
-  }
+            $winner = $this->winner($logChar[0], $logMonster[0]);
+            // $winner = false;
+
+            return $this->views->render($res, 'fighting.html.twig', ['title' => 'Fight !', 'dir' =>  $this->dir, 'character' => $character, 'monster' => $monster, 'logChar' => $logChar, 'logMonster' => $logMonster, 'winner' => $winner, 'admin' => $_SESSION['admin']]);
+            // return $this->views->render($res, 'fighting.html.twig', ['title' => 'Fight !', 'dir' =>  $this->dir, 'character' => $character, 'monster' => $monster, 'admin' => $_SESSION['admin']]);
+        } else {
+            $characters = CHR::all();
+            $monsters = MST::all();
+            return $this->views->render($res, 'fight.html.twig', ['title' => 'Choose your fighter', 'dir' =>  $this->dir, 'characters' => $characters, 'monsters' => $monsters, 'admin' => $_SESSION['admin']]);
+        }
+    }
 
   //Do whole fight
   public function fight(Request $req, Response $res, array $args) {
@@ -67,8 +69,13 @@ class FightController extends SuperController{
   }
 
   //Return fighter type of the winner
-  public function winner($fightId) {
-      $winner = FGL::where('id_fights', $fightId)->where('hp', '>', '0')->orderBy('id', 'desc')->first();
-      return $winner->fighter_type;
-  }
+    public function winner($character, $monster) {
+        if ($character->hp == 0) {
+            return 'm';
+        } else if ($monster->hp == 0) {
+            return 'c';
+        }
+
+        return false;
+    }
 }

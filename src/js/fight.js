@@ -95,6 +95,17 @@ function start(e) {
     });
 }
 
+function setWinner(winner) {
+    $('#next').remove();
+    if (winner === 'c') {
+        $('.fight-view > .character').removeClass('column').addClass('columnWinner');
+        $('.character .winner').text("Winner !");
+    } else if (winner == 'm') {
+        $('.fight-view > .monster').removeClass('column').addClass('columnWinner');
+        $('.character .winner').text("Winner !");
+    }
+}
+
 function nextRound(e) {
 
     e.target.disabled = true;
@@ -119,6 +130,10 @@ function nextRound(e) {
         processData : false,
         contentType : false,
         success     : (response, xhr) => {
+            console.log(response);
+            if (response != 0) {
+                setWinner(response);
+            }
             // do something here
             getLastRound(fightId, char, 'c');
             getLastRound(fightId, monster, 'm');

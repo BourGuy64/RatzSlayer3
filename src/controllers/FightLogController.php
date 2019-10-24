@@ -71,9 +71,24 @@ class FightLogController extends SuperController{
 
         // return $res->withJson(SELF::getRound($fight->id, $currentRound));
 
-        $logChar = FGL::where('id_fights', $fight->id)->where('fighter_type', 'c')->orderBy('id', 'asc')->get();
-        $logMonster = FGL::where('id_fights', $fight->id)->where('fighter_type', 'm')->orderBy('id', 'asc')->get();
-        return $this->views->render($res, 'fightlog.html.twig', ['dir' =>  $this->dir, 'character' => $character, 'monster' => $monster, 'logChar' => $logChar, 'logMonster' => $logMonster, ]);
+        $logChar = FGL::where('id_fights', $fight->id)
+            ->where('fighter_type', 'c')
+            ->orderBy('id', 'desc')
+            ->first();
+
+        $logMonster = FGL::where('id_fights', $fight->id)
+            ->where('fighter_type', 'm')
+            ->orderBy('id', 'desc')
+            ->first();
+        // return $this->views->render($res, 'fightlog.html.twig', ['dir' =>  $this->dir, 'character' => $character, 'monster' => $monster, 'logChar' => $logChar, 'logMonster' => $logMonster, ]);
+
+        $value = 0;
+        if ($logChar->hp <= 0 || $logMonster->hp <= 0) {
+            $value = 1;
+        }
+
+        // return $res->withJson($logChar);
+        return $res->getBody()->write($value);
 
 
         // $winner = $this->winner($fight->id);
