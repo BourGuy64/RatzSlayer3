@@ -7,7 +7,10 @@
 
 {% block main %}
 
+<button id="next">Next round</button>
+
 <div class="fight-view">
+
   {% if winner == 'c' %}
   <div class="columnWinner">
   {% else %}
@@ -95,7 +98,4 @@
   <div class="winBan"><img src="{{dir}}/src/img/winnerBanana.gif" class="winBanana"></div>
   {% endif %}
 </div>
-
-<button id="next">Next round</button>
-
 {% endblock %}
