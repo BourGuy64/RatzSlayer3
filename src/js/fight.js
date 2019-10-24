@@ -46,11 +46,6 @@ function cancel(){
   });
 }
 
-function displayRound($logs) {
-    console.log($logs);
-
-}
-
 function getLastRound(fightId, fighterId, fighterType) {
 
     const requestUrl = Conf.url.api + "/fightlog/last/" + fightId + "/" + fighterType + "/" + fighterId;
