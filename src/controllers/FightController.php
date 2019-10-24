@@ -11,14 +11,24 @@ use ratzslayer3\controllers\FightLogController  as FGLC;
 
 class FightController extends SuperController{
 
-  public function get(Request $req, Response $res, array $args) {
-      if (isset($_COOKIE['CurrentFight'])) {
-          $fightId = $_COOKIE['CurrentFight'];
-          $fight = FGT::where('id', $fightId)->first();
-          $character = CHR::where('id', $fight->id_characters)->first();
-          $monster = MST::where('id', $fight->id_monsters)->first();
-          $logChar = FGL::where('id_fights', $fightId)->where('fighter_type', 'c')->orderBy('id', 'asc')->get();
-          $logMonster = FGL::where('id_fights', $fightId)->where('fighter_type', 'm')->orderBy('id', 'asc')->get();
+    public function get(Request $req, Response $res, array $args) {
+        if (isset($_COOKIE['CurrentFight']) && $_COOKIE['CurrentFight']) {
+            $fightId = $_COOKIE['CurrentFight'];
+
+            $fight = FGT::where('id', $fightId)->first();
+            $character = CHR::where('id', $fight->id_characters)->first();
+            $monster = MST::where('id', $fight->id_monsters)->first();
+
+            $logChar = FGL::where('id_fights', $fightId)
+                ->where('fighter_type', 'c')
+                ->orderBy('id', 'asc')
+                ->get();
+
+            $logMonster = FGL::where('id_fights', $fightId)
+                ->where('fighter_type', 'm')
+                ->orderBy('id', 'asc')
+                ->get();
+
           $winner = $this->winner($fightId);
           return $this->views->render($res, 'fighting.html.twig', ['title' => 'Fight !', 'dir' =>  $this->dir, 'character' => $character, 'monster' => $monster, 'logChar' => $logChar, 'logMonster' => $logMonster, 'winner' => $winner, 'admin' => $_SESSION['admin']]);
           // return $this->views->render($res, 'fighting.html.twig', ['title' => 'Fight !', 'dir' =>  $this->dir, 'character' => $character, 'monster' => $monster, 'admin' => $_SESSION['admin']]);
