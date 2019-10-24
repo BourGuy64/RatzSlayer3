@@ -79,6 +79,13 @@ $app->group('/fight', function ($app) {
     $app->post('',           "\\ratzslayer3\\controllers\\FightController:fight");
 });
 
+// FIGHT
+$app->group('/fightlog', function ($app) {
+    $app->get('/{id}',          "\\ratzslayer3\\controllers\\FightLogController:get");
+    $app->get('/last/{fightId}/{fighterType}/{fighterId}', "\\ratzslayer3\\controllers\\FightLogController:getLast");
+    $app->post('',              "\\ratzslayer3\\controllers\\FightLogController:nextRound");
+});
+
 // USERS
 $app->group('/users', function ($app) {
     $app->get('/login',     "\\ratzslayer3\\controllers\\UsersController:loginForm")->add( new ConnectedRejectMiddleware() );
