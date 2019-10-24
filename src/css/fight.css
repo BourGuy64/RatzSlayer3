@@ -42,6 +42,14 @@
   .separator {
     display: none;
   }
+  .superpos {
+    position: relative;
+  }
+
+  #next {
+    position: absolute;
+    transform: translate(-50%, -50%);
+  }
 }
 
 .column, .columnWinner {
