@@ -83,8 +83,10 @@ class FightLogController extends SuperController{
         // return $this->views->render($res, 'fightlog.html.twig', ['dir' =>  $this->dir, 'character' => $character, 'monster' => $monster, 'logChar' => $logChar, 'logMonster' => $logMonster, ]);
 
         $value = 0;
-        if ($logChar->hp <= 0 || $logMonster->hp <= 0) {
-            $value = 1;
+        if ($logChar->hp <= 0) {
+            $value = 'm';
+        } else if ($logMonster->hp <= 0) {
+            $value = 'c';
         }
 
         // return $res->withJson($logChar);
