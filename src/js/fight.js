@@ -98,8 +98,9 @@ function start(e) {
 
 function setWinner(winner) {
     $('#next').remove();
+    // console.log("winner :" + winner);
     if (winner === 'c') {
-        $('.fight-view > .character').removeClass('column').addClass('columnWinner');
+        $('.fight-view > .character').removeClass('column').addClass('columnWinner').append('<div class="winBan"><img src="' + Conf.url.api + '/src/img/winnerBanana.gif" class="winBanana"></div>');
         $('.character .winner').text("Winner !");
     } else if (winner == 'm') {
         $('.fight-view > .monster').removeClass('column').addClass('columnWinner');
