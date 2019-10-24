@@ -3,47 +3,47 @@
 import * as Conf from './conf.js';
 import Cookies from './../framework/js-cookie/js-cookie.js';
 
-function selectChar(e){
-  $('.select-char').each(function(i){
-    $(this).removeClass('is-selected');
-  });
-  $(this).addClass('is-selected');
-  fightReady();
+function selectChar(e) {
+    $('.select-char').each(function(i) {
+        $(this).removeClass('is-selected');
+    });
+    $(this).addClass('is-selected');
+    fightReady();
 }
 
-function selectMonster(e){
-  $('.select-monster').each(function(i){
-    $(this).removeClass('is-selected');
-  });
-  $(this).addClass('is-selected');
-  fightReady();
+function selectMonster(e) {
+    $('.select-monster').each(function(i) {
+        $(this).removeClass('is-selected');
+    });
+    $(this).addClass('is-selected');
+    fightReady();
 }
 
-function fightReady(){
-  let ready = 0;
-  $('.select-monster').each(function(i){
-    if($(this).hasClass('is-selected') == 1){
-      ready++;
+function fightReady() {
+    let ready = 0;
+    $('.select-monster').each(function(i) {
+        if ($(this).hasClass('is-selected') == 1) {
+            ready++;
+        }
+    });
+    $('.select-char').each(function(i) {
+        if ($(this).hasClass('is-selected') == 1) {
+            ready++;
+        }
+    });
+    if (ready === 2) {
+        $('.popup-fight, .overlay').removeClass('disable');
     }
-  });
-  $('.select-char').each(function(i){
-    if($(this).hasClass('is-selected') == 1){
-      ready++;
-    }
-  });
-  if(ready === 2){
-    $('.popup-fight, .overlay').removeClass('disable');
-  }
 }
 
-function cancel(){
-  $('.popup-fight, .overlay').addClass('disable');
-  $('.select-char').each(function(i){
-    $(this).removeClass('is-selected');
-  });
-  $('.select-monster').each(function(i){
-    $(this).removeClass('is-selected');
-  });
+function cancel() {
+    $('.popup-fight, .overlay').addClass('disable');
+    $('.select-char').each(function(i) {
+        $(this).removeClass('is-selected');
+    });
+    $('.select-monster').each(function(i) {
+        $(this).removeClass('is-selected');
+    });
 }
 
 function getLastRound(fightId, fighterId, fighterType) {
@@ -51,9 +51,9 @@ function getLastRound(fightId, fighterId, fighterType) {
     const requestUrl = Conf.url.api + "/fightlog/last/" + fightId + "/" + fighterType + "/" + fighterId;
 
     $.ajax({
-        type        : 'GET',
-        url         : requestUrl,
-        success     : (response, xhr) => {
+        type: 'GET',
+        url: requestUrl,
+        success: (response, xhr) => {
             // do something here
             console.log(response); // DEV Return what twig generate but in console...
             if (fighterType == 'c') {
@@ -62,12 +62,11 @@ function getLastRound(fightId, fighterId, fighterType) {
                 $('.fight-log.monster').prepend(response);
             }
         },
-        error       : (xhr) => {
+        error: (xhr) => {
             // do something for alert user
             console.log("status =" + xhr.status); // DEV
         },
-        complete    : () => {
-        }
+        complete: () => {}
     });
 }
 
@@ -79,19 +78,21 @@ function start(e) {
     const requestUrl = Conf.url.api + "/" + 'fight';
 
     $.ajax({
-        type        : 'POST',
-        url         : requestUrl,
-        data        : {char: char, monster: monster},
-        success     : (response, xhr) => {
+        type: 'POST',
+        url: requestUrl,
+        data: {
+            char: char,
+            monster: monster
+        },
+        success: (response, xhr) => {
             // do something here
             document.write(response);
         },
-        error       : (xhr) => {
+        error: (xhr) => {
             // do something for alert user
             console.log("status =" + xhr.status); // DEV
         },
-        complete    : () => {
-        }
+        complete: () => {}
     });
 }
 
@@ -122,14 +123,14 @@ function nextRound(e) {
     formData.append("monster", monster);
 
     $.ajax({
-        type        : type,
-        url         : requestUrl,
-        timeout     : 5000,
-        header      : {},
-        data        : formData,
-        processData : false,
-        contentType : false,
-        success     : (response, xhr) => {
+        type: type,
+        url: requestUrl,
+        timeout: 5000,
+        header: {},
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: (response, xhr) => {
             console.log(response);
             if (response != 0) {
                 setWinner(response);
@@ -138,12 +139,12 @@ function nextRound(e) {
             getLastRound(fightId, char, 'c');
             getLastRound(fightId, monster, 'm');
         },
-        error       : (xhr) => {
+        error: (xhr) => {
             // do something for alert user
             console.log("status =" + xhr.status); // DEV
             console.log(xhr);
         },
-        complete    : () => {
+        complete: () => {
             e.target.disabled = false;
         }
     });
