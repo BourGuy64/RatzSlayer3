@@ -41,7 +41,7 @@
     </div>
 
     <div class="fight-log character">
-      {% for log in logChar|reverse|slice(1, logChar.length) %}
+      {% for log in logChar | slice(1, logChar.length) | reverse %}
       <div class="nes-container is-rounded">
         <p>Round: {{log.round}}</p>
         <p>Damage taken: -{{logChar[loop.index - 1].damage}}</p>
@@ -86,7 +86,7 @@
   </div>
 
   <div class="fight-log monster">
-    {% for log in logMonster|reverse|slice(1, logMonster.length) %}
+    {% for log in logMonster | slice(1, logMonster.length) | reverse %}
     <div class="nes-container is-rounded">
       <p>Round: {{log.round}}</p>
       <p>Damage taken: -{{logMonster[loop.index - 1].damage}}</p>
