@@ -3,7 +3,7 @@
   grid-template-columns: repeat(2, minmax(27em, 1fr));
 }
 
-.column{
+.column, .columnWinner{
   width: 30em;
   margin: 1px auto;
 }
@@ -44,7 +44,7 @@
   }
 }
 
-.column {
+.column, .columnWinner {
   margin-top: 1em;
 }
 
@@ -155,4 +155,24 @@ div.select-char , div.select-monster{
 
 .fight-card .stats p  img{
   width: 2em;
+}
+
+.winnerGif {
+  margin: 1.4em auto;
+  width: 21em;
+}
+
+.winGif {
+    border-radius: 10px;
+}
+
+.columnWinner {
+  background-image:url(../img/winnerBackground.gif);
+  background-repeat:no-repeat;
+  background-size: cover;
+}
+
+.winBan {
+  margin: 1.4em auto;
+  width: 21em;
 }

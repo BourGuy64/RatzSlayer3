@@ -8,7 +8,11 @@
 {% block main %}
 
 <div class="fight-view">
+  {% if winner == 'c' %}
+  <div class="columnWinner">
+  {% else %}
   <div class="column">
+  {% endif %}
     <div class="winner">
       {% if winner == 'c' %}
        Winner !
@@ -42,11 +46,18 @@
       </div>
       {% endfor %}
       </div>
+      {% if winner == 'c' %}
+      <div class="winBan"><img src="{{dir}}/src/img/winnerBanana.gif" class="winBanana"></div>
+      {% endif %}
   </div>
 
   <div class="separator"><img src="{{dir}}/src/img/lightning.png" class="lightning"></div>
 
+  {% if winner == 'm' %}
+  <div class="columnWinner">
+  {% else %}
   <div class="column">
+  {% endif %}
     {% if winner == 'm' %}
      <div class="winner">
        Winner !
@@ -80,6 +91,9 @@
     </div>
     {% endfor %}
   </div>
+  {% if winner == 'm' %}
+  <div class="winBan"><img src="{{dir}}/src/img/winnerBanana.gif" class="winBanana"></div>
+  {% endif %}
 </div>
 
 {% endblock %}
