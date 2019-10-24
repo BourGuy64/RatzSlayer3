@@ -7,13 +7,6 @@
 
 {% block main %}
 
-<<<<<<< HEAD
-=======
-{% if winner == false %}
-<button id="next">Next round</button>
-{% endif %}
-
->>>>>>> 5ae6b6ba036d31d36d44a2402397d772af0686f5
 <div class="fight-view">
 
     {% if winner == 'c' %}
@@ -66,8 +59,12 @@
 
 <div class="separator superpos">
   <img src="{{dir}}/src/img/lightning.png" class="lightning">
+</div>
+{% if winner == false %}
+<div class="btnSuperpos">
   <button id="next">Next round</button>
 </div>
+{% endif %}
 
 {% if winner == 'm' %}
 <div class="monster columnWinner">

@@ -36,19 +36,36 @@
     max-width: 380px;
     height: 100%;
   }
-}
 
-@media screen and (max-width: 1310px) {
-  .separator {
-    display: none;
-  }
   .superpos {
     position: relative;
   }
 
-  #next {
+  .btnSuperpos {
     position: absolute;
+    top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%);
+  }
+
+  #next {
+    border-radius: 25px 8px;
+    height: 40px;
+    background-image: linear-gradient(to right, #ff0084 0%, #590740 51%, #ff0084 100%);
+    color: #f0e5ef;
+    box-shadow: 9px 7px 20px 2px #d3639d;
+  }
+
+  #next:hover {
+    background-image: linear-gradient(to right, #590740 0%, #ff0084 51%, #590740 100%);
+  }
+}
+
+
+
+@media screen and (max-width: 1310px) {
+  .separator {
+    display: none;
   }
 }
 
