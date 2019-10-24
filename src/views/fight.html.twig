@@ -7,7 +7,7 @@
 
 {% block main %}
 <div class="fight-view">
-  <div class="col">
+  <div class="column">
     {% if characters|length > 1 %}
       <div class="list-name">Characters</div>
     {% else %}
@@ -23,20 +23,21 @@
           {{character.firstname}} {{character.lastname}}
         </div>
         <div class="stats">
-          <p><img src="{{dir}}/src/img/icons/weight.png">: {{character.weight}}</p>
-          <p><img src="{{dir}}/src/img/icons/size.png">: {{character.size}}</p>
-          <p><img src="{{dir}}/src/img/icons/heart.png">: {{character.hp}}</p>
-          <p><img src="{{dir}}/src/img/icons/sword.png">: {{character.attack}}</p>
-          <p><img src="{{dir}}/src/img/icons/shield.png">: {{character.def}}</p>
-          <p><img src="{{dir}}/src/img/icons/agility.png">: {{character.agility}}</p>
+          <p><img src="{{dir}}/src/img/icons/weight.png" title="Weight">: {{character.weight}}</p>
+          <p><img src="{{dir}}/src/img/icons/size.png" title="Size">: {{character.size}}</p>
+          <p><img src="{{dir}}/src/img/icons/heart.png" title="Health">: {{character.hp}}</p>
+          <p><img src="{{dir}}/src/img/icons/sword.png" title="Attack">: {{character.attack}}</p>
+          <p><img src="{{dir}}/src/img/icons/shield.png" title="Defense">: {{character.def}}</p>
+          <p><img src="{{dir}}/src/img/icons/agility.png" title="Agility">: {{character.agility}}</p>
         </div>
       </div>
       {% endfor %}
     </div>
   </div>
 
+<div class="separator"><img src="{{dir}}/src/img/lightning.png" class="lightning"></div>
 
-  <div class="col">
+  <div class="column">
     {% if monsters|length > 1 %}
       <div class="list-name">Monsters</div>
     {% else %}
@@ -52,12 +53,12 @@
         <p>{{monster.name}}</p>
       </div>
       <div class="stats">
-        <p><img src="{{dir}}/src/img/icons/weight.png">: {{monster.weight}}</p>
-        <p><img src="{{dir}}/src/img/icons/size.png">: {{monster.size}}</p>
-        <p><img src="{{dir}}/src/img/icons/heart.png">: {{monster.hp}}</p>
-        <p><img src="{{dir}}/src/img/icons/sword.png">: {{monster.attack}}</p>
-        <p><img src="{{dir}}/src/img/icons/shield.png">: {{monster.def}}</p>
-        <p><img src="{{dir}}/src/img/icons/agility.png">: {{monster.agility}}</p>
+        <p><img src="{{dir}}/src/img/icons/weight.png" title="Weight">: {{monster.weight}}</p>
+        <p><img src="{{dir}}/src/img/icons/size.png" title="Size">: {{monster.size}}</p>
+        <p><img src="{{dir}}/src/img/icons/heart.png" title="Health">: {{monster.hp}}</p>
+        <p><img src="{{dir}}/src/img/icons/sword.png" title="Attack">: {{monster.attack}}</p>
+        <p><img src="{{dir}}/src/img/icons/shield.png" title="Defense">: {{monster.def}}</p>
+        <p><img src="{{dir}}/src/img/icons/agility.png" title="Agility">: {{monster.agility}}</p>
       </div>
     </div>
     {% endfor %}

@@ -3,14 +3,23 @@
 use \Psr\Http\Message\ServerRequestInterface    as Request;
 use \Psr\Http\Message\ResponseInterface         as Response;
 use ratzslayer3\models\Monster                  as MST;
+use ratzslayer3\models\Fight                    as FGT;
 use ratzslayer3\tools\ImageTools;
-
 
 class MonstersController extends SuperController {
 
     public function get(Request $req, Response $res, array $args) {
         $monsters = MST::all();
-        return $this->views->render($res, 'fighters.html.twig', ['title' => 'Monsters','dir' => $this->dir, 'fighters' => $monsters, 'fighterType' => 'monsters', 'admin' => $_SESSION['admin']]);
+        //Get fighter fight's stats
+        $winners = array();
+        $fights = array();
+        foreach ($monsters as $monster) {
+          $fight = FGT::where('id_monsters', $monster->id)->get();
+          $win = FGT::where('id_monsters', $monster->id)->where('winner', 'm')->get();
+          $winners[$monster->id] = count($win);
+          $fights[$monster->id] = count($fight);
+        }
+        return $this->views->render($res, 'fighters.html.twig', ['title' => 'Monsters','dir' => $this->dir, 'fighters' => $monsters, 'fighterType' => 'monsters', 'winners' => $winners, 'fights' => $fights, 'admin' => $_SESSION['admin']]);
     }
 
     public function createForm(Request $req, Response $res, array $args) {
@@ -27,10 +36,21 @@ class MonstersController extends SuperController {
         // test if character is unique
         $monster = MST::where('name', 'like', $_POST['name'])->first();
         if ($monster) {
-            return $res->withStatus(400);
+            return $res->withJson([
+              "error_code" => 1,
+              "message" => "Erreur, nom du monstre déjà pris"
+            ]);
         }
 
         // upload image
+        if(!isset($_FILES) || !isset($_FILES['img']) || !$_FILES['img'])
+        {
+          return $res->withJson([
+            "error_code" => 1,
+            "message" => "Erreur, veuillez insérer une image"
+          ]);
+        }
+
         $image = new ImageTools($_FILES['img'], $_POST['name']);
         $image->upload();
 
@@ -46,7 +66,10 @@ class MonstersController extends SuperController {
         $monster->picture   = $image->getFileName();
         $monster->save();
 
-        return $res->withJson($monster);
+        return $res->withJson([
+          "error_code" => 0,
+          "message" => "Monster créé"
+        ]);
     }
 
     public function delete(Request $req, Response $res, array $args) {
@@ -57,17 +80,30 @@ class MonstersController extends SuperController {
 
     public function update(Request $req, Response $res, array $args) {
 
+      $existMonster = MST::where('name', 'like', $_POST['name'])->first();
+      // test if character is unique
+      $monster = MST::find($args['id']);
 
-        // test if character is unique
-        $monster = MST::find($args['id']);
+      //test to allow keeping the same monster name
+      if($monster->name != $_POST['name'])
+      {
+        if ($existMonster)
+        {
+            return $res->withJson([
+              "error_code" => 1,
+              "message" => "Erreur, nom du monstre déjà pris"
+            ]);
+        }
+      }
 
         // upload image
-        if(isset($_FILES) && isset($_FILES['img']) && $_FILES['img'])
+        if(isset($_FILES) && isset($_FILES['img']) && $_FILES['img'] )
         {
           $image = new ImageTools($_FILES['img'], $_POST['name']);
           $image->upload();
           $monster->picture   = $image->getFileName();
         }
+
 
         $monster->name      = $_POST['name'];
         $monster->weight    = $_POST['weight'];
@@ -79,6 +115,11 @@ class MonstersController extends SuperController {
 
         $monster->save();
 
-        return $res->withJson($monster);
+        return $res->withJson([
+          "error_code" => 0,
+          "message" => "Monstre mis à jour"
+        ]);
+
+
     }
 }

@@ -3,14 +3,23 @@
 use \Psr\Http\Message\ServerRequestInterface    as Request;
 use \Psr\Http\Message\ResponseInterface         as Response;
 use ratzslayer3\models\Character                as CHR;
+use ratzslayer3\models\Fight                    as FGT;
 use ratzslayer3\tools\ImageTools;
-
 
 class CharactersController extends SuperController {
 
     public function get(Request $req, Response $res, array $args) {
         $characters = CHR::all();
-        return $this->views->render($res, 'fighters.html.twig', ['title' => 'Characters','dir' => $this->dir, 'fighters' => $characters, 'fighterType' => 'characters', 'admin' => $_SESSION['admin']]);
+        //Get fighter fight's stats
+        $winners = array();
+        $fights = array();
+        foreach ($characters as $char) {
+          $fight = FGT::where('id_characters', $char->id)->get();
+          $win = FGT::where('id_characters', $char->id)->where('winner', 'c')->first();
+          $winners[$char->id] = count($win);
+          $fights[$char->id] = count($fight);
+        }
+        return $this->views->render($res, 'fighters.html.twig', ['title' => 'Characters','dir' => $this->dir, 'fighters' => $characters, 'fighterType' => 'characters', 'winners' => $winners, 'fights' => $fights, 'admin' => $_SESSION['admin']]);
     }
 
     public function createForm(Request $req, Response $res, array $args) {
@@ -29,8 +38,21 @@ class CharactersController extends SuperController {
             ->where('firstname', 'like', $_POST['firstname'])
             ->first();
         if ($char) {
-            return $res->withStatus(400);
+          return $res->withJson([
+            "error_code" => 1,
+            "message" => "Erreur, nom et prénom du character déjà pris"
+          ]);
         }
+
+        // upload image
+        if(!isset($_FILES) || !isset($_FILES['img']) || !$_FILES['img'])
+        {
+          return $res->withJson([
+            "error_code" => 1,
+            "message" => "Erreur, veuillez insérer une image"
+          ]);
+        }
+
 
         // upload image
         $image = new ImageTools($_FILES['img'], $_POST['firstname'] . $_POST['lastname']);
@@ -49,19 +71,37 @@ class CharactersController extends SuperController {
         $char->picture      = $image->getFileName();
         $char->save();
 
-        return $res->withJson($char);
+        return $res->withJson([
+          "error_code" => 0,
+          "message" => "Character créé"
+        ]);
     }
 
     public function update(Request $req, Response $res, array $args) {
 
+      $existChar = CHR::where('lastname', 'like', $_POST['lastname'])
+          ->where('firstname', 'like', $_POST['firstname'])
+          ->first();
 
-        // test if character is unique
-        $character = CHR::find($args['id']);
+      // test if character is unique
+      $character = CHR::find($args['id']);
+
+      if($character->firstname != $_POST['firstname'] && $character->lastname != $_POST['lastname'])
+      {
+        if ($existChar) {
+          return $res->withJson([
+            "error_code" => 1,
+            "message" => "Erreur, nom et prénom du character déjà pris"
+          ]);
+        }
+      }
+
+
 
         // upload image
-        if(isset($_FILES) && isset($_FILES['img']) && $_FILES['img'])
+        if(isset($_FILES) && isset($_FILES['img']) && $_FILES['img'] )
         {
-          $image = new ImageTools($_FILES['img'], $_POST['firstname'], $_POST['lastname']);
+          $image = new ImageTools($_FILES['img'], $_POST['firstname'].$_POST['lastname']);
           $image->upload();
           $character->picture   = $image->getFileName();
         }
@@ -77,7 +117,10 @@ class CharactersController extends SuperController {
 
         $character->save();
 
-        return $res->withJson($character);
+        return $res->withJson([
+          "error_code" => 0,
+          "message" => "Character mis à jour"
+        ]);
     }
 
     public function delete(Request $req, Response $res, array $args) {

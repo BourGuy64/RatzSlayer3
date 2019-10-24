@@ -26,6 +26,18 @@
           <div class="def icon"><img src="{{dir}}/src/img/icons/shield.png"><p>Defense:</p> <p>{{fighter.def}}</p></div>
           <div class="agi icon"><img src="{{dir}}/src/img/icons/agility.png"><p>Agility:</p> <p>{{fighter.agility}}</p></div>
         </div>
+        <div class="fight-stats">
+          <div>Win:{{winners[fighter.id]}}</div>
+          <div>Lost:{{fights[fighter.id] - winners[fighter.id]}}</div>
+          <div>
+            {% if fights[fighter.id] - winners[fighter.id] == 0 %}
+              {% set ratio = 0 %}
+            {% else %}
+              {% set ratio = winners[fighter.id] / (fights[fighter.id] - winners[fighter.id]) %}
+            {% endif %}
+            Ratio:{{ratio|round(2, 'floor')}}
+          </div>
+        </div>
         {% if admin %}
         <div class="fighter-editor">
             <a href="{{dir}}/{{fighterType}}/edit/{{fighter.id}}">

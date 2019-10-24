@@ -1,7 +1,51 @@
 .fight-view {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(27em, 1fr));
+}
+
+.column{
+  width: 30em;
+  margin: 1px auto;
+}
+
+@media screen and (max-width: 992px)
+ {
+  .fight-view{
+    grid-template-columns: 1fr;
+  }
+  .column{
+    font-size: 1.5em;
+  }
+  .popup-fight{
+    font-size: 2em;
+    width: 22em;
+  }
+  .popup-button > button{
+    padding: .2em .5em !important;
+  }
+}
+
+@media screen and (min-width: 1310px)
+ {
+  .fight-view{
+    grid-template-columns: minmax(27em, 1fr) 380px minmax(27em, 1fr);
+    min-height: 100%;
+    max-height: auto;
+  }
+  .lightning {
+    max-width: 380px;
+    height: 100%;
+  }
+}
+
+@media screen and (max-width: 1310px) {
+  .separator {
+    display: none;
+  }
+}
+
+.column {
   margin-top: 1em;
-  display: flex;
-  flex-direction: row;
 }
 
 div.select-char , div.select-monster{
@@ -12,6 +56,7 @@ div.select-char , div.select-monster{
   min-width: 22em;
   margin: 1em !important;
   background: rgba(255, 255, 255, 0.69);
+  padding: 1.5em 1em !important;
 }
 
 .select-char:hover, .select-monster:hover {
@@ -106,16 +151,6 @@ div.select-char , div.select-monster{
 
 .list-name{
   text-align: center;
-}
-
-.fight-card{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.fight-card div:first-child{
 }
 
 .fight-card .stats p  img{

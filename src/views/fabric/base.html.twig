@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>{{ title }}</title>
+    <link rel="shortcut icon" type="image/x-icon" href="{{dir}}/favicon.ico"/>
     <meta name="mobile-web-app-capable" content="yes">
     {% block css %}
         <!-- Font Awesome -->
@@ -36,6 +37,25 @@
     </header>
 
     <div id="main">
+
+      <div id="myModal" class="modal">
+
+        <div class="modal-content-false">
+          <span class="close">&times;</span>
+          <p></p>
+        </div>
+
+      </div>
+
+      <div id="myModalDelete"  class="modalDelete">
+        <div class="modal-content-del">
+          <p>
+          </p>
+          <button class="ok">Yes</button>
+          <button class="cancel">Cancel</button>
+        </div>
+      </div>
+
         {% block main %}
         {% endblock %}
     </div>

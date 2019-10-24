@@ -89,4 +89,122 @@ footer {
     }
 }
 
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 40vh; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100vw; /* Full width */
+  height: 100vh; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0,0,0,0.2); /* Black w/ opacity */
+
+}
+
+/* The delete popum (background) */
+.modalDelete {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 40vh; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100vw; /* Full width */
+  height: 100vh; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0,0,0,0.2); /* Black w/ opacity */
+
+}
+
+/* Modal Content */
+.modal-content-false {
+  position: relative;
+  background-color: #eb4949;
+  margin: auto;
+  padding: 20px;
+  width: 30%;
+  height: 20%;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 10px 10px 30px rgba(0,0,0,0.45), 15px 9px 5px rgba(0,0,0,0.35);
+  border: 2px solid #474545;
+}
+
+/* Modal Content */
+.modal-content-true {
+  position: relative;
+  background-color: #78ce4a;
+  margin: auto;
+  padding: 20px;
+  width: 30%;
+  height: 10%;
+  min-height: 140px;
+  min-width: 175px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 10px 10px 30px rgba(0,0,0,0.45), 15px 9px 5px rgba(0,0,0,0.35);
+  border: 2px solid #474545;
+}
+
+/* Modal Content */
+.modal-content-del {
+  position: relative;
+  background-color: #e89532;
+  margin: auto;
+  margin-top: 0;
+  padding: 20px;
+  min-width: 60%;
+  max-width: 30%;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 10px 10px 30px rgba(0,0,0,0.45), 15px 9px 5px rgba(0,0,0,0.35);
+  border: 2px solid #474545;
+}
+
+@media screen and (min-width: 880px) {
+  .modal-content-del {
+    min-width: 30%;
+  }
+}
+
+@media screen and (max-width: 1165px) {
+  .modal-content-false {
+    min-height: 145px;
+    min-width: 250px;
+  }
+}
+
+@media screen and (max-width: 330px) {
+  .modal-content-del {
+    min-height: 260px;
+    min-width: 200px;
+  }
+}
+
+@media screen and (min-width: 815px) {
+  .modal-content-true {
+    min-height: 100px;
+
+  }
+}
+
+/* The Close Button */
+.close {
+  display: flex;
+  color: #737373;
+  justify-content: right;
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 /*# sourceMappingURL=style.css.map */
