@@ -17,7 +17,7 @@
     {% for character in characters %}
       <div data-id="{{character.id}}" class="select-char nes-container is-rounded">
         <div class="picture">
-          <img src="{{dir}}/src/img/fighters/{{character.picture}}" onerror="this.src='{{dir}}/src/img/icons/Characters.png'">
+          <img src="{{dir}}/src/img/fighters/{{character.picture}}">
         </div>
         <div class="name">
           {{character.firstname}} {{character.lastname}}
@@ -46,7 +46,7 @@
     {% for monster in monsters %}
     <div data-id="{{monster.id}}" class="select-monster nes-container is-rounded">
       <div class="picture">
-        <img src="{{dir}}/src/img/fighters/{{monster.picture}}" onerror="this.src='{{dir}}/src/img/icons/Monsters.png'">
+        <img src="{{dir}}/src/img/fighters/{{monster.picture}}">
       </div>
       <div class="name">
         <p>{{monster.name}}</p>
