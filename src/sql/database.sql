@@ -68,6 +68,7 @@ CREATE TABLE `fights_log` (
   `fighter_type` varchar(1) NOT NULL,
   `round` int(11) NOT NULL,
   `hp` int(11) NOT NULL,
+  `damage` int(11) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL,
