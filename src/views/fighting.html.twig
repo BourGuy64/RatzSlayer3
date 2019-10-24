@@ -8,12 +8,16 @@
 {% block main %}
 
 <div class="fight-view">
-  <!-- <div class="column">
+  {% if winner == 'c' %}
+  <div class="columnWinner">
+  {% else %}
+  <div class="column">
+  {% endif %}
     <div class="winner">
       {% if winner == 'c' %}
        Winner !
       {% endif %}
-    </div> -->
+    </div>
     <div class="fight-card">
       <div data-id="{{character.id}}" class="select-char nes-container is-rounded">
         <div class="picture">
@@ -42,16 +46,23 @@
       </div>
       {% endfor %}
       </div>
+      {% if winner == 'c' %}
+      <div class="winBan"><img src="{{dir}}/src/img/winnerBanana.gif" class="winBanana"></div>
+      {% endif %}
   </div>
 
   <div class="separator"><img src="{{dir}}/src/img/lightning.png" class="lightning"></div>
 
-  <!-- <div class="column">
+  {% if winner == 'm' %}
+  <div class="columnWinner">
+  {% else %}
+  <div class="column">
+  {% endif %}
     {% if winner == 'm' %}
      <div class="winner">
        Winner !
      </div>
-    {% endif %} -->
+    {% endif %}
     <div class="fight-card">
     <div data-id="{{monster.id}}" class="select-monster nes-container is-rounded">
       <div class="picture">
@@ -80,6 +91,9 @@
     </div>
     {% endfor %}
   </div>
+  {% if winner == 'm' %}
+  <div class="winBan"><img src="{{dir}}/src/img/winnerBanana.gif" class="winBanana"></div>
+  {% endif %}
 </div>
 
 <button id="next">Next round</button>
