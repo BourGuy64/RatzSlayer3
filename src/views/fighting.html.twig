@@ -24,7 +24,7 @@
     <div class="fight-card">
         <div data-id="{{character.id}}" class="select-char nes-container is-rounded">
             <div class="picture">
-                <img src="{{dir}}/src/img/fighters/{{character.picture}}">
+                <img src="{{dir}}/src/img/fighters/{{character.picture}}" onerror='this.src="{{dir}}/src/img/icons/characters.png"'>
             </div>
             <div class="name">
                 {{character.firstname}} {{character.lastname}}
@@ -81,7 +81,7 @@
         <div class="fight-card">
             <div data-id="{{monster.id}}" class="select-monster nes-container is-rounded">
                 <div class="picture">
-                    <img src="{{dir}}/src/img/fighters/{{monster.picture}}">
+                    <img src="{{dir}}/src/img/fighters/{{monster.picture}}" onerror='this.src="{{dir}}/src/img/icons/monsters.png"'>
                 </div>
                 <div class="name">
                     {{monster.name}}
