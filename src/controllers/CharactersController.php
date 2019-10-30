@@ -15,7 +15,7 @@ class CharactersController extends SuperController {
         $fights = array();
         foreach ($characters as $char) {
           $fight = FGT::where('id_characters', $char->id)->get();
-          $win = FGT::where('id_characters', $char->id)->where('winner', 'c')->first();
+          $win = FGT::where('id_characters', $char->id)->where('winner', 'c')->get();
           $winners[$char->id] = count($win);
           $fights[$char->id] = count($fight);
         }
