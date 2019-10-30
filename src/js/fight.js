@@ -99,6 +99,7 @@ function start(e) {
 
 function setWinner(winner) {
     $('#next').remove();
+    $('.action').remove();
     // console.log("winner :" + winner);
     if (winner === 'c') {
         $('.fight-view > .character').removeClass('column').addClass('columnWinner').append('<div class="winBan"><img src="' + Conf.url.api + '/src/img/winnerBanana.gif" class="winBanana"></div>');
@@ -109,9 +110,29 @@ function setWinner(winner) {
     }
 }
 
+function selectAction(e) {
+    $(e.target).siblings().removeClass('selected').css('background-color', 'white');
+    $(e.target).addClass('selected').css('background-color', 'red');
+    let allSelected = true;
+    $('.action > [data-action=attack]').each( (index, e) => {
+        if ( !($(this).hasClass('selected') || $(this).siblings().first().hasClass('selected')) ) {
+            allSelected = false;
+            console.log("ouin ouin ouin ouinouinouinouiinouiiiiiiin");
+        } else {
+            console.log("youhoooou");
+        }
+    });
+    if (allSelected) {
+        console.log("wtf ??");
+        $('#next').prop('disabled', false);
+    }
+}
+
 function nextRound(e) {
 
     e.target.disabled = true;
+    $('[data-action]').siblings().removeClass('selected').css('background-color', 'white');
+    const action = $(['data-action']).first().data('action');
 
     const type = "POST";
     const requestUrl = Conf.url.api + "/fightlog";
@@ -122,7 +143,9 @@ function nextRound(e) {
     const formData = new FormData();
     formData.append("fightId", fightId);
     formData.append("char", char);
+    formData.append("charAction", action);
     formData.append("monster", monster);
+
 
     $.ajax({
         type: type,
@@ -133,7 +156,6 @@ function nextRound(e) {
         processData: false,
         contentType: false,
         success: (response, xhr) => {
-            console.log(response);
             if (response != 0) {
                 setWinner(response);
             }
@@ -148,6 +170,7 @@ function nextRound(e) {
         },
         complete: () => {
             e.target.disabled = false;
+            $('#next').prop('disabled', true);
         }
     });
 }
@@ -157,5 +180,6 @@ export function init() {
     $('.select-monster').on('click', selectMonster);
     $('.cancel-fight').on('click', cancel);
     $('.start-fight').on('click', start);
+    $('.action > button').on('click', selectAction);
     $('#next').on('click', nextRound);
 }
