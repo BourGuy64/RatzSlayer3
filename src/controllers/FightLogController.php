@@ -124,8 +124,21 @@ class FightLogController extends SuperController{
         ->orderBy('id', 'desc')
         ->first();
 
-    $fightlog->damage = $realAttack - $realDef/5;
-    $leftLife = $lastRound->hp - ($realAttack - $realDef/5);
+    if($_POST['charAction'] == 'def' && $fighter->type == 'm'){
+      $fightlog->damage = $realAttack - $realDef/2;
+      $leftLife = $lastRound->hp - ($realAttack - $realDef/2);
+    }
+    elseif($_POST['charAction'] == 'attack' && $fighter->type == 'm'){
+      $fightlog->damage = $realAttack - $realDef/5;
+      $leftLife = $lastRound->hp - ($realAttack - $realDef/5);
+    }
+    else{
+      $fightlog->damage = $realAttack - $realDef/5;
+      $leftLife = $lastRound->hp - ($realAttack - $realDef/5);
+    }
+
+
+
 
     if ($leftLife < 0) {
         $leftLife = 0;
