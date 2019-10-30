@@ -75,7 +75,7 @@ function start(e) {
 
     const char = $('.select-char.is-selected').attr('data-id');
     const monster = $('.select-monster.is-selected').attr('data-id');
-    const requestUrl = Conf.url.api + "/" + 'fight';
+    const requestUrl = Conf.url.api + "/fight";
 
     $.ajax({
         type: 'POST',
@@ -86,7 +86,8 @@ function start(e) {
         },
         success: (response, xhr) => {
             // do something here
-            document.write(response);
+            document.location.href= Conf.url.api + "/fight";
+            // document.write(response);
         },
         error: (xhr) => {
             // do something for alert user
