@@ -85,8 +85,12 @@ class FightLogController extends SuperController{
         $value = 0;
         if ($logChar->hp <= 0) {
             $value = 'm';
+            $fight->winner = $value;
+            $fight->save();
         } else if ($logMonster->hp <= 0) {
             $value = 'c';
+            $fight->winner = $value;
+            $fight->save();
         }
 
         // return $res->withJson($logChar);
