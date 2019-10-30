@@ -40,6 +40,13 @@
         </div>
     </div>
 
+    {% if winner == false %}
+    <div class="action" data-id="{{character.id}}">
+        <button type="button" data-action="attack">ad carry mid only dps stuff no def</button>
+        <button type="button" data-action="def">a toute les soirées obligé faut que ca tank a fond</button>
+    </div>
+    {% endif %}
+
     <div class="fight-log character">
         {% for log in logChar | slice(0, logChar.length-1) %}
         <div class="nes-container is-rounded">
@@ -62,7 +69,7 @@
 </div>
 {% if winner == false %}
 <div class="btnSuperpos">
-  <button id="next">Next round</button>
+  <button id="next" disabled>Next round</button>
 </div>
 {% endif %}
 
