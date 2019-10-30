@@ -131,8 +131,9 @@ function selectAction(e) {
 function nextRound(e) {
 
     e.target.disabled = true;
+    const action = $('.selected').first().data('action');
     $('[data-action]').siblings().removeClass('selected').css('background-color', 'white');
-    const action = $(['data-action']).first().data('action');
+    console.log(action);
 
     const type = "POST";
     const requestUrl = Conf.url.api + "/fightlog";
