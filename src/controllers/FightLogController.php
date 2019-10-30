@@ -107,6 +107,9 @@ class FightLogController extends SuperController{
     }
 
   public static function doAttack($fighter, $target, $fightId, $round){
+    $realAttack = SELF::getRealStats($fighter, $target)[0];
+    $realDef = SELF::getRealStats($target, $target)[1];
+
     //Create new fight log
     $fightlog = new FGL;
     $fightlog->id_fights = $fightId;
@@ -121,15 +124,15 @@ class FightLogController extends SuperController{
         ->orderBy('id', 'desc')
         ->first();
 
-    $fightlog->damage = $fighter->attack;
-    $leftLife = $lastRound->hp - $fighter->attack;
+    $fightlog->damage = $realAttack - $realDef/5;
+    $leftLife = $lastRound->hp - ($realAttack - $realDef/5);
 
     if ($leftLife < 0) {
         $leftLife = 0;
     }
-
     $fightlog->hp = $leftLife;
     $fightlog->save();
+
   }
 
   //Init fight log, add life for fighters
@@ -166,6 +169,44 @@ class FightLogController extends SuperController{
   //Verify if a fighter is dead (use as condition in fight for interrupt it if a player with 0 hp in the fight)
   public static function fighterIsDying($fightId){
     return FGL::where('id_fights', $fightId)->where('hp', '0')->first();
+  }
+
+  public static function getRealStats($attacker, $attacked){
+    $realAttack = $attacker->attack;
+    $realDef = $attacked->def;
+    //Increases the attacker's attack proportionally to the agility difference between attacker and attacked
+    if($attacker->agility > $attacked->agility){
+      $quicker = $attacker->agility;
+      $slower = $attacked->agility;
+    }
+    else if($attacker->agility < $attacked->agility){
+      $quicker = $attacked->agility;
+      $slower = $attacker->agility;
+    }
+    for ($i = 1; $quicker > $i; $i++) {
+      if($attacker->agility >= $attacked->agility * $i){
+        $realAttack *= $i;
+      }
+    }
+    //Increase realAttack depend on weight
+    for ($i=0; $attacker->weight > $i; $i++){
+      $realAttack += $attacker->attack * 0.002;
+    }
+    //Increase realAttack depend on size
+    for ($i=0; $attacker->size > $i; $i++){
+      $realAttack += $attacker->attack * 0.001;
+    }
+    //Increase realDef of attacked depend of weight
+    for ($i=0; $attacked->weight > $i; $i++){
+      $realDef += $attacked->def * 0.001;
+    }
+    //Increase realDef of attacked depend of size
+    for ($i=0; $attacked->size > $i; $i++){
+      $realDef += $attacked->def * 0.002;
+    }
+    $realAttack = random_int($realAttack * 0.8, $realAttack * 1.2);
+    $realDef = random_int($attacked->def * 0.8, $attacked->def * 1.2);
+    return [$realAttack, $realDef];
   }
 
 }
