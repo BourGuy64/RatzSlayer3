@@ -3,6 +3,7 @@ composer.phar
 .DS_Store
 .jshintrc
 src/conf/conf.ini
+kint.phar
 
 package-lock.json
 node_modules
