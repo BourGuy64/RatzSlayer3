@@ -38,14 +38,13 @@
                 <p><img src="{{dir}}/src/img/icons/agility.png">: {{character.agility}}</p>
             </div>
         </div>
+        {% if winner == false %}
+        <div class="action nes-container is-rounded" data-id="{{character.id}}">
+            <button type="button" data-action="attack">Attack</button>
+            <button type="button" data-action="def">Defend</button>
+        </div>
+        {% endif %}
     </div>
-
-    {% if winner == false %}
-    <div class="action" data-id="{{character.id}}">
-        <button type="button" data-action="attack">ad carry mid only dps stuff no def</button>
-        <button type="button" data-action="def">a toute les soirées obligé faut que ca tank a fond</button>
-    </div>
-    {% endif %}
 
     <div class="fight-log character">
         {% for log in logChar | slice(0, logChar.length-1) %}
