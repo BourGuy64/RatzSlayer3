@@ -156,6 +156,7 @@ class FightLogController extends SuperController{
     $fightlog->id_fighter = $firstFighter->id;
     $fightlog->round = 0;
     $fightlog->hp = $firstFighter->hp;
+    $fightlog->damage = 0;
     if($firstFighter->type == 'c'){
       $fightlog->fighter_type = 'c';
     }
@@ -170,6 +171,7 @@ class FightLogController extends SuperController{
     $fightlog->id_fighter = $secondFighter->id;
     $fightlog->round = 0;
     $fightlog->hp = $secondFighter->hp;
+    $fightlog->damage = 0;
     if($secondFighter->type == 'c'){
       $fightlog->fighter_type = 'c';
     }
