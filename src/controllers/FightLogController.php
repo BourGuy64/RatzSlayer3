@@ -188,16 +188,8 @@ class FightLogController extends SuperController{
     $realAttack = $attacker->attack;
     $realDef = $attacked->def;
     //Increases the attacker's attack proportionally to the agility difference between attacker and attacked
-    if($attacker->agility > $attacked->agility){
-      $quicker = $attacker->agility;
-      $slower = $attacked->agility;
-    }
-    else if($attacker->agility < $attacked->agility){
-      $quicker = $attacked->agility;
-      $slower = $attacker->agility;
-    }
-    for ($i = 1; $quicker > $i; $i++) {
-      if($attacker->agility >= $attacked->agility * $i){
+    if($attacker->agility >= $attacked->agility*2){
+      for ($i = 2; $attacker->agility >= ($attacked->agility*$i); $i++){
         $realAttack *= $i;
       }
     }
