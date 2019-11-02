@@ -99,6 +99,11 @@ $app->group('/users', function ($app) {
     $app->delete('/{id}',       "\\ratzslayer3\\controllers\\UsersController:delete");
 })->add( new AuthentificationMiddleware() );
 
+// RANKING
+$app->group('/ranking', function ($app) {
+    $app->get('',           "\\ratzslayer3\\controllers\\RankingController:get");
+});
+
 // MAIN MENU
 $app->get('/',              "\\ratzslayer3\\controllers\\MainMenuController:get");
 

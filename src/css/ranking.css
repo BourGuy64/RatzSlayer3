@@ -1,0 +1,54 @@
+.rank {
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+}
+
+.fighter-card {
+  display: grid;
+  grid-template-columns: 20% 38% 38%;
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-rows: 3em;
+  grid-gap: 0.3em 0.5em;
+  width: 30em;
+  height: auto;
+  margin: 1em !important;
+  background: rgba(255, 255, 255, 0.69);
+  padding: 1.5em 1em !important;
+}
+.fighter-card .fighter-name {
+  margin: auto 1em;
+  grid-column-start: span 2;
+}
+.fighter-card .fighter-name p {
+  margin-bottom: 0 !important;
+}
+.fighter-card .stats {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  grid-column-start: 3 span;
+  grid-row-start: 2;
+}
+.fighter-card .stats div {
+  display: flex;
+  flex-direction: row;
+}
+.fighter-card .stats img {
+  width: 2em;
+}
+.fighter-card img {
+  max-height: 3em;
+  max-width: 3em;
+  margin: 0 auto;
+}
+.fighter-card .fight-stats {
+  display: flex;
+  justify-content: space-around;
+  grid-column-start: 3 span;
+  grid-row-start: 3;
+}
+.fighter-card .fight-stats div {
+  margin: auto 0px;
+}
+
+/*# sourceMappingURL=ranking.css.map */
