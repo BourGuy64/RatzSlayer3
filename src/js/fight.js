@@ -55,17 +55,15 @@ function getLastRound(fightId, fighterId, fighterType) {
         url: requestUrl,
         success: (response, xhr) => {
             // do something here
-            console.log(response); // DEV Return what twig generate but in console...
             if (fighterType == 'c') {
                 $('.fight-log.character').prepend(response);
             } else if (fighterType == 'm') {
                 $('.fight-log.monster').prepend(response);
             }
-            location.reload();
+
         },
         error: (xhr) => {
             // do something for alert user
-            console.log("status =" + xhr.status); // DEV
         },
         complete: () => {}
     });
@@ -92,7 +90,6 @@ function start(e) {
         },
         error: (xhr) => {
             // do something for alert user
-            console.log("status =" + xhr.status); // DEV
         },
         complete: () => {}
     });
@@ -101,7 +98,6 @@ function start(e) {
 function setWinner(winner) {
     $('#next').remove();
     $('.action').remove();
-    // console.log("winner :" + winner);
     if (winner === 'c') {
         $('.fight-view > .character').removeClass('column').addClass('columnWinner').append('<div class="winBan"><img src="' + Conf.url.api + '/src/img/winnerBanana.gif" class="winBanana"></div>');
         $('.character .winner').text("Winner !");
@@ -118,13 +114,10 @@ function selectAction(e) {
     $('.action > [data-action=attack]').each( (index, e) => {
         if ( !($(this).hasClass('selected') || $(this).siblings().first().hasClass('selected')) ) {
             allSelected = false;
-            console.log("ouin ouin ouin ouinouinouinouiinouiiiiiiin");
         } else {
-            console.log("youhoooou");
         }
     });
     if (allSelected) {
-        console.log("wtf ??");
         $('#next').prop('disabled', false);
     }
 }
@@ -134,7 +127,6 @@ function nextRound(e) {
     e.target.disabled = true;
     const action = $('.selected').first().data('action');
     $('[data-action]').siblings().removeClass('selected').css('background-color', 'white');
-    console.log(action);
 
     const type = "POST";
     const requestUrl = Conf.url.api + "/fightlog";
@@ -160,6 +152,7 @@ function nextRound(e) {
         success: (response, xhr) => {
             if (response != 0) {
                 setWinner(response);
+                location.reload();
             }
             // do something here
             getLastRound(fightId, char, 'c');
@@ -167,8 +160,6 @@ function nextRound(e) {
         },
         error: (xhr) => {
             // do something for alert user
-            console.log("status =" + xhr.status); // DEV
-            console.log(xhr);
         },
         complete: () => {
             e.target.disabled = false;
