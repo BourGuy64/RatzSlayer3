@@ -31,6 +31,8 @@ class FightController extends SuperController{
 
             $winner = $this->winner($logChar[0], $logMonster[0]);
 
+            $monsterDamage = 0;
+            $charDamage = 0;
             //Get all damage sudden by monster
             foreach ($logMonster as $log) {
               $monsterDamage += $log->damage;
