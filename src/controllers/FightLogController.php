@@ -69,8 +69,6 @@ class FightLogController extends SuperController{
             }
         }
 
-        // return $res->withJson(SELF::getRound($fight->id, $currentRound));
-
         $logChar = FGL::where('id_fights', $fight->id)
             ->where('fighter_type', 'c')
             ->orderBy('id', 'desc')
@@ -80,7 +78,6 @@ class FightLogController extends SuperController{
             ->where('fighter_type', 'm')
             ->orderBy('id', 'desc')
             ->first();
-        // return $this->views->render($res, 'fightlog.html.twig', ['dir' =>  $this->dir, 'character' => $character, 'monster' => $monster, 'logChar' => $logChar, 'logMonster' => $logMonster, ]);
 
         $value = 0;
         if ($logChar->hp <= 0) {
@@ -198,7 +195,7 @@ class FightLogController extends SuperController{
     for ($i=0; $attacked->size > $i; $i++){
       $realDef += $attacked->def * 0.002;
     }
-    
+
     $realAttack = random_int($realAttack * 0.8, $realAttack * 1.2);
     $realDef = random_int($attacked->def * 0.8, $attacked->def * 1.2);
     return [$realAttack, $realDef];
