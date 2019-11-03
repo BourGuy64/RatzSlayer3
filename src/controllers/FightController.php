@@ -43,17 +43,31 @@ class FightController extends SuperController{
 
   //Do whole fight
   public function fight(Request $req, Response $res, array $args) {
-      $character = CHR::find($_POST['char']);
-      $monster = MST::find($_POST['monster']);
+      $fight = new FGT;
+      $fight->winner = 0;
 
-      if(!($monster && $character)){
+      if ( isset($_POST['char']) && isset($_POST['monster']) ) {
+          $character = CHR::find($_POST['char']);
+          $monster = MST::find($_POST['monster']);
+          $fight->id_characters     = $character->id;
+          $fight->id_monsters       = $monster->id;
+      } else if ( isset($_POST['chars']) && isset($_POST['monsters']) ) {
+
+          $characters = json_decode($_POST['chars']);
+          $monsters = json_decode($_POST['monsters']);
+          $fight->id_characters     = $characters[0];
+          $fight->id_characters2    = $characters[1];
+          $fight->id_characters3    = $characters[2];
+          $fight->id_monsters       = $monsters[0];
+          $fight->id_monsters2      = $monsters[1];
+          $fight->id_monsters3      = $monsters[2];
+
+      }
+
+      if(!($monster && $character) && !($monsters && $characters)){
           return $res->withStatus(400);
       }
 
-      $fight = new FGT;
-      $fight->id_characters = $character->id;
-      $fight->id_monsters = $monster->id;
-      $fight->winner = 0;
       $fight->save();
 
       if ($monster->agility > $character->agility) {

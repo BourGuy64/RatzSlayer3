@@ -48,7 +48,11 @@ CREATE TABLE `monsters` (
 CREATE TABLE `fights` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_characters` int(11) NOT NULL,
+  `id_characters2` int(11) NOT NULL,
+  `id_characters3` int(11) NOT NULL,
   `id_monsters` int(11) NOT NULL,
+  `id_monsters2` int(11) NOT NULL,
+  `id_monsters3` int(11) NOT NULL,
   `winner` varchar(1) NOT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,

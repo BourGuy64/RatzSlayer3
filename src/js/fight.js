@@ -58,7 +58,6 @@ function selectChar(e) {
 }
 
 function selectMonster(e) {
-    console.log('wtf');
     if (modeSelected()) {
         switch (mode) {
             case '1vs1':
@@ -169,28 +168,71 @@ function getLastRound(fightId, fighterId, fighterType) {
 function start(e) {
     e.preventDefault();
 
-    const char = $('.select-char.is-selected').attr('data-id');
-    const monster = $('.select-monster.is-selected').attr('data-id');
-    const requestUrl = Conf.url.api + "/fight";
+    let requestUrl;
 
-    $.ajax({
-        type: 'POST',
-        url: requestUrl,
-        data: {
-            char: char,
-            monster: monster
-        },
-        success: (response, xhr) => {
-            // do something here
-            document.location.href= Conf.url.api + "/fight";
-            // document.write(response);
-        },
-        error: (xhr) => {
-            // do something for alert user
-            console.log("status =" + xhr.status); // DEV
-        },
-        complete: () => {}
-    });
+    switch (mode) {
+        case '1vs1':
+            requestUrl = Conf.url.api + "/fight";
+
+            const char = $('.select-char.is-selected').attr('data-id');
+            const monster = $('.select-monster.is-selected').attr('data-id');
+
+            $.ajax({
+                type: 'POST',
+                url: requestUrl,
+                data: {
+                    char: char,
+                    monster: monster
+                },
+                success: (response, xhr) => {
+                    // do something here
+                    document.location.href= Conf.url.api + "/fight";
+                    // document.write(response);
+                },
+                error: (xhr) => {
+                    // do something for alert user
+                    console.log("status =" + xhr.status); // DEV
+                },
+                complete: () => {}
+            });
+            break;
+
+        case '3vs3':
+            requestUrl = Conf.url.api + "/fight";
+
+            const chars = [];
+            const monsters = [];
+            $('.select-monster').each(function(i) {
+                if ($(this).hasClass('is-selected')) {
+                    chars.push($(this).data('id'));
+                }
+            });
+            $('.select-monster').each(function(i) {
+                if ($(this).hasClass('is-selected')) {
+                    monsters.push($(this).data('id'));
+                }
+            });
+
+            $.ajax({
+                type: 'POST',
+                url: requestUrl,
+                data: {
+                    chars: JSON.stringify(chars),
+                    monsters: JSON.stringify(monsters)
+                },
+                success: (response, xhr) => {
+                    // do something here
+                    document.location.href= Conf.url.api + "/fight";
+                    // document.write(response);
+                },
+                error: (xhr) => {
+                    // do something for alert user
+                    console.log("status =" + xhr.status); // DEV
+                },
+                complete: () => {}
+            });
+            break;
+    }
 }
 
 function setWinner(winner) {
