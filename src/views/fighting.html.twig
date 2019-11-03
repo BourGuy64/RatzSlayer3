@@ -116,6 +116,40 @@
         {% if winner == 'm' %}
         <div class="winBan"><img src="{{dir}}/src/img/winnerBanana.gif" class="winBanana"></div>
         {% endif %}
-
     </div>
+
+    {% if winner %}
+      <div class="final-stats nes-container is-rounded">
+        <div class="character-final-stats">
+          <p>{{character.firstname}} {{character.lastname}}</p>
+          <div class="attack-give">
+              Attacks done: {{ logChar|length - 1 }}
+          </div>
+          <div class="total-give">
+              Damage give: {{ monsterDamage }}
+          </div>
+          <div class="attack-get">
+              Attacks sudden: {{ logMonster|length - 1 }}
+          </div>
+          <div class="total-hurt">
+              Damage get: {{ charDamage }}
+          </div>
+        </div>
+        <div class="monster-final-stats">
+          <p>{{monster.name}}</p>
+          <div class="attack-give">
+              Attacks done: {{ logMonster|length - 1 }}
+          </div>
+          <div class="total-give">
+              Damage give: {{ charDamage }}
+          </div>
+          <div class="attack-get">
+              Attacks sudden: {{ logChar|length - 1 }}
+          </div>
+          <div class="total-hurt">
+              Damage get: {{ monsterDamage }}
+          </div>
+        </div>
+      </div>
+    {% endif %}
     {% endblock %}

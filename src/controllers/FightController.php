@@ -30,10 +30,16 @@ class FightController extends SuperController{
                 ->get();
 
             $winner = $this->winner($logChar[0], $logMonster[0]);
-            // $winner = false;
 
-            return $this->views->render($res, 'fighting.html.twig', ['title' => 'Fight !', 'dir' =>  $this->dir, 'character' => $character, 'monster' => $monster, 'logChar' => $logChar, 'logMonster' => $logMonster, 'winner' => $winner, 'admin' => $_SESSION['admin']]);
-            // return $this->views->render($res, 'fighting.html.twig', ['title' => 'Fight !', 'dir' =>  $this->dir, 'character' => $character, 'monster' => $monster, 'admin' => $_SESSION['admin']]);
+            //Get all damage sudden by monster
+            foreach ($logMonster as $log) {
+              $monsterDamage += $log->damage;
+            }
+            //Get all damage sudden by character
+            foreach ($logChar as $log) {
+              $charDamage += $log->damage;
+            }
+            return $this->views->render($res, 'fighting.html.twig', ['title' => 'Fight !', 'dir' =>  $this->dir, 'character' => $character, 'monster' => $monster, 'logChar' => $logChar, 'logMonster' => $logMonster, 'winner' => $winner, 'charDamage' => $charDamage, 'monsterDamage' => $monsterDamage, 'admin' => $_SESSION['admin']]);
         } else {
             $characters = CHR::all();
             $monsters = MST::all();

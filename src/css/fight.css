@@ -221,3 +221,22 @@ div.select-char , div.select-monster{
   margin: 1.4em auto;
   width: 21em;
 }
+
+.final-stats{
+  position: fixed;
+  bottom: 2%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 1.5em;
+}
+
+.character-final-stats > p, .monster-final-stats > p{
+  text-align: center;
+}
+
+.character-final-stats > div, .monster-final-stats > div{
+  font-size: .8em;
+}
