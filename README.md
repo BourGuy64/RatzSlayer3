@@ -1,6 +1,9 @@
 # RatzSlayer3
 Repository du projet de Licence Pro CIASIE en PHP.
 
+## Repository
+Liens vers le repository github: https://github.com/BourGuy64/RatzSlayer3
+
 ## Documents
 [Sujet](https://arche.univ-lorraine.fr/pluginfile.php/1834821/mod_resource/content/1/LP2%20-%20Projet%20Fil%20Rouge.pdf)
 
@@ -8,53 +11,20 @@ Repository du projet de Licence Pro CIASIE en PHP.
 - Apache
 - MySQL
 - PHP
-- Composer
 
+## Groupe
+Bertschy Louis
+Bour Victor
+Izzi Allan
 
-## Installation
-1. Clonez le repository à la racine du serveur apache en utilisant la commande suivante :
-```
-git clone git@github.com:BourGuy64/LP-PHP.git
-```
+## Information
+Les identifiants du compte administrateur par défaut sont:
+- login: admin
+- mdp: motdepasseadmin
 
-**OU** 1 à 2 en oneshot :
-```
-git clone git@github.com:BourGuy64/LP-PHP.git && git update-index --assume-unchanged src/conf/conf.ini
-```
-3. Créez la base de données avec le fichier `/LP-PHP/src/sql/database.sql`.
+Le fichier zip fonctionnel est '1vs1.zip'.
+Le fichier SQL contenant les personnages est src/sql/database.sql.
+src/sql/database-nodata.sql est le fichier sql sans données de personnages.
 
-4. Créez le fichier de conf.ini dans le répertoire src/conf/ avec le template suivant, en ajustant les valeurs :
-```
-db_driver=mysql
-host=localhost
-dbname=database
-db_user=user
-db_password=password
-db_charset=utf8
-db_collation=utf8_unicode_ci
-prefix=
-```
-
-
-## Minimiser un fichier (.min)
-### Requis
-- NPM package [minify](https://www.npmjs.com/package/minify)
-### Utilisation
-- Minimiser un fichier :
-```
-minify input.css > output.min.css
-```
-```
-minify input.js > output.min.js
-```
-- Minimiser tous les fichiers d'un dossier :
-```
-for file in *.css;
-do minify "$file" > "${file%.css}.min.css";
-done
-```
-```
-for file in *.js;
-do minify "$file" > "${file%.js}.min.js";
-done
-```
+Nous ajoutons l'archive '3vs3.zip' contenant le code où nous avons essayé d'implémenter le mode 3vs3 sans succes pour vous permettre de regarder le code.
+Il faut charger le fichier sql contenu dans l'archive. (src/sql/database.sql)
