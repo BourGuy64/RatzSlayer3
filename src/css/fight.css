@@ -198,6 +198,10 @@ div.select-char , div.select-monster{
   width: 50%;
 }
 
+.fight-card > .action > .selected{
+  background-color: red;
+}
+
 .fight-card > .action > button:last-child{
   border-left: 2px solid black;
 }

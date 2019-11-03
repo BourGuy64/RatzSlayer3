@@ -43,7 +43,7 @@
 
                 {% if winner == 0 %}
                 <div class="action nes-container is-rounded" data-id="{{character.id}}">
-                    <button type="button" data-action="attack">Attack</button>
+                    <button type="button" class="selected" data-action="attack">Attack</button>
                     <button type="button" data-action="def">Defend</button>
                 </div>
                 {% endif %}
@@ -72,9 +72,10 @@
         <div class="separator superpos">
             <img src="{{dir}}/src/img/lightning.png" class="lightning">
         </div>
+
         {% if winner == 0 %}
         <div class="btnSuperpos">
-            <button id="next" disabled>Next round</button>
+            <button id="next">Next round</button>
         </div>
         {% endif %}
 

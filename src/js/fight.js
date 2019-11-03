@@ -219,7 +219,6 @@ function start(e) {
                 success: (response, xhr) => {
                     // do something here
                     document.location.href= Conf.url.api + "/fight";
-                    // document.write(response);
                 },
                 error: (xhr) => {
                     // do something for alert user
@@ -234,7 +233,6 @@ function start(e) {
 function setWinner(winner) {
     $('#next').remove();
     $('.action').remove();
-    // console.log("winner :" + winner);
     if (winner === 'c') {
         $('.fight-view > .character').removeClass('column').addClass('columnWinner').append('<div class="winBan"><img src="' + Conf.url.api + '/src/img/winnerBanana.gif" class="winBanana"></div>');
         $('.character .winner').text("Winner !");
@@ -247,27 +245,18 @@ function setWinner(winner) {
 function selectAction(e) {
     $(e.target).siblings().removeClass('selected').css('background-color', 'white');
     $(e.target).addClass('selected').css('background-color', 'red');
-    let allSelected = true;
-    $('.action > [data-action=attack]').each( (index, e) => {
-        if ( !($(this).hasClass('selected') || $(this).siblings().first().hasClass('selected')) ) {
-            allSelected = false;
-            console.log("ouin ouin ouin ouinouinouinouiinouiiiiiiin");
-        } else {
-            console.log("youhoooou");
-        }
-    });
-    if (allSelected) {
-        console.log("wtf ??");
-        $('#next').prop('disabled', false);
-    }
 }
 
 function nextRound(e) {
 
-    e.target.disabled = true;
+    const test = [];
+    $('button[data-action]').each( (i, e) => {
+        if ( $(e).hasClass('selected') ) {
+            console.log( $(e).data('action') );
+        }
+    });
     const action = $('.selected').first().data('action');
     $('[data-action]').siblings().removeClass('selected').css('background-color', 'white');
-    console.log(action);
 
     const type = "POST";
     const requestUrl = Conf.url.api + "/fightlog";
@@ -304,8 +293,6 @@ function nextRound(e) {
             console.log(xhr);
         },
         complete: () => {
-            e.target.disabled = false;
-            $('#next').prop('disabled', true);
         }
     });
 }

@@ -15,20 +15,20 @@ class FightController extends SuperController{
         if (isset($_COOKIE['CurrentFight']) && $_COOKIE['CurrentFight']) {
             $fightId = $_COOKIE['CurrentFight'];
 
-            $fight = FGT::where('id', $fightId)->first();
+            $fight = FGT::find($fightId);
 
             $characters = [];
             $characters[] = CHR::find($fight->id_characters);
-            if ($fight->id_characters1 && $fight->id_characters2) {
-                $characters[] = CHR::find($fight->id_characters1);
+            if ($fight->id_characters2 && $fight->id_characters3) {
                 $characters[] = CHR::find($fight->id_characters2);
+                $characters[] = CHR::find($fight->id_characters3);
             }
 
             $monster = [];
             $monsters[] = MST::find($fight->id_monsters);
-            if ($fight->id_monsters1 && $fight->id_monsters2) {
-                $monsters[] = MST::find($fight->id_monsters1);
+            if ($fight->id_monsters2 && $fight->id_monsters3) {
                 $monsters[] = MST::find($fight->id_monsters2);
+                $monsters[] = MST::find($fight->id_monsters3);
             }
 
             $charLogs = [];
