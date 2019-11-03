@@ -40,6 +40,10 @@ $container['view'] = function ($container) {
     return $view;
 };
 
+$container['settings'] = [
+    'displayErrorDetails' => true
+];
+
 /**
  * Rewrite start here
  */

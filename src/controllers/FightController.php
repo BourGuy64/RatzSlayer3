@@ -15,65 +15,53 @@ class FightController extends SuperController{
         if (isset($_COOKIE['CurrentFight']) && $_COOKIE['CurrentFight']) {
             $fightId = $_COOKIE['CurrentFight'];
 
-            $fight      = FGT::where('id', $fightId)->first();
-            
-            $characters = [
-                CHR::where('id', $fight->id_characters)->first(),
-                CHR::where('id', $fight->id_characters1)->first(),
-                CHR::where('id', $fight->id_characters2)->first(),
-            ];
-            $monsters = [
-                MST::where('id', $fight->id_monsters)->first(),
-                MST::where('id', $fight->id_monsters1)->first(),
-                MST::where('id', $fight->id_monsters2)->first(),
-            ];
+            $fight = FGT::where('id', $fightId)->first();
 
-            $charLogs = [
-                FGL::where('id_fights', $fightId)
-                    ->where('fighter_type', 'c')
-                    ->where('id_fighter', $characters[0]->id)
-                    ->orderBy('id', 'desc')
-                    ->get(),
-                FGL::where('id_fights', $fightId)
-                    ->where('fighter_type', 'c')
-                    ->where('id_fighter', $characters[1]->id)
-                    ->orderBy('id', 'desc')
-                    ->get(),
-                FGL::where('id_fights', $fightId)
-                    ->where('fighter_type', 'c')
-                    ->where('id_fighter', $characters[2]->id)
-                    ->orderBy('id', 'desc')
-                    ->get(),
-            ];
-            $mstrLogs = [
-                FGL::where('id_fights', $fightId)
-                    ->where('fighter_type', 'm')
-                    ->where('id_fighter', $monsters[0]->id)
-                    ->orderBy('id', 'desc')
-                    ->get(),
-                FGL::where('id_fights', $fightId)
-                    ->where('fighter_type', 'm')
-                    ->where('id_fighter', $monsters[1]->id)
-                    ->orderBy('id', 'desc')
-                    ->get(),
-                FGL::where('id_fights', $fightId)
-                    ->where('fighter_type', 'm')
-                    ->where('id_fighter', $monsters[2]->id)
-                    ->orderBy('id', 'desc')
-                    ->get(),
-            ];
+            $characters = [];
+            $characters[] = CHR::find($fight->id_characters);
+            if ($fight->id_characters1 && $fight->id_characters2) {
+                $characters[] = CHR::find($fight->id_characters1);
+                $characters[] = CHR::find($fight->id_characters2);
+            }
 
-            $winner = $this->winner($logChar[0], $logMonster[0]);
+            $monster = [];
+            $monsters[] = MST::find($fight->id_monsters);
+            if ($fight->id_monsters1 && $fight->id_monsters2) {
+                $monsters[] = MST::find($fight->id_monsters1);
+                $monsters[] = MST::find($fight->id_monsters2);
+            }
+
+            $charLogs = [];
+            foreach ($characters as $character) {
+                $charLogs[] = FGL::where('id_fights', $fightId)
+                    ->where('fighter_type', 'c')
+                    ->where('id_fighter', $character->id)
+                    ->orderBy('id', 'desc')
+                    ->get();
+            }
+
+            $mstrLogs = [];
+            foreach ($monsters as $monster) {
+                $mstrLogs[] = FGL::where('id_fights', $fightId)
+                    ->where('fighter_type', 'm')
+                    ->where('id_fighter', $monster->id)
+                    ->orderBy('id', 'desc')
+                    ->get();
+            }
+
+            // $winner = $this->winner($charLogs[0], $mstrLogs[0]);
+            $winner = 0;
 
             $twigData = [
                 'dir' =>  $this->dir,
                 'admin' => $_SESSION['admin'],
                 'title' => 'Fight !',
-                'character' => $characters,
-                'monster' => $monsters,
-                'logChar' => $charLogs,
-                'logMonster' => $monsterLogs,
+                'characters' => $characters,
+                'monsters' => $monsters,
+                'logChars' => $charLogs,
+                'logMonsters' => $mstrLogs,
                 'winner' => $winner,
+                'test' => "sleep"
             ];
             return $this->views->render($res, 'fighting.html.twig', $twigData);
         } else {
