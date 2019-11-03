@@ -79,8 +79,14 @@ function selectMonster(e) {
                             selectedNumber++;
                         }
                     });
+
                     if (selectedNumber < 3) {
                         $(this).addClass('is-selected');
+                        selectedNumber++;
+                    }
+
+                    if (selectedNumber == 3) {
+                        fightReady();
                     }
                 }
                 break;
