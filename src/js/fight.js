@@ -198,6 +198,7 @@ function deleteFight(){
       processData: false,
       contentType: false,
       success: (response, xhr) => {
+          document.cookie = "CurrentFight=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
           location.reload();
       },
       error: (xhr) => {
@@ -210,6 +211,7 @@ function deleteFight(){
 }
 
 export function init() {
+    $('.leaveFights-unfinished').on('click', deleteFight);
     $('.select-char').on('click', selectChar);
     $('.select-monster').on('click', selectMonster);
     $('.cancel-fight').on('click', cancel);
@@ -218,5 +220,5 @@ export function init() {
     $('#next').on('click', nextRound);
     $('.random-selection-char').on('click', randomChar);
     $('.random-selection-monster').on('click', randomMonster);
-    $('.leaveFights-unfinished').on('click', deleteFight);
+
 }

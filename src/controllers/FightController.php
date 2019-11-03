@@ -87,7 +87,6 @@ class FightController extends SuperController{
 
     public function delete(Request $req, Response $res, array $args){
       $fightId = $_COOKIE['CurrentFight'];
-      setcookie('CurrentFight', time() - 3600);
       FGL::where('id_fights', $fightId)->delete();
       FGT::where('id', $fightId)->delete();
     }
