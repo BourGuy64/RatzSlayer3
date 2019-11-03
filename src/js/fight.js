@@ -168,12 +168,10 @@ function getLastRound(fightId, fighterId, fighterType) {
 function start(e) {
     e.preventDefault();
 
-    let requestUrl;
+    const requestUrl = Conf.url.api + "/fight";;
 
     switch (mode) {
         case '1vs1':
-            requestUrl = Conf.url.api + "/fight";
-
             const char = $('.select-char.is-selected').attr('data-id');
             const monster = $('.select-monster.is-selected').attr('data-id');
 
@@ -198,11 +196,9 @@ function start(e) {
             break;
 
         case '3vs3':
-            requestUrl = Conf.url.api + "/fight";
-
             const chars = [];
             const monsters = [];
-            $('.select-monster').each(function(i) {
+            $('.select-char').each(function(i) {
                 if ($(this).hasClass('is-selected')) {
                     chars.push($(this).data('id'));
                 }

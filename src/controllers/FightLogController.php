@@ -130,36 +130,22 @@ class FightLogController extends SuperController{
     $fightlog->save();
   }
 
-  //Init fight log, add life for fighters
-  public static function roundZero($firstFighter, $secondFighter, $fightId){
-    //Init first fighter log
-    $fightlog = new FGL;
-    $fightlog->id_fights = $fightId;
-    $fightlog->id_fighter = $firstFighter->id;
-    $fightlog->round = 0;
-    $fightlog->hp = $firstFighter->hp;
-    if($firstFighter->type == 'c'){
-      $fightlog->fighter_type = 'c';
-    }
-    else if($firstFighter->type == 'm'){
-      $fightlog->fighter_type = 'm';
-    }
-    $fightlog->save();
+    // Init fight log
+    public static function roundZero($fighter, $fightId){
+        $fightlog = new FGL;
+        $fightlog->id_fights = $fightId;
+        $fightlog->id_fighter = $fighter->id;
+        $fightlog->round = 0;
+        $fightlog->hp = $fighter->hp;
 
-    //Second fighter, with lower agility
-    $fightlog = new FGL;
-    $fightlog->id_fights = $fightId;
-    $fightlog->id_fighter = $secondFighter->id;
-    $fightlog->round = 0;
-    $fightlog->hp = $secondFighter->hp;
-    if($secondFighter->type == 'c'){
-      $fightlog->fighter_type = 'c';
+        if ($fighter->type == 'c') {
+            $fightlog->fighter_type = 'c';
+        } else if($fighter->type == 'm') {
+            $fightlog->fighter_type = 'm';
+        }
+
+        $fightlog->save();
     }
-    else if($secondFighter->type == 'm'){
-      $fightlog->fighter_type = 'm';
-    }
-    $fightlog->save();
-  }
 
   //Verify if a fighter is dead (use as condition in fight for interrupt it if a player with 0 hp in the fight)
   public static function fighterIsDying($fightId){
