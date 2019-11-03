@@ -31,6 +31,8 @@ class RankingController extends SuperController {
           //get all damage give
           foreach ($fights as $fight) {
             $give = FGL::where('id_fights', $fight->id)->where('fighter_type', 'm')->get();
+            $giveC[$char->id] = 0;
+            $takeC[$char->id] = 0;
             foreach ($give as $round) {
               $giveC[$char->id] += $round->damage;
             }
@@ -50,6 +52,8 @@ class RankingController extends SuperController {
           //get all damage give
           foreach ($fights as $fight) {
             $give = FGL::where('id_fights', $fight->id)->where('fighter_type', 'c')->get();
+            $giveM[$monster->id] = 0;
+            $takeM[$monster->id] = 0;
             foreach ($give as $round) {
               $giveM[$monster->id] += $round->damage;
             }
