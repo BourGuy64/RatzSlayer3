@@ -16,6 +16,7 @@ class FightController extends SuperController{
             $fightId = $_COOKIE['CurrentFight'];
 
             $fight      = FGT::where('id', $fightId)->first();
+            
             $characters = [
                 CHR::where('id', $fight->id_characters)->first(),
                 CHR::where('id', $fight->id_characters1)->first(),
@@ -27,25 +28,40 @@ class FightController extends SuperController{
                 MST::where('id', $fight->id_monsters2)->first(),
             ];
 
-            $logChar = FGL::where('id_fights', $fightId)
-                ->where('fighter_type', 'c')
-                ->orderBy('id', 'desc')
-                ->get();
-
             $charLogs = [
                 FGL::where('id_fights', $fightId)
                     ->where('fighter_type', 'c')
+                    ->where('id_fighter', $characters[0]->id)
+                    ->orderBy('id', 'desc')
+                    ->get(),
+                FGL::where('id_fights', $fightId)
+                    ->where('fighter_type', 'c')
+                    ->where('id_fighter', $characters[1]->id)
+                    ->orderBy('id', 'desc')
+                    ->get(),
+                FGL::where('id_fights', $fightId)
+                    ->where('fighter_type', 'c')
+                    ->where('id_fighter', $characters[2]->id)
                     ->orderBy('id', 'desc')
                     ->get(),
             ];
             $mstrLogs = [
-
+                FGL::where('id_fights', $fightId)
+                    ->where('fighter_type', 'm')
+                    ->where('id_fighter', $monsters[0]->id)
+                    ->orderBy('id', 'desc')
+                    ->get(),
+                FGL::where('id_fights', $fightId)
+                    ->where('fighter_type', 'm')
+                    ->where('id_fighter', $monsters[1]->id)
+                    ->orderBy('id', 'desc')
+                    ->get(),
+                FGL::where('id_fights', $fightId)
+                    ->where('fighter_type', 'm')
+                    ->where('id_fighter', $monsters[2]->id)
+                    ->orderBy('id', 'desc')
+                    ->get(),
             ];
-
-            $logMonster = FGL::where('id_fights', $fightId)
-                ->where('fighter_type', 'm')
-                ->orderBy('id', 'desc')
-                ->get();
 
             $winner = $this->winner($logChar[0], $logMonster[0]);
 
@@ -55,8 +71,8 @@ class FightController extends SuperController{
                 'title' => 'Fight !',
                 'character' => $characters,
                 'monster' => $monsters,
-                'logChar' => $logChar,
-                'logMonster' => $logMonster,
+                'logChar' => $charLogs,
+                'logMonster' => $monsterLogs,
                 'winner' => $winner,
             ];
             return $this->views->render($res, 'fighting.html.twig', $twigData);
