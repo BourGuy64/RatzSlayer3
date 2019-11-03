@@ -1,6 +1,6 @@
 .rank {
   display: grid;
-  grid-template-columns: repeat(3, minmax(40em, 1fr));
+  grid-template-columns: repeat(3, minmax(32em, 1fr));
 }
 .rank > div {
   margin: 0 auto;
