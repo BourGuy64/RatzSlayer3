@@ -3,36 +3,126 @@
 import * as Conf from './conf.js';
 import Cookies from './../framework/js-cookie/js-cookie.js';
 
+
+let mode;
+
+function selectMode(e) {
+    $('.gameMode').removeClass('selected').css('background-color', 'white');    // unselect all mode
+    $('.is-selected').removeClass('is-selected');                               // unselect all characters
+    $(e.target).addClass('selected').css('background-color', 'red');            // select clicked mode
+    mode = $(e.target).data('mode');                                    // update variabel selectedMode
+}
+
+function modeSelected() {
+    let modeSelected = false;
+    if ( $('.gameMode').hasClass('selected') ) {
+        modeSelected = true;    // return true if one mode is selected
+    }
+    return modeSelected;           // return false if no one mode is selected
+}
+
 function selectChar(e) {
-    $('.select-char').each(function(i) {
-        $(this).removeClass('is-selected');
-    });
-    $(this).addClass('is-selected');
-    fightReady();
+    if (modeSelected()) {
+        switch (mode) {
+            case '1vs1':
+                $('.select-char').each(function(i) {
+                    $(this).removeClass('is-selected');
+                });
+                $(this).addClass('is-selected');
+                fightReady();
+                break;
+
+            case '3vs3':
+                if ($(this).hasClass('is-selected')) {
+                    $(this).removeClass('is-selected');
+                } else {
+                    let selectedNumber = 0;
+                    $('.select-char').each(function(i) {
+                        if ($(this).hasClass('is-selected')) {
+                            selectedNumber++;
+                        }
+                    });
+
+                    if (selectedNumber < 3) {
+                        $(this).addClass('is-selected');
+                        selectedNumber++;
+                    }
+
+                    if (selectedNumber == 3) {
+                        fightReady();
+                    }
+                }
+                break;
+        }
+    }
 }
 
 function selectMonster(e) {
-    $('.select-monster').each(function(i) {
-        $(this).removeClass('is-selected');
-    });
-    $(this).addClass('is-selected');
-    fightReady();
+    console.log('wtf');
+    if (modeSelected()) {
+        switch (mode) {
+            case '1vs1':
+                $('.select-monster').each(function(i) {
+                    $(this).removeClass('is-selected');
+                });
+                $(this).addClass('is-selected');
+                fightReady();
+                break;
+
+            case '3vs3':
+                if ($(this).hasClass('is-selected')) {
+                    $(this).removeClass('is-selected');
+                } else {
+                    let selectedNumber = 0;
+                    $('.select-monster').each(function(i) {
+                        if ($(this).hasClass('is-selected')) {
+                            selectedNumber++;
+                        }
+                    });
+                    if (selectedNumber < 3) {
+                        $(this).addClass('is-selected');
+                    }
+                }
+                break;
+        }
+    }
 }
 
 function fightReady() {
     let ready = 0;
-    $('.select-monster').each(function(i) {
-        if ($(this).hasClass('is-selected') == 1) {
-            ready++;
-        }
-    });
-    $('.select-char').each(function(i) {
-        if ($(this).hasClass('is-selected') == 1) {
-            ready++;
-        }
-    });
-    if (ready === 2) {
-        $('.popup-fight, .overlay').removeClass('disable');
+
+    switch (mode) {
+        case '1vs1':
+            $('.select-monster').each(function(i) {
+                if ($(this).hasClass('is-selected')) {
+                    ready++;
+                }
+            });
+            $('.select-char').each(function(i) {
+                if ($(this).hasClass('is-selected')) {
+                    ready++;
+                }
+            });
+            if (ready === 2) {
+                $('.popup-fight, .overlay').removeClass('disable');
+            }
+            break;
+
+        case '3vs3':
+            $('.select-monster').each(function(i) {
+                if ($(this).hasClass('is-selected')) {
+                    ready++;
+                }
+            });
+            $('.select-char').each(function(i) {
+                if ($(this).hasClass('is-selected')) {
+                    ready++;
+                }
+            });
+            if (ready === 6) {
+                $('.popup-fight, .overlay').removeClass('disable');
+            }
+            break;
     }
 }
 
@@ -177,8 +267,11 @@ function nextRound(e) {
 }
 
 export function init() {
+    $('.gameMode').on('click', selectMode);
+
     $('.select-char').on('click', selectChar);
     $('.select-monster').on('click', selectMonster);
+
     $('.cancel-fight').on('click', cancel);
     $('.start-fight').on('click', start);
     $('.action > button').on('click', selectAction);

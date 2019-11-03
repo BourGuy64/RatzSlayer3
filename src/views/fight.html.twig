@@ -6,7 +6,14 @@
 {% endblock %}
 
 {% block main %}
+
+<div class="nes-container is-rounded">
+    <button type="button" class="gameMode" data-mode="1vs1">1vs1</button>
+    <button type="button" class="gameMode" data-mode="3vs3">3vs3</button>
+</div>
+
 <div class="fight-view">
+
   <div class="column">
     {% if characters|length > 1 %}
       <div class="list-name">Characters</div>
