@@ -93,17 +93,7 @@ class FightLogController extends SuperController{
             $fight->save();
         }
 
-        // return $res->withJson($logChar);
         return $res->getBody()->write($value);
-
-
-        // $winner = $this->winner($fight->id);
-        // $fight->winner = $winner;
-        // $fight->save();
-        // $logChar = FGL::where('id_fights', $fight->id)->where('fighter_type', 'c')->orderBy('id', 'asc')->get();
-        // $logMonster = FGL::where('id_fights', $fight->id)->where('fighter_type', 'm')->orderBy('id', 'asc')->get();
-        // setcookie("CurrentFight", $fight->id, time() + (10 * 365 * 24 * 60 * 60));
-        // return $this->views->render($res, 'fighting.html.twig', ['title' => 'Fight !', 'dir' =>  $this->dir, 'character' => $character, 'monster' => $monster, 'logChar' => $logChar, 'logMonster' => $logMonster, 'winner' => $winner, 'admin' => $_SESSION['admin']]);
     }
 
   public static function doAttack($fighter, $target, $fightId, $round){
@@ -127,25 +117,20 @@ class FightLogController extends SuperController{
     if($_POST['charAction'] == 'def' && $fighter->type == 'm'){
       $fightlog->damage = $realAttack - $realDef/2;
       $leftLife = $lastRound->hp - ($realAttack - $realDef/2);
-    }
-    elseif($_POST['charAction'] == 'attack' && $fighter->type == 'm'){
+    } else if($_POST['charAction'] == 'attack' && $fighter->type == 'm'){
+      $fightlog->damage = $realAttack - $realDef/5;
+      $leftLife = $lastRound->hp - ($realAttack - $realDef/5);
+    } else {
       $fightlog->damage = $realAttack - $realDef/5;
       $leftLife = $lastRound->hp - ($realAttack - $realDef/5);
     }
-    else{
-      $fightlog->damage = $realAttack - $realDef/5;
-      $leftLife = $lastRound->hp - ($realAttack - $realDef/5);
-    }
-
-
-
 
     if ($leftLife < 0) {
         $leftLife = 0;
     }
+
     $fightlog->hp = $leftLife;
     $fightlog->save();
-
   }
 
   //Init fight log, add life for fighters
@@ -193,22 +178,27 @@ class FightLogController extends SuperController{
         $realAttack *= $i;
       }
     }
+
     //Increase realAttack depend on weight
     for ($i=0; $attacker->weight > $i; $i++){
       $realAttack += $attacker->attack * 0.002;
     }
+
     //Increase realAttack depend on size
     for ($i=0; $attacker->size > $i; $i++){
       $realAttack += $attacker->attack * 0.001;
     }
+
     //Increase realDef of attacked depend of weight
     for ($i=0; $attacked->weight > $i; $i++){
       $realDef += $attacked->def * 0.001;
     }
+
     //Increase realDef of attacked depend of size
     for ($i=0; $attacked->size > $i; $i++){
       $realDef += $attacked->def * 0.002;
     }
+    
     $realAttack = random_int($realAttack * 0.8, $realAttack * 1.2);
     $realDef = random_int($attacked->def * 0.8, $attacked->def * 1.2);
     return [$realAttack, $realDef];
