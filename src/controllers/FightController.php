@@ -49,8 +49,7 @@ class FightController extends SuperController{
                     ->get();
             }
 
-            // $winner = $this->winner($charLogs[0], $mstrLogs[0]);
-            $winner = 0;
+            $winner = SELF::winner($fightId);
 
             $twigData = [
                 'dir' =>  $this->dir,
@@ -118,14 +117,31 @@ class FightController extends SuperController{
         return $res->withRedirect($this->dir . '/fight');
     }
 
-    //Return fighter type of the winner
-    public function winner($character, $monster) {
-        if ($character->hp == 0) {
-            return 'm';
-        } else if ($monster->hp == 0) {
-            return 'c';
+    public static function winner($fightId) {
+        $maxRound = FGL::where('id_fights', $fightId)
+            ->max('round');
+
+        $logs = FGL::where('id_fights', $fightId)
+            ->where('round', $maxRound)->get();
+
+        $nbFighters = count($logs)/2;
+
+        $deadCharacters = 0;
+        $deadMonsters = 0;
+        foreach ($logs as $log) {
+            if ( ($log->hp <= 0) && ($log->fighter_type == 'c') ) {
+                $deadCharacters++;
+                if ($deadCharacters >= $nbFighters) {
+                    return 'm';
+                }
+            } else if ( ($log->hp <= 0) && ($log->fighter_type == 'm') ) {
+                $deadMonsters++;
+                if ($deadMonsters >= $nbFighters) {
+                    return 'c';
+                }
+            }
         }
 
-        return false;
+        return null;
     }
 }

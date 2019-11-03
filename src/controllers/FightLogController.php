@@ -6,6 +6,7 @@ use ratzslayer3\models\Character                as CHR;
 use ratzslayer3\models\Monster                  as MST;
 use ratzslayer3\models\FightLog                 as FGL;
 use ratzslayer3\models\Fight                    as FGT;
+use ratzslayer3\controllers\FightController     as FGTC;
 
 class FightLogController extends SuperController{
 
@@ -39,96 +40,148 @@ class FightLogController extends SuperController{
             ->where('id_fights', $fight->id)
             ->first();
 
-        return $this->views->render($res, 'fightlog.html.twig', ['dir' =>  $this->dir, 'fighter' => $fighter, 'log' => $log ]);
+        $twigData = [
+            'dir'       =>  $this->dir,
+            'fighter'   => $fighter,
+            'log'       => $log
+        ];
+        return $this->views->render($res, 'fightlog.html.twig', $twigData);
     }
 
     public function nextRound(Request $req, Response $res, array $args) {
 
-        $fight = FGT::find($_POST['fightId']);
-        $character = CHR::find($_POST['char']);
-        $monster = MST::find($_POST['monster']);
-        if(!($monster && $character)){
-            return $res->withStatus(400);
+        $fight      = FGT::find($_POST['fightId']);
+
+        $charDatas = json_decode(htmlspecialchars_decode($_POST['chars']));
+        $monsterDatas = json_decode(htmlspecialchars_decode($_POST['monsters']));
+
+        $characters = [];
+        foreach ($charDatas as $charData) {
+            $characters[] = CHR::find($charData->id);
         }
+        $characters = $this->lifeOrder($characters);
+
+        $monsters = [];
+        foreach ($monsterDatas as $monsterData) {
+            $monsters[] = MST::find($monsterData->id);
+        }
+        $monsters = $this->lifeOrder($monsters);
 
         $lastRound = FGL::orderBy('round', 'desc')
             ->where('id_fights', $fight->id)
-            ->first(); // gets the whole row
+            ->first();
         $currentRound = $lastRound->round + 1;
 
+        $this->initCurrentRoundLog($characters, $monsters, $fight->id, $currentRound);
 
-        if ($monster->agility > $character->agility) {
-            $this->doAttack($character, $monster, $fight->id, $currentRound);
-            if (!$this->fighterIsDying($fight->id)) {
-                $this->doAttack($monster, $character, $fight->id, $currentRound);
-            }
-        } else {
-            $this->doAttack($monster, $character, $fight->id, $currentRound);
-            if (!$this->fighterIsDying($fight->id)) {
-                $this->doAttack($character, $monster, $fight->id, $currentRound);
+        $fighters = $this->attackOrder($characters, $monsters);
+
+        foreach ($fighters as $fighter) {
+            $fighterLog = FGL::where('round', $currentRound)
+                ->where('id_fighter', $fighter->id)
+                ->where('fighter_type', $fighter->type)
+                ->orderBy('id', 'desc')
+                ->first();
+
+            if ($fighterLog->hp > 0) {
+                switch ($fighter->type) {
+                    case 'c':
+                        $attacked = null;
+                        foreach ($monsters as $monster) {
+                            if (!$attacked && $monster->hp > 0) {
+                                $attacked = $monster;
+                            }
+                        }
+                        $this->doAttack($fighter, $attacked, $fight->id, $currentRound);
+                        break;
+                    case 'm':
+                        $attacked = null;
+                        foreach ($characters as $character) {
+                            if (!$attacked && $character->hp > 0) {
+                                $attacked = $character;
+                            }
+                        }
+                        $this->doAttack($fighter, $attacked, $fight->id, $currentRound);
+                        break;
+                }
             }
         }
 
-        $logChar = FGL::where('id_fights', $fight->id)
-            ->where('fighter_type', 'c')
+        return $res->withJson(FGTC::winner($_POST['fightId']));
+    }
+
+    public static function doAttack($fighter, $target, $fightId, $round){
+        $realAttack = SELF::getRealStats($fighter, $target)[0];
+        $realDef = SELF::getRealStats($target, $target)[1];
+
+        $fightLog = FGL::where('round', $round)
+            ->where('id_fighter', $target->id)
+            ->where('fighter_type', $target->type)
             ->orderBy('id', 'desc')
             ->first();
 
-        $logMonster = FGL::where('id_fights', $fight->id)
-            ->where('fighter_type', 'm')
-            ->orderBy('id', 'desc')
-            ->first();
+        $damage = $realAttack - $realDef/5;
+        $leftLife = $fightLog->hp - ($realAttack - $realDef/5);
 
-        $value = 0;
-        if ($logChar->hp <= 0) {
-            $value = 'm';
-            $fight->winner = $value;
-            $fight->save();
-        } else if ($logMonster->hp <= 0) {
-            $value = 'c';
-            $fight->winner = $value;
-            $fight->save();
+        $fightLog->damage += $damage;
+        $leftLife = $fightLog->hp - $damage;
+
+        if ($leftLife < 0) {
+            $leftLife = 0;
         }
 
-        return $res->getBody()->write($value);
+        $fightLog->hp = $leftLife;
+        $fightLog->save();
     }
 
-  public static function doAttack($fighter, $target, $fightId, $round){
-    $realAttack = SELF::getRealStats($fighter, $target)[0];
-    $realDef = SELF::getRealStats($target, $target)[1];
-
-    //Create new fight log
-    $fightlog = new FGL;
-    $fightlog->id_fights = $fightId;
-    $fightlog->id_fighter = $target->id;
-    $fightlog->round = $round;
-    $fightlog->fighter_type = $target->type;
-
-    //Get hp of target from last round
-    $lastRound = FGL::where('round', $round-1)
-        ->where('id_fighter', $target->id)
-        ->where('fighter_type', $target->type)
-        ->orderBy('id', 'desc')
-        ->first();
-
-    if($_POST['charAction'] == 'def' && $fighter->type == 'm'){
-      $fightlog->damage = $realAttack - $realDef/2;
-      $leftLife = $lastRound->hp - ($realAttack - $realDef/2);
-    } else if($_POST['charAction'] == 'attack' && $fighter->type == 'm'){
-      $fightlog->damage = $realAttack - $realDef/5;
-      $leftLife = $lastRound->hp - ($realAttack - $realDef/5);
-    } else {
-      $fightlog->damage = $realAttack - $realDef/5;
-      $leftLife = $lastRound->hp - ($realAttack - $realDef/5);
+    public function attackOrder($characters, $monsters) {
+        $order = array_merge($characters, $monsters);
+        $agility = array_column($order, 'agility');
+        array_multisort($agility, SORT_DESC, $order);
+        return $order;
     }
 
-    if ($leftLife < 0) {
-        $leftLife = 0;
+    public function lifeOrder($fighters) {
+        $hp = array_column($fighters, 'hp');
+        array_multisort($hp, SORT_DESC, $fighters);
+        return $fighters;
     }
 
-    $fightlog->hp = $leftLife;
-    $fightlog->save();
-  }
+    public function initCurrentRoundLog($characters, $monsters, $fightId, $round) {
+        foreach ($characters as $character) {
+            $lastRound = FGL::where('round', $round-1)
+                ->where('id_fighter', $character->id)
+                ->where('fighter_type', $character->type)
+                ->orderBy('id', 'desc')
+                ->first();
+
+            $fightlog = new FGL;
+            $fightlog->id_fights = $fightId;
+            $fightlog->id_fighter = $character->id;
+            $fightlog->round = $round;
+            $fightlog->fighter_type = $character->type;
+            $fightlog->damage = 0;
+            $fightlog->hp = $lastRound->hp;
+            $fightlog->save();
+        }
+
+        foreach ($monsters as $monster) {
+            $lastRound = FGL::where('round', $round-1)
+                ->where('id_fighter', $monster->id)
+                ->where('fighter_type', $monster->type)
+                ->orderBy('id', 'desc')
+                ->first();
+
+            $fightlog = new FGL;
+            $fightlog->id_fights = $fightId;
+            $fightlog->id_fighter = $monster->id;
+            $fightlog->round = $round;
+            $fightlog->fighter_type = $monster->type;
+            $fightlog->damage = 0;
+            $fightlog->hp = $lastRound->hp;
+            $fightlog->save();
+        }
+    }
 
     // Init fight log
     public static function roundZero($fighter, $fightId){

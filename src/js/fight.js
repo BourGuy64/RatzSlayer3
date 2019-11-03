@@ -16,7 +16,7 @@ function selectMode(e) {
 function modeSelected() {
     let modeSelected = false;
     if ( $('.gameMode').hasClass('selected') ) {
-        modeSelected = true;    // return true if one mode is selected
+        modeSelected = true;        // return true if one mode is selected
     }
     return modeSelected;           // return false if no one mode is selected
 }
@@ -249,14 +249,23 @@ function selectAction(e) {
 
 function nextRound(e) {
 
-    const test = [];
-    $('button[data-action]').each( (i, e) => {
+    const chars = [];
+    let i = 0;
+    $('button.action').each( (i, e) => {
         if ( $(e).hasClass('selected') ) {
-            console.log( $(e).data('action') );
+            chars.push({
+                'id': $(e).parent().data('id'),
+                'action': $(e).data('action')
+            });
         }
     });
-    const action = $('.selected').first().data('action');
-    $('[data-action]').siblings().removeClass('selected').css('background-color', 'white');
+
+    const monsters = [];
+    $('.select-monster').each( (i, e) => {
+        monsters.push( {
+            'id': $(e).data('id'),
+        });
+    });
 
     const type = "POST";
     const requestUrl = Conf.url.api + "/fightlog";
@@ -266,9 +275,8 @@ function nextRound(e) {
     const monster = $('.select-monster').attr('data-id');
     const formData = new FormData();
     formData.append("fightId", fightId);
-    formData.append("char", char);
-    formData.append("charAction", action);
-    formData.append("monster", monster);
+    formData.append("chars", JSON.stringify(chars));
+    formData.append("monsters", JSON.stringify(monsters));
 
 
     $.ajax({
@@ -280,7 +288,8 @@ function nextRound(e) {
         processData: false,
         contentType: false,
         success: (response, xhr) => {
-            if (response != 0) {
+            console.log(response);
+            if (response != null) {
                 setWinner(response);
             }
             // do something here
