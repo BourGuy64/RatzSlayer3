@@ -184,6 +184,31 @@ function randomMonster(){
     $('.select-monster').random().addClass('is-selected');
     fightReady();
 }
+
+function deleteFight(){
+
+  const type = "DELETE";
+  const requestUrl = Conf.url.api + "/fight";
+
+  $.ajax({
+      type: type,
+      url: requestUrl,
+      timeout: 5000,
+      header: {},
+      processData: false,
+      contentType: false,
+      success: (response, xhr) => {
+          location.reload();
+      },
+      error: (xhr) => {
+          // do something for alert user
+      },
+      complete: () => {
+
+      }
+  });
+}
+
 export function init() {
     $('.select-char').on('click', selectChar);
     $('.select-monster').on('click', selectMonster);
@@ -193,4 +218,5 @@ export function init() {
     $('#next').on('click', nextRound);
     $('.random-selection-char').on('click', randomChar);
     $('.random-selection-monster').on('click', randomMonster);
+    $('.leaveFights-unfinished').on('click', deleteFight);
 }

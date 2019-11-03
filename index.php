@@ -77,6 +77,7 @@ $app->group('/monsters', function ($app) {
 $app->group('/fight', function ($app) {
     $app->get('',           "\\ratzslayer3\\controllers\\FightController:get");
     $app->post('',           "\\ratzslayer3\\controllers\\FightController:fight");
+    $app->delete('',        "\\ratzslayer3\\controllers\\FightController:delete");
 });
 
 // FIGHT
