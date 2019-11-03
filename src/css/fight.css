@@ -80,7 +80,7 @@ div.select-char , div.select-monster{
   grid-gap: .2em .5em;
   min-width: 22em;
   margin: 1em !important;
-  background: rgba(255, 255, 255, 0.69);
+  background: rgba(255, 255, 255, 0.49);
   padding: 1.5em 1em !important;
 }
 
@@ -239,4 +239,10 @@ div.select-char , div.select-monster{
 
 .character-final-stats > div, .monster-final-stats > div{
   font-size: .8em;
+}
+
+.random-selection-monster, .random-selection-char{
+  position: fixed;
+  bottom: 1vh;
+  z-index: 5;
 }

@@ -177,6 +177,22 @@ function nextRound(e) {
     });
 }
 
+//Create jQuery function to get random object of DOM
+$.fn.random = function() {
+  return this.eq(Math.floor(Math.random() * this.length));
+}
+
+function randomChar(){
+    $('.select-char').removeClass('is-selected');
+    $('.select-char').random().addClass('is-selected');
+    fightReady();
+}
+
+function randomMonster(){
+    $('.select-monster').removeClass('is-selected');
+    $('.select-monster').random().addClass('is-selected');
+    fightReady();
+}
 export function init() {
     $('.select-char').on('click', selectChar);
     $('.select-monster').on('click', selectMonster);
@@ -184,4 +200,6 @@ export function init() {
     $('.start-fight').on('click', start);
     $('.action > button').on('click', selectAction);
     $('#next').on('click', nextRound);
+    $('.random-selection-char').on('click', randomChar);
+    $('.random-selection-monster').on('click', randomMonster);
 }
