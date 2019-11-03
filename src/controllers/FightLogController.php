@@ -128,12 +128,11 @@ class FightLogController extends SuperController{
       $leftLife = $lastRound->hp - $damage;
     }
     else{
-      $fightlog->damage = $realAttack - $realDef/5;
-      $leftLife = $lastRound->hp - ($realAttack - $realDef/5);
+      $damage = $realAttack - $realDef/5;
+      $damage < 1 ? $damage = 1 : '';//Damage can't  be negative
+      $fightlog->damage = $damage;
+      $leftLife = $lastRound->hp - $damage;
     }
-
-
-
 
     if ($leftLife < 0) {
         $leftLife = 0;
