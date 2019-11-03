@@ -59,7 +59,42 @@ class RankingController extends SuperController {
             $takeM[$monster->id] += $round->damage;
           }
         }
+        //sort characters by victory
+        arsort($winsC);
+        $sorted_characters = array();
+        foreach ($winsC as $key => $value) {
+          array_push($sorted_characters, $characters[$key - 1]);
+        }
+        //sort monsters by victory
+        arsort($winsM);
+        $sorted_monsters = array();
+        foreach ($winsM as $key => $value) {
+          array_push($sorted_monsters, $monsters[$key - 1]);
+        }
 
-        return $this->views->render($res, 'ranking.html.twig', ['title' => 'Ranking','dir' => $this->dir,'winsC' => $winsC, 'winsM' => $winsM, 'monsters' => $monsters, 'characters' => $characters, 'fightsC' => $fightsC, 'fightsM' => $fightsM, 'takeM' => $takeM, 'giveM' => $giveM, 'takeC' => $takeC, 'giveC' => $giveC ]);
+        //sort all fighter by victory
+        $winsForAll = array();
+        foreach ($winsM as $key => $value) {
+          $winsForAll[$key.'M'] = $value;
+        }
+        foreach ($winsC as $key => $value) {
+          $winsForAll[$key.'C'] = $value;
+        }
+
+        arsort($winsForAll);
+        //Create an array with all fighter in
+        $sorted_fighter = array();
+        foreach ($winsForAll as $key => $value) {
+          if(stripos($key, 'M') !== FALSE){
+            $real_key = substr_replace($key ,"", -1);
+            array_push($sorted_fighter, $monsters[$key - 1]);
+          }
+          else if(stripos($key, 'C') !== FALSE){
+            $real_key = substr_replace($key ,"", -1);
+            array_push($sorted_fighter, $characters[$key - 1]);
+          }
+        }
+
+        return $this->views->render($res, 'ranking.html.twig', ['title' => 'Ranking','dir' => $this->dir,'winsC' => $winsC, 'winsM' => $winsM, 'fighters' => $sorted_fighter, 'monsters' => $sorted_monsters, 'characters' => $sorted_characters, 'fightsC' => $fightsC, 'fightsM' => $fightsM, 'takeM' => $takeM, 'giveM' => $giveM, 'takeC' => $takeC, 'giveC' => $giveC ]);
     }
 }

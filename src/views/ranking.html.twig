@@ -9,6 +9,9 @@
 
 <div class="rank">
   <div class="monster-rank">
+    <div class="rank-type">
+      Monsters
+    </div>
     {% for monster in monsters %}
       {% if fightsM[monster.id] > 0 %}
         <div class="nes-container is-rounded fighter-card">
@@ -38,6 +41,9 @@
   </div>
 
   <div class="character-rank">
+    <div class="rank-type">
+      Characters
+    </div>
     {% for character in characters %}
       {% if fightsC[character.id] > 0 %}
         <div class="nes-container is-rounded fighter-card">
@@ -65,6 +71,66 @@
       {% endif %}
     {% endfor %}
   </div>
+
+  <div class="all-rank">
+    <div class="rank-type">
+      Fighters
+    </div>
+    {% for fighter in fighters %}
+      {% if fighter.type == 'c' %}
+        {% if fightsC[fighter.id] > 0 %}
+          <div class="nes-container is-rounded fighter-card">
+              <img src="{{dir}}/src/img/fighters/{{fighter.picture}}" onerror="this.src='{{dir}}/src/img/icons/characters.png'">
+              <div class="fighter-name">
+                <p class="name">{{fighter.firstname}} {{fighter.lastname}}</p>
+              </div>
+              <div class="stats">
+                <div class="hp icon"><p>Give :</p><p>{{giveC[fighter.id]}}</p></div>
+                <div class="att icon"><p>Taken :</p><p>{{takeC[fighter.id]}}</p></div>
+              </div>
+              <div class="fight-stats">
+                <div>Win:{{winsC[fighter.id]}}</div>
+                <div>Lost:{{fightsC[fighter.id] - winsC[fighter.id]}}</div>
+                <div>
+                  {% if fightsC[fighter.id] - winsC[fighter.id] == 0 %}
+                    {% set ratio = 0 %}
+                  {% else %}
+                    {% set ratio = winsC[fighter.id] / (fightsC[fighter.id] - winsC[fighter.id]) %}
+                  {% endif %}
+                  Ratio:{{ratio|round(2, 'floor')}}
+                </div>
+              </div>
+          </div>
+        {% endif %}
+      {% else %}
+          {% if fightsM[fighter.id] > 0 %}
+            <div class="nes-container is-rounded fighter-card">
+                <img src="{{dir}}/src/img/fighters/{{fighter.picture}}" onerror="this.src='{{dir}}/src/img/icons/monsters.png'">
+                <div class="fighter-name">
+                  <p class="name">{{fighter.name}}</p>
+                </div>
+                <div class="stats">
+                  <div class="hp icon"><p>Give :</p><p>{{giveM[fighter.id]}}</p></div>
+                  <div class="att icon"><p>Taken :</p><p>{{takeM[fighter.id]}}</p></div>
+                </div>
+                <div class="fight-stats">
+                  <div>Win:{{winsM[fighter.id]}}</div>
+                  <div>Lost:{{fightsM[fighter.id] - winsM[fighter.id]}}</div>
+                  <div>
+                    {% if fightsM[fighter.id] - winsM[fighter.id] == 0 %}
+                      {% set ratio = 0 %}
+                    {% else %}
+                      {% set ratio = winsM[fighter.id] / (fightsM[fighter.id] - winsM[fighter.id]) %}
+                    {% endif %}
+                    Ratio:{{ratio|round(2, 'floor')}}
+                  </div>
+                </div>
+            </div>
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+  </div>
+
 
 </div>
 {% endblock %}

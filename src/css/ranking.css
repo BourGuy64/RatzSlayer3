@@ -1,6 +1,13 @@
 .rank {
   display: grid;
-  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(40em, 1fr));
+}
+.rank > div {
+  margin: 0 auto;
+}
+
+.rank-type {
+  text-align: center;
 }
 
 .fighter-card {
