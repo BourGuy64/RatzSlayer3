@@ -61,6 +61,7 @@ function getLastRound(fightId, fighterId, fighterType) {
             } else if (fighterType == 'm') {
                 $('.fight-log.monster').prepend(response);
             }
+            location.reload();
         },
         error: (xhr) => {
             // do something for alert user

@@ -1,7 +1,9 @@
 <div class="navbar">
     {% if title == 'RatzSlayer3' %}
       <div></div>
-    {% elseif title == 'Fight !' %}
+    {% elseif winner == false %}
+      <a onclick='alert("Fight not finish !");'><</a>
+    {% elseif winner %}
       <a class="leaveFights" onclick='document.cookie = "CurrentFight=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";' href="./fight"><</a>
     {% else %}
       <a href="{{dir}}/"><</a>
