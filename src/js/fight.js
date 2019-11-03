@@ -118,6 +118,7 @@ function selectAction(e) {
         }
     });
     if (allSelected) {
+        $('.btnSuperpos').removeClass('unusable');
         $('#next').prop('disabled', false);
     }
 }
@@ -139,7 +140,7 @@ function nextRound(e) {
     formData.append("char", char);
     formData.append("charAction", action);
     formData.append("monster", monster);
-
+    $('.btnSuperpos').addClass('unusable');
 
     $.ajax({
         type: type,
