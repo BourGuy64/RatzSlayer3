@@ -80,7 +80,6 @@ class FightLogController extends SuperController{
             ->where('fighter_type', 'm')
             ->orderBy('id', 'desc')
             ->first();
-        // return $this->views->render($res, 'fightlog.html.twig', ['dir' =>  $this->dir, 'character' => $character, 'monster' => $monster, 'logChar' => $logChar, 'logMonster' => $logMonster, ]);
 
         $value = 0;
         if ($logChar->hp <= 0) {
@@ -96,14 +95,6 @@ class FightLogController extends SuperController{
         // return $res->withJson($logChar);
         return $res->getBody()->write($value);
 
-
-        // $winner = $this->winner($fight->id);
-        // $fight->winner = $winner;
-        // $fight->save();
-        // $logChar = FGL::where('id_fights', $fight->id)->where('fighter_type', 'c')->orderBy('id', 'asc')->get();
-        // $logMonster = FGL::where('id_fights', $fight->id)->where('fighter_type', 'm')->orderBy('id', 'asc')->get();
-        // setcookie("CurrentFight", $fight->id, time() + (10 * 365 * 24 * 60 * 60));
-        // return $this->views->render($res, 'fighting.html.twig', ['title' => 'Fight !', 'dir' =>  $this->dir, 'character' => $character, 'monster' => $monster, 'logChar' => $logChar, 'logMonster' => $logMonster, 'winner' => $winner, 'admin' => $_SESSION['admin']]);
     }
 
   public static function doAttack($fighter, $target, $fightId, $round){
@@ -125,12 +116,16 @@ class FightLogController extends SuperController{
         ->first();
 
     if($_POST['charAction'] == 'def' && $fighter->type == 'm'){
-      $fightlog->damage = $realAttack - $realDef/2;
-      $leftLife = $lastRound->hp - ($realAttack - $realDef/2);
+      $damage = $realAttack - ($realDef*1.25)/5;
+      $damage < 1 ? $damage = 1 : '';//Damage can't  be negative
+      $fightlog->damage = $damage;
+      $leftLife = $lastRound->hp - $damage;
     }
     elseif($_POST['charAction'] == 'attack' && $fighter->type == 'm'){
-      $fightlog->damage = $realAttack - $realDef/5;
-      $leftLife = $lastRound->hp - ($realAttack - $realDef/5);
+      $damage = $realAttack - ($realDef)/5;
+      $damage < 1 ? $damage = 1 : '';//Damage can't  be negative
+      $fightlog->damage = $damage;
+      $leftLife = $lastRound->hp - $damage;
     }
     else{
       $fightlog->damage = $realAttack - $realDef/5;
