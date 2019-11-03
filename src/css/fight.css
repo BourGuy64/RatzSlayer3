@@ -244,5 +244,5 @@ div.select-char , div.select-monster{
 .random-selection-monster, .random-selection-char{
   position: fixed;
   bottom: 1vh;
-  z-index: 5;
+  z-index: 2;
 }
